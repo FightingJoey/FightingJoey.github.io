@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  <meta name="baidu-site-verification" content="QBiIZlhg1Z">
+
+
+
+  <meta name="google-site-verification" content="8b4O8NqoCE_ObwFghNQGLCCDzFQBbnfur2gvs1E0pGE">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="true">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="true">
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Cookie处理在设置Cookie的时候，我们经常做的是在请求的请求头里添加Cookie，但是这只是把Cookie发送给了服务端，我们本地并没有保存Cookie，Cookie最终要写到WebView的一个Cookie文件目录里面，后续WebView里面自己的发起的请求或者跳转才能在发起请求的时候在对应的域名下面取到Cookie传出去。 Webview加载 H5 页面，实际上是把页面相关的.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WKWebView进阶填坑指南-Swift">
+<meta property="og:url" content="https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/index.html">
+<meta property="og:site_name" content="乔羽的技术博客">
+<meta property="og:description" content="Cookie处理在设置Cookie的时候，我们经常做的是在请求的请求头里添加Cookie，但是这只是把Cookie发送给了服务端，我们本地并没有保存Cookie，Cookie最终要写到WebView的一个Cookie文件目录里面，后续WebView里面自己的发起的请求或者跳转才能在发起请求的时候在对应的域名下面取到Cookie传出去。 Webview加载 H5 页面，实际上是把页面相关的.html">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-15T10:28:47.429Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WKWebView进阶填坑指南-Swift">
+<meta name="twitter:description" content="Cookie处理在设置Cookie的时候，我们经常做的是在请求的请求头里添加Cookie，但是这只是把Cookie发送给了服务端，我们本地并没有保存Cookie，Cookie最终要写到WebView的一个Cookie文件目录里面，后续WebView里面自己的发起的请求或者跳转才能在发起请求的时候在对应的域名下面取到Cookie传出去。 Webview加载 H5 页面，实际上是把页面相关的.html">
+
+
+
+
+
+
+  <link rel="canonical" href="https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>WKWebView进阶填坑指南-Swift | 乔羽的技术博客</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ca17fff7ec3d7f6b92d63c70eefbb02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">乔羽的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WKWebView进阶填坑指南-Swift
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-15 11:47:35 / 修改时间：18:28:47" itemprop="dateCreated datePublished" datetime="2018-11-15T11:47:35+08:00">2018-11-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/11/15/开发/WKWebView进阶填坑指南-Swift/" class="leancloud_visitors" data-flag-title="WKWebView进阶填坑指南-Swift">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Cookie处理"><a href="#Cookie处理" class="headerlink" title="Cookie处理"></a>Cookie处理</h2><p>在设置<code>Cookie</code>的时候，我们经常做的是在请求的请求头里添加<code>Cookie</code>，但是这只是把<code>Cookie</code>发送给了服务端，我们本地并没有保存<code>Cookie</code>，<code>Cookie</code>最终要写到<code>WebView</code>的一个<code>Cookie</code>文件目录里面，后续<code>WebView</code>里面自己的发起的请求或者跳转才能在发起请求的时候在对应的域名下面取到<code>Cookie</code>传出去。</p>
+<p><code>Webview</code>加载 H5 页面，实际上是把页面相关的<code>.html、js、css</code>文件下载到本地，然后再加载，这时页面去获取<code>Cookie</code> 的时候，是去本地<code>WebView</code>里的<code>Cookie</code>文件目录里查找，如果没有设置的话肯定就找不到了。所以在设置<code>Cookie</code>的时候，服务端和客户端都要设置。</p>
+<h4 id="一、服务端-Cookie-设置"><a href="#一、服务端-Cookie-设置" class="headerlink" title="一、服务端 Cookie 设置"></a>一、服务端 Cookie 设置</h4><p>在使用<code>UIWebView</code>的时候，我们是通过<code>NSHTTPCookieStorage</code>来管理 <code>Cookie</code>的，下面我们给<code>devqiaoyu.tech</code>这个域名添加一个名为<code>user</code>的<code>Cookie</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var props = Dictionary&lt;HTTPCookiePropertyKey, Any&gt;()</span><br><span class="line">props[HTTPCookiePropertyKey.name] = &quot;user&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.value] = &quot;admin&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.path] = &quot;/&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.domain] = &quot;devqiaoyu.tech&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.version] = &quot;0&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.originURL] = &quot;devqiaoyu.tech&quot;</span><br><span class="line">if let cookie = HTTPCookie(properties: props) &#123;</span><br><span class="line">    HTTPCookieStorage.shared.setCookie(cookie)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>WKWebView Cookie</code>问题在于<code>WKWebView</code>发起的请求不会自动带上存储于<code>NSHTTPCookieStorage</code>容器中的<code>Cookie</code>。</strong></p>
+<p>解决办法也很简单，就是在<code>WKWebView</code>发起请求之前，先从<code>NSHTTPCookieStorage</code>读取<code>Cookie</code>，然后手动往<code>URLRequest</code>的请求头里添加一下<code>Cookie</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">func getCookie() -&gt; String &#123;</span><br><span class="line">    var cookieString = &quot;&quot;</span><br><span class="line">	if let cookies = HTTPCookieStorage.shared.cookies &#123;</span><br><span class="line">		for cookie in cookies &#123;</span><br><span class="line">		if cookie.domain == cookieDomain &#123;</span><br><span class="line">			let str = &quot;\(cookie.name)=\(cookie.value)&quot;</span><br><span class="line">			cookieString.append(&quot;\(str);&quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return cookieString</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var request = URLRequest(url: URL(string: &quot;https://devqiaoyu.com&quot;))</span><br><span class="line">request.addValue(getCookie(), forHTTPHeaderField: &quot;Cookie&quot;)</span><br></pre></td></tr></table></figure>
+<p>当服务器页面发生重定向的时候，此时第一次在<code>RequestHeader</code>中写入的<code>Cookie</code>会丢失，还需要对重定向的请求重新做添加<code>Cookie</code>的处理。具体方法请往下看~</p>
+<h4 id="二、客户端-Cookie-设置"><a href="#二、客户端-Cookie-设置" class="headerlink" title="二、客户端 Cookie 设置"></a>二、客户端 Cookie 设置</h4><p>上面这么写完了，当页面加载的时候，后端无论是啥语言，都能从请求头里看到<code>Cookie</code>了，但是后端渲染返回页面后，在客户端的<code>WebView</code>里运行的时候，JS 在执行的时候调用<code>document.cookie</code> API 是读取不到<code>Cookie</code>的，所以还得针对客户端<code>Cookie</code>进行处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var cookieString = &quot;&quot;</span><br><span class="line">if let cookies = HTTPCookieStorage.shared.cookies &#123;</span><br><span class="line">	for cookie in cookies &#123;</span><br><span class="line">		if cookie.domain == &quot;devqiaoyu.tech&quot; &#123;</span><br><span class="line">			let str = &quot;\(cookie.name)=\(cookie.value)&quot;</span><br><span class="line">			cookieString.append(&quot;document.cookie=&apos;\(str);path=/;domain=devqiaoyu.tech&apos;;&quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">let cookieScript = WKUserScript(source: cookieString, injectionTime: .atDocumentStart, forMainFrameOnly: false)</span><br><span class="line">let userContentController = WKUserContentController()</span><br><span class="line">userContentController.addUserScript(cookieScript)</span><br><span class="line"></span><br><span class="line">let webViewConfig = WKWebViewConfiguration()</span><br><span class="line">webViewConfig.userContentController = userContentController</span><br><span class="line"></span><br><span class="line">let webV = WKWebView(frame: CGRect.zero, configuration: webViewConfig)</span><br></pre></td></tr></table></figure>
+<p><strong>客户端<code>Cookie</code>注入实际上就是创建一个 JS 脚本，让<code>WebView</code>去执行，推荐在<code>.atDocumentStart</code>这个时机进行预置静态  JS 的注入。</strong>这样<code>WebView</code>在加载后端返回的静态页面的时候，就可以拿到保存着客户端的<code>Cookie</code>了。</p>
+<blockquote>
+<p><strong>注意：document.cookie() 无法跨域设置 Cookie</strong>，比如你第一次加载的请求时 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> ，在重定向的时候跳转到了 <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> ，那么第二个请求就可能因为没有携带 <code>Cookie</code>而无法访问。当然啦，解决办法还是有的，请往下看~</p>
+</blockquote>
+<h2 id="URL拦截"><a href="#URL拦截" class="headerlink" title="URL拦截"></a>URL拦截</h2><p>在<code>WKWebView</code>中，每一次页面跳转之前，都会调用下面的回调函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -&gt; Void)</span><br></pre></td></tr></table></figure>
+<h4 id="Web-页面重定向问题"><a href="#Web-页面重定向问题" class="headerlink" title="Web 页面重定向问题"></a>Web 页面重定向问题</h4><p>重定向问题有两种：</p>
+<ul>
+<li>服务器页面重定向，需要对新发起的请求重新种<code>Cookie</code></li>
+<li>本地页面重定向，只要客户端设置了<code>Cookie</code>，那么就不需要处理了</li>
+</ul>
+<p>所以如果是服务器页面重定向，那么判断此时<code>Request</code>是否有你要的<code>Cookie</code>没有就<code>Cancel</code>掉，修改<code>Request</code>重新发起。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -&gt; Void)</span><br><span class="line">&#123;</span><br><span class="line">    var shouldCancelLoadURL = false</span><br><span class="line">    if let cookie = navigationAction.request.value(forHTTPHeaderField: &quot;Cookie&quot;) &#123;</span><br><span class="line">        if cookie.contains(&quot;user&quot;) &#123;</span><br><span class="line">            shouldCancelLoadURL = false</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            var request = URLRequest(url: URL(string: (navigationAction.request.url?.absoluteString)!)!)</span><br><span class="line">            request.addValue(getCookie(), forHTTPHeaderField: &quot;Cookie&quot;)</span><br><span class="line">            webView.load(request)</span><br><span class="line">            shouldCancelLoadURL = true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        var request = URLRequest(url: URL(string: (navigationAction.request.url?.absoluteString)!)!)</span><br><span class="line">        request.addValue(getCookie(), forHTTPHeaderField: &quot;Cookie&quot;)</span><br><span class="line">		webView.load(request)</span><br><span class="line">		shouldCancelLoadURL = true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if shouldCancelLoadURL &#123;</span><br><span class="line">    	decisionHandler(WKNavigationActionPolicy.cancel)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		decisionHandler(WKNavigationActionPolicy.allow)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h4><p>针对跨域的问题，解决办法和上面的方法类似，仅仅是判断条件不同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -&gt; Void)</span><br><span class="line">&#123;</span><br><span class="line">    var shouldCancelLoadURL = false</span><br><span class="line">    if let url = navigationAction.request.url?.absoluteString &#123;</span><br><span class="line">        if url.contains(&quot;devqiaoyu.tech&quot;) &#123; // 原来的域名</span><br><span class="line">            shouldCancelLoadURL = false</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">        	// 重新发起请求，种Cookie</span><br><span class="line">            shouldCancelLoadURL = true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">    	// 重新发起请求，种Cookie</span><br><span class="line">		shouldCancelLoadURL = true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if shouldCancelLoadURL &#123;</span><br><span class="line">    	decisionHandler(WKNavigationActionPolicy.cancel)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		decisionHandler(WKNavigationActionPolicy.allow)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="假跳转的请求拦截"><a href="#假跳转的请求拦截" class="headerlink" title="假跳转的请求拦截"></a>假跳转的请求拦截</h4><p><strong>一种 JS 调用 Native 的通信方案</strong>，详细介绍可以看<a href="http://www.cocoachina.com/ios/20180109/21795.html" target="_blank" rel="noopener">从零收拾一个hybrid框架（一）– 从选择JS通信方案开始</a>。下面内容是从该文章内摘录的。</p>
+<p>何谓 <strong>假跳转的请求拦截</strong> 就是由网页发出一条新的跳转请求，跳转的目的地是一个非法的压根就不存在的地址，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//常规的Http地址</span><br><span class="line">https://wenku.baidu.com/xxxx?xx=xx</span><br><span class="line">//假的请求通信地址</span><br><span class="line">wakaka://wahahalalala/action?param=paramobj</span><br></pre></td></tr></table></figure>
+<p>看我下面写的那条假跳转地址，这么一条什么都不是的扯淡地址，直接放到浏览器里，直接扔到<code>WebView</code>里，肯定是妥妥的什么都打不开的，而如果在经过我们改造过的<code>Hybrid WebView</code>里，进行拦截不进行跳转</p>
+<p>url 地址分为这么几个部分</p>
+<ul>
+<li>协议：也就是 <code>http/https/file</code> 等，上面用了<code>wakaka</code></li>
+<li>域名：上面的 <code>wenku.baidu.com</code> 或 <code>wahahalalala</code></li>
+<li>路径：上面的 <code>xxxx?</code> 或 <code>action？</code></li>
+<li>参数：上面的 <code>xx=xx</code> 或 <code>param=paramobj</code></li>
+</ul>
+<p>如果我们构建一条假url</p>
+<ul>
+<li>用协议与域名当做通信识别</li>
+<li>用路径当做指令识别</li>
+<li>用参数当做数据传递</li>
+</ul>
+<p>客户端会无差别拦截所有请求，真正的 url 地址应该照常放过，只有协议域名匹配的 url 地址才应该被客户端拦截，拦截下来的 url 不会导致 WebView 继续跳转错误地址，因此无感知，相反拦截下来的 url 我们可以读取其中路径当做指令，读取其中参数当做数据，从而根据约定调用对应的 Native 原生代码</p>
+<p>以上其实是一种 <strong>协议约定</strong> 只要 JS 侧按着这个约定协议生成假 url，Native 按着约定协议拦截/读取假 url，整个流程就能跑通。</p>
+<h2 id="User-Agent设置"><a href="#User-Agent设置" class="headerlink" title="User-Agent设置"></a>User-Agent设置</h2><h4 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h4><p>就是<code>App</code>内所有<code>Web</code>请求的<code>User-Agent</code>全部被修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// UIWebView</span><br><span class="line">let webView = UIWebView(frame: CGRect.zero)</span><br><span class="line">let userAgent = webView.stringByEvaluatingJavaScript(from: &quot;navigator.userAgent&quot;)</span><br><span class="line">if let agent = userAgent &#123;</span><br><span class="line">    let user = &quot;@\(agent);extra_user_agent&quot;</span><br><span class="line">    let dict = [&quot;UserAgent&quot;:user]</span><br><span class="line">    UserDefaults.standard.register(defaults: dict)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// WKWebView</span><br><span class="line">let webV = WKWebView(frame: CGRect.zero)</span><br><span class="line">webV.evaluateJavaScript(&quot;navigator.userAgent&quot;) &#123; (result, error) in</span><br><span class="line">	if let oldAgent = result as? String &#123;</span><br><span class="line">		let user = &quot;@\(oldAgent);extra_user_agent&quot;</span><br><span class="line">		let dict = [&quot;UserAgent&quot;:user]</span><br><span class="line">		UserDefaults.standard.register(defaults: dict)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="单个WebView设置"><a href="#单个WebView设置" class="headerlink" title="单个WebView设置"></a>单个WebView设置</h3><p>在<code>iOS9</code>，<code>WKWebView</code>提供了一个非常便捷的属性去更改<code>User-Agent</code>，就是<code>customUserAgent</code>属性。这样使用起来不仅方便，也不会全局更改<code>User-Agent</code>，可惜的是<code>iOS9</code>才有，如果适配<code>iOS8</code>，还是要使用上面的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let webView = UIWebView(frame: CGRect.zero)</span><br><span class="line">let userAgent = webView.stringByEvaluatingJavaScript(from: &quot;navigator.userAgent&quot;)</span><br><span class="line">if let agent = userAgent &#123;</span><br><span class="line">    let user = &quot;@\(agent);extra_user_agent&quot;</span><br><span class="line">    webView.customUserAgent = user</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.jianshu.com/p/06963b57d78e" target="_blank" rel="noopener">WKWebView 那些坑</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-apple"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文作者:</span><a href="/" title="访问 乔羽 / Geselle-Joy 的个人博客">乔羽 / Geselle-Joy</a></p>
+  <p><span>本文链接:</span><a href="/2018/11/15/开发/WKWebView进阶填坑指南-Swift/" title="WKWebView进阶填坑指南-Swift">https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>版权声明:</span><i class="fa fa-creative-commons"></i>  本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">知识共享 署名-非商业性使用-禁止演绎 4.0 国际</a> 许可协议，转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.JPG" alt="乔羽 / Geselle-Joy 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.JPG" alt="乔羽 / Geselle-Joy 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/02/开发/纯Swift项目基础第三方库/" rel="next" title="纯Swift项目基础第三方库">
+                <i class="fa fa-chevron-left"></i> 纯Swift项目基础第三方库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/16/私密笔记/目前已装的包管理工具/" rel="prev" title="目前已装的包管理工具">
+                目前已装的包管理工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="乔羽 / Geselle-Joy">
+            
+              <p class="site-author-name" itemprop="name">乔羽 / Geselle-Joy</p>
+              <p class="site-description motion-element" itemprop="description">Efforts to become the person I want to be.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Geselle-Joy" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/96ef11d38b00" target="_blank" title="简书"><i class="fa fa-fw fa-book"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://juejin.im/user/589c225661ff4b006b3140a6" target="_blank" title="掘金"><i class="fa fa-fw fa-cogs"></i>掘金</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/1822593915/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博"><i class="fa fa-fw fa-globe"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chengluffy.github.io" title="败寇路飞" target="_blank">败寇路飞</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie处理"><span class="nav-number">1.</span> <span class="nav-text">Cookie处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、服务端-Cookie-设置"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、服务端 Cookie 设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、客户端-Cookie-设置"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、客户端 Cookie 设置</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#URL拦截"><span class="nav-number">2.</span> <span class="nav-text">URL拦截</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-页面重定向问题"><span class="nav-number">2.0.1.</span> <span class="nav-text">Web 页面重定向问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域问题"><span class="nav-number">2.0.2.</span> <span class="nav-text">跨域问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#假跳转的请求拦截"><span class="nav-number">2.0.3.</span> <span class="nav-text">假跳转的请求拦截</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Agent设置"><span class="nav-number">3.</span> <span class="nav-text">User-Agent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局设置"><span class="nav-number">3.0.1.</span> <span class="nav-text">全局设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单个WebView设置"><span class="nav-number">3.1.</span> <span class="nav-text">单个WebView设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乔羽 / Geselle-Joy</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://gesellejoy.disqus.com/count.js" async></script>
+  
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Rf6dglrTvJaecQzm147kv1Y3-gzGzoHsz", "naYjjqUq3HgaspsbCc45Io6H");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

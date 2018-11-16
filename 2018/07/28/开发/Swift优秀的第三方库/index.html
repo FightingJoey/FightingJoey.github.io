@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  <meta name="baidu-site-verification" content="QBiIZlhg1Z">
+
+
+
+  <meta name="google-site-verification" content="8b4O8NqoCE_ObwFghNQGLCCDzFQBbnfur2gvs1E0pGE">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="true">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="true">
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Swift优秀的第三方库Swift开发资源汇总 iOS开发优秀博客和软件推荐 数据库、数据存储 realm-cocoa - Realm 是一个移动端数据库：Core Data 和 SQLite 的替代品  Valet - Valet 可以让你安全地在 iOS 或 OS X 钥匙链中存储数据，而不需要掌握任何钥匙链工作的知识。它支持在一台设备的多个应用（同一个开发者）间分享数据，以及在一个应用中在多">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift优秀的第三方库">
+<meta property="og:url" content="https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/index.html">
+<meta property="og:site_name" content="乔羽的技术博客">
+<meta property="og:description" content="Swift优秀的第三方库Swift开发资源汇总 iOS开发优秀博客和软件推荐 数据库、数据存储 realm-cocoa - Realm 是一个移动端数据库：Core Data 和 SQLite 的替代品  Valet - Valet 可以让你安全地在 iOS 或 OS X 钥匙链中存储数据，而不需要掌握任何钥匙链工作的知识。它支持在一台设备的多个应用（同一个开发者）间分享数据，以及在一个应用中在多">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-10T07:38:04.604Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift优秀的第三方库">
+<meta name="twitter:description" content="Swift优秀的第三方库Swift开发资源汇总 iOS开发优秀博客和软件推荐 数据库、数据存储 realm-cocoa - Realm 是一个移动端数据库：Core Data 和 SQLite 的替代品  Valet - Valet 可以让你安全地在 iOS 或 OS X 钥匙链中存储数据，而不需要掌握任何钥匙链工作的知识。它支持在一台设备的多个应用（同一个开发者）间分享数据，以及在一个应用中在多">
+
+
+
+
+
+
+  <link rel="canonical" href="https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Swift优秀的第三方库 | 乔羽的技术博客</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ca17fff7ec3d7f6b92d63c70eefbb02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">乔羽的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift优秀的第三方库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-28 15:30:41" itemprop="dateCreated datePublished" datetime="2018-07-28T15:30:41+08:00">2018-07-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-10 15:38:04" itemprop="dateModified" datetime="2018-11-10T15:38:04+08:00">2018-11-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2018/07/28/开发/Swift优秀的第三方库/" class="leancloud_visitors" data-flag-title="Swift优秀的第三方库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Swift优秀的第三方库"><a href="#Swift优秀的第三方库" class="headerlink" title="Swift优秀的第三方库"></a>Swift优秀的第三方库</h3><p><a href="http://dev.swiftguide.cn" target="_blank" rel="noopener">Swift开发资源汇总</a></p>
+<p><a href="https://github.com/imlifengfeng/iOSBlogAndTools" target="_blank" rel="noopener">iOS开发优秀博客和软件推荐</a></p>
+<h4 id="数据库、数据存储"><a href="#数据库、数据存储" class="headerlink" title="数据库、数据存储"></a>数据库、数据存储</h4><ul>
+<li><p><a href="https://github.com/realm/realm-cocoa" target="_blank" rel="noopener">realm-cocoa</a> - Realm 是一个移动端数据库：Core Data 和 SQLite 的替代品</p>
+</li>
+<li><p><a href="https://github.com/square/Valet" target="_blank" rel="noopener">Valet</a> - Valet 可以让你安全地在 iOS 或 OS X 钥匙链中存储数据，而不需要掌握任何钥匙链工作的知识。它支持在一台设备的多个应用（同一个开发者）间分享数据，以及在一个应用中在多个设备间利用 iCloud 进行分享。支持 Touch ID</p>
+</li>
+<li><p><a href="https://github.com/stephencelis/SQLite.swift" target="_blank" rel="noopener">SQLite.swift</a> - 简单、轻量，使用上最SQL的SQLite封装库</p>
+</li>
+<li><p><a href="https://github.com/modo-studio/SugarRecord" target="_blank" rel="noopener">SugarRecord</a> - 基于CoreData与REALM的好用封装</p>
+</li>
+</ul>
+<h4 id="网络库、Network"><a href="#网络库、Network" class="headerlink" title="网络库、Network"></a>网络库、Network</h4><ul>
+<li><p><a href="https://github.com/Moya/Moya" target="_blank" rel="noopener">Moya</a> - 用 Swift 写的网络抽象层</p>
+</li>
+<li><p><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener">Alamofire</a></p>
+</li>
+<li><p><a href="https://github.com/netguru/ResponseDetective" target="_blank" rel="noopener">ResponseDetective</a> - 一个非嵌入式框架，用于拦截应用程序和服务器之间的任何传出请求和传入响应以用于调试目的。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="keychain"><a href="#keychain" class="headerlink" title="keychain"></a>keychain</h4><ul>
+<li><a href="https://github.com/kishikawakatsumi/KeychainAccess" target="_blank" rel="noopener">KeychainAccess</a></li>
+<li><a href="https://github.com/evgenyneu/keychain-swift" target="_blank" rel="noopener">keychain-swift</a></li>
+</ul>
+<h4 id="JSON解析"><a href="#JSON解析" class="headerlink" title="JSON解析"></a>JSON解析</h4><ul>
+<li><a href="https://github.com/SwiftyJSON/SwiftyJSON" target="_blank" rel="noopener">SwiftyJSON</a> - 在 Swift 里处理 JSON 更好的方式，重点在于<strong>解析JSON数据</strong>，但是不能自动映射到model实例上。</li>
+<li><a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="noopener">ObjectMapper</a> - ObjectMapper是一个用Swift编写的框架，它使您可以轻松地将模型对象（类或结构体）转换为 JSON 和从 JSON 转换为模型。</li>
+<li><a href="https://github.com/alibaba/HandyJSON" target="_blank" rel="noopener">HandyJSON</a> - 一个方便的swift json-object 序列化/反序列化库</li>
+</ul>
+<h4 id="监测分析工具"><a href="#监测分析工具" class="headerlink" title="监测分析工具"></a>监测分析工具</h4><ul>
+<li><a href="https://www.ichdata.com/firebase-analytics-for-apps.html" target="_blank" rel="noopener">Firebase</a> - Firebase Analytics 是一个免费 app 监测解决方案，追踪 app 使用量、用户活跃度、以及事件；设置用户属性；创建自定义受众</li>
+</ul>
+<h4 id="异步UI、异步编程"><a href="#异步UI、异步编程" class="headerlink" title="异步UI、异步编程"></a>异步UI、异步编程</h4><ul>
+<li><a href="https://github.com/facebookarchive/AsyncDisplayKit" target="_blank" rel="noopener">AsyncDisplayKit</a> - iOS app 的平滑异步用户界面。Facebook 为他们的 app <em>Paper</em> 创造了这个异步 UI SDK。如果你想让你的 app 总是每秒用 60 帧的速度来渲染，一定要看看这个库</li>
+<li><a href="https://github.com/mxcl/PromiseKit" target="_blank" rel="noopener">PromiseKit</a></li>
+<li><a href="https://github.com/yannickl/AwaitKit" target="_blank" rel="noopener">AwaitKit</a> - 受 ES8 Async/Await 启发，用 Swift 实现的异步编程库</li>
+</ul>
+<h4 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h4><ul>
+<li><h4 id="图像处理、滤镜"><a href="#图像处理、滤镜" class="headerlink" title="图像处理、滤镜"></a>图像处理、滤镜</h4></li>
+<li><p><a href="https://github.com/liyong03/YLGIFImage-Swift" target="_blank" rel="noopener">YLGIFImage-Swift</a> - 异步GIF图像解码器和图像查看器支持播放GIF图像。 它只是使用更少的内存</p>
+</li>
+</ul>
+<h4 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h4><ul>
+<li><a href="https://github.com/ViccAlexander/Chameleon" target="_blank" rel="noopener">Chameleon</a> - iOS 的扁平颜色框架（Obj-C 和 Swift）</li>
+</ul>
+<h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><ul>
+<li><a href="https://github.com/nickoneill/PermissionScope" target="_blank" rel="noopener">PermissionScope</a> - 巧妙的 iOS 权限 UI 和 统一 API</li>
+</ul>
+<h4 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h4><ul>
+<li><a href="https://github.com/nvzqz/FileKit" target="_blank" rel="noopener">FileKit</a> - 简单和富有表现力的 Swift 文件管理</li>
+</ul>
+<h4 id="UserDefaults"><a href="#UserDefaults" class="headerlink" title="UserDefaults"></a>UserDefaults</h4><ul>
+<li><a href="https://github.com/radex/SwiftyUserDefaults" target="_blank" rel="noopener">SwiftyUserDefaults</a> - NSUserDefaults 的现代化 Swift API</li>
+</ul>
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><ul>
+<li><a href="https://github.com/giginet/Crossroad" target="_blank" rel="noopener">Crossroad</a> - 轻松路由URL方案</li>
+</ul>
+<h4 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h4><ul>
+<li><a href="https://github.com/yulingtianxia/YXYDashLayer" target="_blank" rel="noopener">YXYDashLayer</a> - 多彩的圆角矩形Dash边框</li>
+</ul>
+<h4 id="图片请求、图片浏览器"><a href="#图片请求、图片浏览器" class="headerlink" title="图片请求、图片浏览器"></a>图片请求、图片浏览器</h4><ul>
+<li><p><a href="https://github.com/onevcat/Kingfisher" target="_blank" rel="noopener">Kingfisher</a> - 是一个轻量、纯 Swift 的库，可以从网络中异步下载和缓存图片</p>
+</li>
+<li><p><a href="https://github.com/Krisiacik/ImageViewer" target="_blank" rel="noopener">ImageViewer</a> - 模仿 Twitter 的图片浏览器</p>
+</li>
+<li><p><a href="https://github.com/Yummypets/YPImagePicker" target="_blank" rel="noopener">YPImagePicker</a> - 类似Instagram的图像选择器和滤镜</p>
+</li>
+</ul>
+<h4 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h4><ul>
+<li><a href="https://github.com/HeroTransitions/Hero" target="_blank" rel="noopener">Hero</a> - 是为了构建 iOS 试图控制器过渡动画的库。它在 UIKit 繁琐的过渡动画 API 之上提供了一个层，使得自定义过渡动画对于开发人员来说是一个轻松的任务。</li>
+<li><a href="https://github.com/yapstudios/YapAnimator" target="_blank" rel="noopener">YapAnimator</a> - 快速友好的基于物理学的动画系统</li>
+<li><a href="https://github.com/MengTo/Spring" target="_blank" rel="noopener">Spring</a> - 简化动画开发的Swift iOS动画库</li>
+<li><a href="https://github.com/ninjaprox/NVActivityIndicatorView" target="_blank" rel="noopener">NVActivityIndicatorView</a> - 一系列令人惊叹的加载动画</li>
+</ul>
+<h4 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h4><ul>
+<li><a href="https://github.com/onevcat/Hedwig" target="_blank" rel="noopener">Hedwig</a> - 像老板一样发送邮件到任意 SMTP 服务器，用 Swift 编写并且是跨平台的</li>
+</ul>
+<h4 id="设备信息"><a href="#设备信息" class="headerlink" title="设备信息"></a>设备信息</h4><ul>
+<li><p><a href="https://github.com/dennisweissmann/DeviceKit" target="_blank" rel="noopener">DeviceKit</a> -  是 UIDevice 的值类型替换。轻松获取设备信息和电池电量。</p>
+</li>
+<li><p><a href="https://github.com/dani-gavrilov/GDPerformanceView-Swift" target="_blank" rel="noopener">GDPerformanceView</a> - 在状态栏上方显示 FPS，CPU 使用情况，app 和 iOS 版本，并通过 delegate 报告 FPS 和 CPU 使用情况。</p>
+</li>
+</ul>
+<h4 id="图表、表格"><a href="#图表、表格" class="headerlink" title="图表、表格"></a>图表、表格</h4><ul>
+<li><p><a href="https://github.com/danielgindi/Charts" target="_blank" rel="noopener">Charts</a> - 漂亮的线图、饼图、条形图、分布图、气泡图、雷达图还有更多种类，这是一个图表库。</p>
+</li>
+<li><p><a href="https://github.com/kevinzhow/PNChart-Swift" target="_blank" rel="noopener">PNChart-Swift</a> - 带动画效果的图表控件库</p>
+</li>
+<li><p><a href="https://github.com/cagricolak/CoreCharts" target="_blank" rel="noopener">CoreCharts</a> - 一个简单而强大的图表库</p>
+</li>
+</ul>
+<h4 id="UITableViewCell"><a href="#UITableViewCell" class="headerlink" title="UITableViewCell"></a>UITableViewCell</h4><ul>
+<li><a href="https://github.com/MortimerGoro/MGSwipeTableCell" target="_blank" rel="noopener">MGSwipeTableCell</a> - 一个易于使用的UITableViewCell子类，允许显示带有多种转换的可滑动按钮。</li>
+</ul>
+<h4 id="随机数据"><a href="#随机数据" class="headerlink" title="随机数据"></a>随机数据</h4><ul>
+<li><a href="https://github.com/nvzqz/RandomKit" target="_blank" rel="noopener">RandomKit</a> - Swift 中的随机数据生成</li>
+</ul>
+<h4 id="引导页"><a href="#引导页" class="headerlink" title="引导页"></a>引导页</h4><ul>
+<li><a href="https://github.com/mamaral/Onboard" target="_blank" rel="noopener">Onboard</a> - 只需几行代码，即可轻松创建漂亮，引人入胜的用户指导页体验。</li>
+</ul>
+<h4 id="测试框架"><a href="#测试框架" class="headerlink" title="测试框架"></a>测试框架</h4><ul>
+<li><a href="https://github.com/Quick/Quick" target="_blank" rel="noopener">Quick</a> - Swift （以及 Objective-C）测试框架。</li>
+<li><a href="https://github.com/Quick/Nimble" target="_blank" rel="noopener">Nimble</a> - Swift 和 Objective-C 的匹配器</li>
+</ul>
+<h4 id="内购框架"><a href="#内购框架" class="headerlink" title="内购框架"></a>内购框架</h4><ul>
+<li><a href="https://github.com/bizz84/SwiftyStoreKit" target="_blank" rel="noopener">SwiftyStoreKit</a> - 是一个轻量的 app 内购框架，支持 iOS 8.0+，tvOS 9.0+和macOS 10.10+</li>
+</ul>
+<h4 id="日期、时间处理、日历"><a href="#日期、时间处理、日历" class="headerlink" title="日期、时间处理、日历"></a>日期、时间处理、日历</h4><ul>
+<li><p><a href="https://github.com/naoty/Timepiece" target="_blank" rel="noopener">Timepiece</a> - Swift 里直观的日期处理。</p>
+</li>
+<li><p><a href="https://github.com/WenchaoD/FSCalendar" target="_blank" rel="noopener">FSCalendar</a> - 完全自定义的 iOS 日历库</p>
+</li>
+<li><p><a href="https://github.com/malcommac/SwiftDate" target="_blank" rel="noopener">SwiftDate</a> – 特别完整、强大的日期时间操作管理类库。它几乎涵盖了已知开源日期类库所有优秀特性。 他能帮你轻松处理时区，处理时间加减，计算到期时间等等场景下的问题。</p>
+</li>
+</ul>
+<h4 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h4><ul>
+<li><a href="https://github.com/krzyzanowskim/CryptoSwift" target="_blank" rel="noopener">CryptoSwift</a> - 是一个不断扩充的集合，包含了标准、安全、用 Swift 实现的加密算法</li>
+</ul>
+<h4 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h4><ul>
+<li><a href="https://github.com/SnapKit/SnapKit" target="_blank" rel="noopener">Snapkit</a></li>
+</ul>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><ul>
+<li><a href="https://github.com/Danie1s/Tiercel" target="_blank" rel="noopener">Tiercel</a> - 简单易用且功能丰富的纯Swift下载框架</li>
+</ul>
+<h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><ul>
+<li><a href="https://github.com/PrideChung/FontAwesomeKit" target="_blank" rel="noopener">FontAwesomeKit</a> - 用这个库你可以轻松地添加字体到你的项目里，并且在多种方式里使用它。</li>
+</ul>
+<h4 id="文本输入框、图文混排"><a href="#文本输入框、图文混排" class="headerlink" title="文本输入框、图文混排"></a>文本输入框、图文混排</h4><ul>
+<li><p><a href="https://github.com/raulriera/TextFieldEffects" target="_blank" rel="noopener">TextFieldEffects</a> - 动效非常不错的文本输入框</p>
+</li>
+<li><p><a href="https://github.com/KyoheiG3/AttributedLabel" target="_blank" rel="noopener">AttributedLabel</a> - 显示性能数量级 UILabel 的 AttributedLabel</p>
+</li>
+</ul>
+<h4 id="键盘类"><a href="#键盘类" class="headerlink" title="键盘类"></a>键盘类</h4><ul>
+<li><p><a href="https://github.com/netyouli/WHC_KeyboardManager" target="_blank" rel="noopener">WHC_KeyboardManager</a> - Swift 轻量级的键盘管理器</p>
+</li>
+<li><p><a href="https://github.com/hackiftekhar/IQKeyboardManager" target="_blank" rel="noopener"><strong>IQKeyboardManager</strong></a></p>
+</li>
+</ul>
+<h4 id="弹窗"><a href="#弹窗" class="headerlink" title="弹窗"></a>弹窗</h4><ul>
+<li><a href="https://github.com/codestergit/SweetAlert-iOS" target="_blank" rel="noopener">SweetAlert</a> - 带动画效果弹窗封装类</li>
+<li><a href="https://github.com/huri000/SwiftEntryKit" target="_blank" rel="noopener">SwiftEntryKit</a> - iOS上的横幅展示器库SwiftEntryKit</li>
+<li><a href="https://github.com/CaliCastle/PopMenu" target="_blank" rel="noopener">PopMenu</a> - 一款酷酷且可定制的弹出层for iOS</li>
+<li><a href="https://github.com/andreamazz/AMPopTip" target="_blank" rel="noopener">AMPopTip</a></li>
+<li><a href="https://github.com/scalessec/Toast-Swift" target="_blank" rel="noopener">Toast-Swift</a></li>
+</ul>
+<h4 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h4><ul>
+<li><p><a href="https://github.com/jriosdev/iOSDropDown" target="_blank" rel="noopener">iOSDropDown</a>  —  可定制的iOS下拉菜单</p>
+</li>
+<li><p><a href="https://github.com/morizotter/SwiftyDrop" target="_blank" rel="noopener">SwiftyDrop</a> — 轻量、易用的小清新弹出列表及信息提示组件真心不错。</p>
+</li>
+</ul>
+<h4 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h4><ul>
+<li><a href="https://github.com/dasdom/BreakOutToRefresh" target="_blank" rel="noopener">BreakOutToRefresh</a></li>
+<li><a href="https://github.com/andreamazz/GearRefreshControl" target="_blank" rel="noopener">GearRefreshControl</a></li>
+<li><a href="https://github.com/jcavar/refresher" target="_blank" rel="noopener">refresher</a></li>
+<li><a href="https://github.com/eggswift/pull-to-refresh" target="_blank" rel="noopener">pull-to-refresh</a></li>
+</ul>
+<h4 id="HUD"><a href="#HUD" class="headerlink" title="HUD"></a>HUD</h4><ul>
+<li><a href="https://github.com/pkluz/PKHUD" target="_blank" rel="noopener">PKHUD</a></li>
+<li><p><a href="https://github.com/johnlui/SwiftNotice" target="_blank" rel="noopener">SwiftNotice</a></p>
+</li>
+<li><p><a href="https://github.com/krimpedance/KRProgressHUD" target="_blank" rel="noopener">KRProgressHUD</a></p>
+</li>
+</ul>
+<h4 id="二维码"><a href="#二维码" class="headerlink" title="二维码"></a>二维码</h4><ul>
+<li><a href="https://github.com/YTiOSer/ScanCode_Swift" target="_blank" rel="noopener">ScanCode_Swift</a> - 二维码 VIN码扫描 支持拍照相册选择图片识别, 功能强大, UI漂亮, 集成简单!</li>
+<li><a href="https://github.com/yannickl/QRCodeReader.swift" target="_blank" rel="noopener">QRCodeReader.swift</a> – QRCodeReader.swift一款简单的 QR 二维码阅读组件及示例，提供前后相机切换功能。</li>
+</ul>
+<h4 id="SegmentControl"><a href="#SegmentControl" class="headerlink" title="SegmentControl"></a>SegmentControl</h4><ul>
+<li><a href="https://github.com/HeshamMegid/HMSegmentedControl-Swift" target="_blank" rel="noopener">HMSegmentedControl-Swift</a></li>
+</ul>
+<h4 id="UIKit扩展"><a href="#UIKit扩展" class="headerlink" title="UIKit扩展"></a>UIKit扩展</h4><ul>
+<li><p><a href="https://github.com/nerdycat/Cupcake" target="_blank" rel="noopener">Cupcake</a> - 为iOS创建和布局UI组件的简单方法（Swift版本）</p>
+</li>
+<li><p><a href="https://github.com/Xiaoye220/EmptyDataSet-Swift" target="_blank" rel="noopener">EmptyDataSet-Swift</a> - 嵌入式 UITableView/UICollectionView 的父类类别，用于显示空的数据集，无论何时…</p>
+</li>
+<li><p><a href="https://github.com/Instagram/IGListKit" target="_blank" rel="noopener">Instagram/IGListKit</a> - 为了构建快速和可扩展的列表而生的数据驱动 UICollectionView 框架</p>
+</li>
+<li><p><a href="https://github.com/Ramotion/animated-tab-bar" target="_blank" rel="noopener">RAMAnimatedTabBarController</a> - 灵动的动画标签栏类库</p>
+</li>
+<li><p><a href="https://github.com/robbdimitrov/RDVTabBarController" target="_blank" rel="noopener">RDVTabBarController</a> - 一个定制化的TabBarController库，可动画显示隐藏tabbar栏，可定制tabbar栏</p>
+</li>
+<li><p><a href="https://github.com/chenjiang3/RDVTabBarControllerSwift" target="_blank" rel="noopener">RDVTabBarControllerSwift</a></p>
+</li>
+<li><p><a href="http://d.cocoachina.com/code/detail/286102" target="_blank" rel="noopener">SlideTapBar</a> – 滚动栏菜单，向上滚动时隐藏tabbar，向下滚动马上显示tabbar。</p>
+</li>
+<li><p><a href="https://github.com/lexrus/LTMorphingLabel" target="_blank" rel="noopener">LTMorphingLabel</a> - 各种文字动画效果</p>
+</li>
+<li><p><a href="https://github.com/arcangelw/WZRootNavigationController" target="_blank" rel="noopener">WZRootNavigationController</a> - iOS NavigationController过渡效果</p>
+</li>
+<li><p><a href="https://github.com/marcosgriselli/EasyTransitions" target="_blank" rel="noopener">EasyTransitions</a> - 一种创建自定义交互式UIViewController转换的简单方法</p>
+</li>
+<li><p><a href="https://github.com/neoneye/SwiftyFORM" target="_blank" rel="noopener">SwiftyFORM</a> – swift 表单输入框架（亮点是表单验证规则引擎），是我见过地最易用的 Swift 表单组件</p>
+</li>
+</ul>
+<h4 id="基础工具类以及Category"><a href="#基础工具类以及Category" class="headerlink" title="基础工具类以及Category"></a>基础工具类以及Category</h4><ul>
+<li><a href="https://github.com/FabrizioBrancati/BFKit-Swift" target="_blank" rel="noopener">BFKit</a> - 国外的一个大神写的很好用的分类，比较齐全 </li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-apple"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文作者:</span><a href="/" title="访问 乔羽 / Geselle-Joy 的个人博客">乔羽 / Geselle-Joy</a></p>
+  <p><span>本文链接:</span><a href="/2018/07/28/开发/Swift优秀的第三方库/" title="Swift优秀的第三方库">https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>版权声明:</span><i class="fa fa-creative-commons"></i>  本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">知识共享 署名-非商业性使用-禁止演绎 4.0 国际</a> 许可协议，转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.JPG" alt="乔羽 / Geselle-Joy 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.JPG" alt="乔羽 / Geselle-Joy 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/15/教程/MacOS 终端 iTerm2 并配置 zsh/" rel="next" title="MacOS 终端 iTerm2 并配置 zsh">
+                <i class="fa fa-chevron-left"></i> MacOS 终端 iTerm2 并配置 zsh
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/28/开发/OC优秀的第三方库/" rel="prev" title="OC优秀的第三方库">
+                OC优秀的第三方库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="乔羽 / Geselle-Joy">
+            
+              <p class="site-author-name" itemprop="name">乔羽 / Geselle-Joy</p>
+              <p class="site-description motion-element" itemprop="description">Efforts to become the person I want to be.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Geselle-Joy" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/96ef11d38b00" target="_blank" title="简书"><i class="fa fa-fw fa-book"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://juejin.im/user/589c225661ff4b006b3140a6" target="_blank" title="掘金"><i class="fa fa-fw fa-cogs"></i>掘金</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/1822593915/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博"><i class="fa fa-fw fa-globe"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chengluffy.github.io" title="败寇路飞" target="_blank">败寇路飞</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift优秀的第三方库"><span class="nav-number">1.</span> <span class="nav-text">Swift优秀的第三方库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库、数据存储"><span class="nav-number">1.1.</span> <span class="nav-text">数据库、数据存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络库、Network"><span class="nav-number">1.2.</span> <span class="nav-text">网络库、Network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#keychain"><span class="nav-number">1.3.</span> <span class="nav-text">keychain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON解析"><span class="nav-number">1.4.</span> <span class="nav-text">JSON解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监测分析工具"><span class="nav-number">1.5.</span> <span class="nav-text">监测分析工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步UI、异步编程"><span class="nav-number">1.6.</span> <span class="nav-text">异步UI、异步编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#轮播图"><span class="nav-number">1.7.</span> <span class="nav-text">轮播图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图像处理、滤镜"><span class="nav-number">1.8.</span> <span class="nav-text">图像处理、滤镜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#颜色"><span class="nav-number">1.9.</span> <span class="nav-text">颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">1.10.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件操作"><span class="nav-number">1.11.</span> <span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UserDefaults"><span class="nav-number">1.12.</span> <span class="nav-text">UserDefaults</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由"><span class="nav-number">1.13.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#边框"><span class="nav-number">1.14.</span> <span class="nav-text">边框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片请求、图片浏览器"><span class="nav-number">1.15.</span> <span class="nav-text">图片请求、图片浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动画"><span class="nav-number">1.16.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#邮件"><span class="nav-number">1.17.</span> <span class="nav-text">邮件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设备信息"><span class="nav-number">1.18.</span> <span class="nav-text">设备信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图表、表格"><span class="nav-number">1.19.</span> <span class="nav-text">图表、表格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UITableViewCell"><span class="nav-number">1.20.</span> <span class="nav-text">UITableViewCell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机数据"><span class="nav-number">1.21.</span> <span class="nav-text">随机数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引导页"><span class="nav-number">1.22.</span> <span class="nav-text">引导页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试框架"><span class="nav-number">1.23.</span> <span class="nav-text">测试框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内购框架"><span class="nav-number">1.24.</span> <span class="nav-text">内购框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日期、时间处理、日历"><span class="nav-number">1.25.</span> <span class="nav-text">日期、时间处理、日历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加解密"><span class="nav-number">1.26.</span> <span class="nav-text">加解密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布局"><span class="nav-number">1.27.</span> <span class="nav-text">布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载"><span class="nav-number">1.28.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字体"><span class="nav-number">1.29.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本输入框、图文混排"><span class="nav-number">1.30.</span> <span class="nav-text">文本输入框、图文混排</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#键盘类"><span class="nav-number">1.31.</span> <span class="nav-text">键盘类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#弹窗"><span class="nav-number">1.32.</span> <span class="nav-text">弹窗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下拉菜单"><span class="nav-number">1.33.</span> <span class="nav-text">下拉菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下拉刷新"><span class="nav-number">1.34.</span> <span class="nav-text">下拉刷新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HUD"><span class="nav-number">1.35.</span> <span class="nav-text">HUD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二维码"><span class="nav-number">1.36.</span> <span class="nav-text">二维码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SegmentControl"><span class="nav-number">1.37.</span> <span class="nav-text">SegmentControl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UIKit扩展"><span class="nav-number">1.38.</span> <span class="nav-text">UIKit扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基础工具类以及Category"><span class="nav-number">1.39.</span> <span class="nav-text">基础工具类以及Category</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乔羽 / Geselle-Joy</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://gesellejoy.disqus.com/count.js" async></script>
+  
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Rf6dglrTvJaecQzm147kv1Y3-gzGzoHsz", "naYjjqUq3HgaspsbCc45Io6H");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

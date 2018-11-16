@@ -1,0 +1,3113 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  <meta name="baidu-site-verification" content="QBiIZlhg1Z">
+
+
+
+  <meta name="google-site-verification" content="8b4O8NqoCE_ObwFghNQGLCCDzFQBbnfur2gvs1E0pGE">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="true">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="true">
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Efforts to become the person I want to be.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="乔羽的技术博客">
+<meta property="og:url" content="https://devqiaoyu.tech/index.html">
+<meta property="og:site_name" content="乔羽的技术博客">
+<meta property="og:description" content="Efforts to become the person I want to be.">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="乔羽的技术博客">
+<meta name="twitter:description" content="Efforts to become the person I want to be.">
+
+
+
+
+
+
+  <link rel="canonical" href="https://devqiaoyu.tech/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>乔羽的技术博客</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ca17fff7ec3d7f6b92d63c70eefbb02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">乔羽的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home menu-item-active">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/15/开发/WKWebView进阶填坑指南-Swift/" itemprop="url">
+                  WKWebView进阶填坑指南-Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-15 11:47:35 / 修改时间：18:28:47" itemprop="dateCreated datePublished" datetime="2018-11-15T11:47:35+08:00">2018-11-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/11/15/开发/WKWebView进阶填坑指南-Swift/" class="leancloud_visitors" data-flag-title="WKWebView进阶填坑指南-Swift">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Cookie处理"><a href="#Cookie处理" class="headerlink" title="Cookie处理"></a>Cookie处理</h2><p>在设置<code>Cookie</code>的时候，我们经常做的是在请求的请求头里添加<code>Cookie</code>，但是这只是把<code>Cookie</code>发送给了服务端，我们本地并没有保存<code>Cookie</code>，<code>Cookie</code>最终要写到<code>WebView</code>的一个<code>Cookie</code>文件目录里面，后续<code>WebView</code>里面自己的发起的请求或者跳转才能在发起请求的时候在对应的域名下面取到<code>Cookie</code>传出去。</p>
+<p><code>Webview</code>加载 H5 页面，实际上是把页面相关的<code>.html、js、css</code>文件下载到本地，然后再加载，这时页面去获取<code>Cookie</code> 的时候，是去本地<code>WebView</code>里的<code>Cookie</code>文件目录里查找，如果没有设置的话肯定就找不到了。所以在设置<code>Cookie</code>的时候，服务端和客户端都要设置。</p>
+<h4 id="一、服务端-Cookie-设置"><a href="#一、服务端-Cookie-设置" class="headerlink" title="一、服务端 Cookie 设置"></a>一、服务端 Cookie 设置</h4><p>在使用<code>UIWebView</code>的时候，我们是通过<code>NSHTTPCookieStorage</code>来管理 <code>Cookie</code>的，下面我们给<code>devqiaoyu.tech</code>这个域名添加一个名为<code>user</code>的<code>Cookie</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var props = Dictionary&lt;HTTPCookiePropertyKey, Any&gt;()</span><br><span class="line">props[HTTPCookiePropertyKey.name] = &quot;user&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.value] = &quot;admin&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.path] = &quot;/&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.domain] = &quot;devqiaoyu.tech&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.version] = &quot;0&quot;</span><br><span class="line">props[HTTPCookiePropertyKey.originURL] = &quot;devqiaoyu.tech&quot;</span><br><span class="line">if let cookie = HTTPCookie(properties: props) &#123;</span><br><span class="line">    HTTPCookieStorage.shared.setCookie(cookie)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>WKWebView Cookie</code>问题在于<code>WKWebView</code>发起的请求不会自动带上存储于<code>NSHTTPCookieStorage</code>容器中的<code>Cookie</code>。</strong></p>
+<p>解决办法也很简单，就是在<code>WKWebView</code>发起请求之前，先从<code>NSHTTPCookieStorage</code>读取<code>Cookie</code>，然后手动往<code>URLRequest</code>的请求头里添加一下<code>Cookie</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">func getCookie() -&gt; String &#123;</span><br><span class="line">    var cookieString = &quot;&quot;</span><br><span class="line">	if let cookies = HTTPCookieStorage.shared.cookies &#123;</span><br><span class="line">		for cookie in cookies &#123;</span><br><span class="line">		if cookie.domain == cookieDomain &#123;</span><br><span class="line">			let str = &quot;\(cookie.name)=\(cookie.value)&quot;</span><br><span class="line">			cookieString.append(&quot;\(str);&quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return cookieString</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var request = URLRequest(url: URL(string: &quot;https://devqiaoyu.com&quot;))</span><br><span class="line">request.addValue(getCookie(), forHTTPHeaderField: &quot;Cookie&quot;)</span><br></pre></td></tr></table></figure>
+<p>当服务器页面发生重定向的时候，此时第一次在<code>RequestHeader</code>中写入的<code>Cookie</code>会丢失，还需要对重定向的请求重新做添加<code>Cookie</code>的处理。具体方法请往下看~</p>
+<h4 id="二、客户端-Cookie-设置"><a href="#二、客户端-Cookie-设置" class="headerlink" title="二、客户端 Cookie 设置"></a>二、客户端 Cookie 设置</h4><p>上面这么写完了，当页面加载的时候，后端无论是啥语言，都能从请求头里看到<code>Cookie</code>了，但是后端渲染返回页面后，在客户端的<code>WebView</code>里运行的时候，JS 在执行的时候调用<code>document.cookie</code> API 是读取不到<code>Cookie</code>的，所以还得针对客户端<code>Cookie</code>进行处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var cookieString = &quot;&quot;</span><br><span class="line">if let cookies = HTTPCookieStorage.shared.cookies &#123;</span><br><span class="line">	for cookie in cookies &#123;</span><br><span class="line">		if cookie.domain == &quot;devqiaoyu.tech&quot; &#123;</span><br><span class="line">			let str = &quot;\(cookie.name)=\(cookie.value)&quot;</span><br><span class="line">			cookieString.append(&quot;document.cookie=&apos;\(str);path=/;domain=devqiaoyu.tech&apos;;&quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">let cookieScript = WKUserScript(source: cookieString, injectionTime: .atDocumentStart, forMainFrameOnly: false)</span><br><span class="line">let userContentController = WKUserContentController()</span><br><span class="line">userContentController.addUserScript(cookieScript)</span><br><span class="line"></span><br><span class="line">let webViewConfig = WKWebViewConfiguration()</span><br><span class="line">webViewConfig.userContentController = userContentController</span><br><span class="line"></span><br><span class="line">let webV = WKWebView(frame: CGRect.zero, configuration: webViewConfig)</span><br></pre></td></tr></table></figure>
+<p><strong>客户端<code>Cookie</code>注入实际上就是创建一个 JS 脚本，让<code>WebView</code>去执行，推荐在<code>.atDocumentStart</code>这个时机进行预置静态  JS 的注入。</strong>这样<code>WebView</code>在加载后端返回的静态页面的时候，就可以拿到保存着客户端的<code>Cookie</code>了。</p>
+<blockquote>
+<p><strong>注意：document.cookie() 无法跨域设置 Cookie</strong>，比如你第一次加载的请求时 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> ，在重定向的时候跳转到了 <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> ，那么第二个请求就可能因为没有携带 <code>Cookie</code>而无法访问。当然啦，解决办法还是有的，请往下看~</p>
+</blockquote>
+<h2 id="URL拦截"><a href="#URL拦截" class="headerlink" title="URL拦截"></a>URL拦截</h2><p>在<code>WKWebView</code>中，每一次页面跳转之前，都会调用下面的回调函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -&gt; Void)</span><br></pre></td></tr></table></figure>
+<h4 id="Web-页面重定向问题"><a href="#Web-页面重定向问题" class="headerlink" title="Web 页面重定向问题"></a>Web 页面重定向问题</h4><p>重定向问题有两种：</p>
+<ul>
+<li>服务器页面重定向，需要对新发起的请求重新种<code>Cookie</code></li>
+<li>本地页面重定向，只要客户端设置了<code>Cookie</code>，那么就不需要处理了</li>
+</ul>
+<p>所以如果是服务器页面重定向，那么判断此时<code>Request</code>是否有你要的<code>Cookie</code>没有就<code>Cancel</code>掉，修改<code>Request</code>重新发起。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -&gt; Void)</span><br><span class="line">&#123;</span><br><span class="line">    var shouldCancelLoadURL = false</span><br><span class="line">    if let cookie = navigationAction.request.value(forHTTPHeaderField: &quot;Cookie&quot;) &#123;</span><br><span class="line">        if cookie.contains(&quot;user&quot;) &#123;</span><br><span class="line">            shouldCancelLoadURL = false</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            var request = URLRequest(url: URL(string: (navigationAction.request.url?.absoluteString)!)!)</span><br><span class="line">            request.addValue(getCookie(), forHTTPHeaderField: &quot;Cookie&quot;)</span><br><span class="line">            webView.load(request)</span><br><span class="line">            shouldCancelLoadURL = true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        var request = URLRequest(url: URL(string: (navigationAction.request.url?.absoluteString)!)!)</span><br><span class="line">        request.addValue(getCookie(), forHTTPHeaderField: &quot;Cookie&quot;)</span><br><span class="line">		webView.load(request)</span><br><span class="line">		shouldCancelLoadURL = true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if shouldCancelLoadURL &#123;</span><br><span class="line">    	decisionHandler(WKNavigationActionPolicy.cancel)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		decisionHandler(WKNavigationActionPolicy.allow)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h4><p>针对跨域的问题，解决办法和上面的方法类似，仅仅是判断条件不同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -&gt; Void)</span><br><span class="line">&#123;</span><br><span class="line">    var shouldCancelLoadURL = false</span><br><span class="line">    if let url = navigationAction.request.url?.absoluteString &#123;</span><br><span class="line">        if url.contains(&quot;devqiaoyu.tech&quot;) &#123; // 原来的域名</span><br><span class="line">            shouldCancelLoadURL = false</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">        	// 重新发起请求，种Cookie</span><br><span class="line">            shouldCancelLoadURL = true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">    	// 重新发起请求，种Cookie</span><br><span class="line">		shouldCancelLoadURL = true</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if shouldCancelLoadURL &#123;</span><br><span class="line">    	decisionHandler(WKNavigationActionPolicy.cancel)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		decisionHandler(WKNavigationActionPolicy.allow)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="假跳转的请求拦截"><a href="#假跳转的请求拦截" class="headerlink" title="假跳转的请求拦截"></a>假跳转的请求拦截</h4><p><strong>一种 JS 调用 Native 的通信方案</strong>，详细介绍可以看<a href="http://www.cocoachina.com/ios/20180109/21795.html" target="_blank" rel="noopener">从零收拾一个hybrid框架（一）– 从选择JS通信方案开始</a>。下面内容是从该文章内摘录的。</p>
+<p>何谓 <strong>假跳转的请求拦截</strong> 就是由网页发出一条新的跳转请求，跳转的目的地是一个非法的压根就不存在的地址，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//常规的Http地址</span><br><span class="line">https://wenku.baidu.com/xxxx?xx=xx</span><br><span class="line">//假的请求通信地址</span><br><span class="line">wakaka://wahahalalala/action?param=paramobj</span><br></pre></td></tr></table></figure>
+<p>看我下面写的那条假跳转地址，这么一条什么都不是的扯淡地址，直接放到浏览器里，直接扔到<code>WebView</code>里，肯定是妥妥的什么都打不开的，而如果在经过我们改造过的<code>Hybrid WebView</code>里，进行拦截不进行跳转</p>
+<p>url 地址分为这么几个部分</p>
+<ul>
+<li>协议：也就是 <code>http/https/file</code> 等，上面用了<code>wakaka</code></li>
+<li>域名：上面的 <code>wenku.baidu.com</code> 或 <code>wahahalalala</code></li>
+<li>路径：上面的 <code>xxxx?</code> 或 <code>action？</code></li>
+<li>参数：上面的 <code>xx=xx</code> 或 <code>param=paramobj</code></li>
+</ul>
+<p>如果我们构建一条假url</p>
+<ul>
+<li>用协议与域名当做通信识别</li>
+<li>用路径当做指令识别</li>
+<li>用参数当做数据传递</li>
+</ul>
+<p>客户端会无差别拦截所有请求，真正的 url 地址应该照常放过，只有协议域名匹配的 url 地址才应该被客户端拦截，拦截下来的 url 不会导致 WebView 继续跳转错误地址，因此无感知，相反拦截下来的 url 我们可以读取其中路径当做指令，读取其中参数当做数据，从而根据约定调用对应的 Native 原生代码</p>
+<p>以上其实是一种 <strong>协议约定</strong> 只要 JS 侧按着这个约定协议生成假 url，Native 按着约定协议拦截/读取假 url，整个流程就能跑通。</p>
+<h2 id="User-Agent设置"><a href="#User-Agent设置" class="headerlink" title="User-Agent设置"></a>User-Agent设置</h2><h4 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h4><p>就是<code>App</code>内所有<code>Web</code>请求的<code>User-Agent</code>全部被修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// UIWebView</span><br><span class="line">let webView = UIWebView(frame: CGRect.zero)</span><br><span class="line">let userAgent = webView.stringByEvaluatingJavaScript(from: &quot;navigator.userAgent&quot;)</span><br><span class="line">if let agent = userAgent &#123;</span><br><span class="line">    let user = &quot;@\(agent);extra_user_agent&quot;</span><br><span class="line">    let dict = [&quot;UserAgent&quot;:user]</span><br><span class="line">    UserDefaults.standard.register(defaults: dict)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// WKWebView</span><br><span class="line">let webV = WKWebView(frame: CGRect.zero)</span><br><span class="line">webV.evaluateJavaScript(&quot;navigator.userAgent&quot;) &#123; (result, error) in</span><br><span class="line">	if let oldAgent = result as? String &#123;</span><br><span class="line">		let user = &quot;@\(oldAgent);extra_user_agent&quot;</span><br><span class="line">		let dict = [&quot;UserAgent&quot;:user]</span><br><span class="line">		UserDefaults.standard.register(defaults: dict)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="单个WebView设置"><a href="#单个WebView设置" class="headerlink" title="单个WebView设置"></a>单个WebView设置</h3><p>在<code>iOS9</code>，<code>WKWebView</code>提供了一个非常便捷的属性去更改<code>User-Agent</code>，就是<code>customUserAgent</code>属性。这样使用起来不仅方便，也不会全局更改<code>User-Agent</code>，可惜的是<code>iOS9</code>才有，如果适配<code>iOS8</code>，还是要使用上面的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let webView = UIWebView(frame: CGRect.zero)</span><br><span class="line">let userAgent = webView.stringByEvaluatingJavaScript(from: &quot;navigator.userAgent&quot;)</span><br><span class="line">if let agent = userAgent &#123;</span><br><span class="line">    let user = &quot;@\(agent);extra_user_agent&quot;</span><br><span class="line">    webView.customUserAgent = user</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.jianshu.com/p/06963b57d78e" target="_blank" rel="noopener">WKWebView 那些坑</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/02/开发/纯Swift项目基础第三方库/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/02/开发/纯Swift项目基础第三方库/" itemprop="url">
+                  纯Swift项目基础第三方库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-02 17:08:23" itemprop="dateCreated datePublished" datetime="2018-11-02T17:08:23+08:00">2018-11-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-14 09:43:41" itemprop="dateModified" datetime="2018-11-14T09:43:41+08:00">2018-11-14</time>
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/11/02/开发/纯Swift项目基础第三方库/" class="leancloud_visitors" data-flag-title="纯Swift项目基础第三方库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="网络框架"><a href="#网络框架" class="headerlink" title="网络框架"></a>网络框架</h3><ul>
+<li><a href="https://github.com/Moya/Moya" target="_blank" rel="noopener">Moya</a> - 用 Swift 写的网络抽象层</li>
+<li><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener">Alamofire</a></li>
+</ul>
+<h3 id="Keychain"><a href="#Keychain" class="headerlink" title="Keychain"></a>Keychain</h3><ul>
+<li><a href="https://github.com/kishikawakatsumi/KeychainAccess" target="_blank" rel="noopener">KeychainAccess</a></li>
+</ul>
+<h3 id="JSON解析"><a href="#JSON解析" class="headerlink" title="JSON解析"></a>JSON解析</h3><ul>
+<li><a href="https://github.com/alibaba/HandyJSON" target="_blank" rel="noopener"><strong>HandyJSON</strong></a> - 一个方便的swift json-object 序列化/反序列化库</li>
+</ul>
+<h3 id="UserDefaults"><a href="#UserDefaults" class="headerlink" title="UserDefaults"></a>UserDefaults</h3><ul>
+<li><a href="https://github.com/radex/SwiftyUserDefaults" target="_blank" rel="noopener">SwiftyUserDefaults</a> - NSUserDefaults 的现代化 Swift API</li>
+</ul>
+<h3 id="图片解析加载"><a href="#图片解析加载" class="headerlink" title="图片解析加载"></a>图片解析加载</h3><ul>
+<li><a href="https://github.com/onevcat/Kingfisher" target="_blank" rel="noopener">Kingfisher</a> - 是一个轻量、纯 Swift 的库，可以从网络中异步下载和缓存图片</li>
+</ul>
+<h3 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h3><ul>
+<li><a href="https://github.com/krzyzanowskim/CryptoSwift" target="_blank" rel="noopener">CryptoSwift</a> - 是一个不断扩充的集合，包含了标准、安全、用 Swift 实现的加密算法</li>
+</ul>
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><ul>
+<li><a href="https://github.com/SnapKit/SnapKit" target="_blank" rel="noopener">Snapkit</a></li>
+</ul>
+<h3 id="富文本"><a href="#富文本" class="headerlink" title="富文本"></a>富文本</h3><ul>
+<li><a href="https://github.com/KyoheiG3/AttributedLabel" target="_blank" rel="noopener">AttributedLabel</a> - 显示性能数量级 UILabel 的 AttributedLabel</li>
+</ul>
+<h3 id="键盘类"><a href="#键盘类" class="headerlink" title="键盘类"></a>键盘类</h3><ul>
+<li><a href="https://github.com/hackiftekhar/IQKeyboardManager" target="_blank" rel="noopener">IQKeyboardManagerSwift</a></li>
+</ul>
+<h3 id="提示框"><a href="#提示框" class="headerlink" title="提示框"></a>提示框</h3><ul>
+<li><a href="https://github.com/scalessec/Toast-Swift" target="_blank" rel="noopener">Toast-Swift</a></li>
+</ul>
+<h3 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h3><ul>
+<li><a href="https://github.com/LeoMobileDeveloper/PullToRefreshKit" target="_blank" rel="noopener">PullToRefreshKit</a></li>
+</ul>
+<h3 id="SegmentControl"><a href="#SegmentControl" class="headerlink" title="SegmentControl"></a>SegmentControl</h3><ul>
+<li><a href="https://github.com/HeshamMegid/HMSegmentedControl-Swift" target="_blank" rel="noopener">HMSegmentedControl-Swift</a></li>
+</ul>
+<h3 id="空页面"><a href="#空页面" class="headerlink" title="空页面"></a>空页面</h3><ul>
+<li><a href="https://github.com/Xiaoye220/EmptyDataSet-Swift" target="_blank" rel="noopener">DZNEmptyDataSet-Swift</a> - 空页面视图框架</li>
+</ul>
+<h3 id="TabBarController"><a href="#TabBarController" class="headerlink" title="TabBarController"></a>TabBarController</h3><ul>
+<li><a href="https://github.com/chenjiang3/RDVTabBarControllerSwift" target="_blank" rel="noopener">RDVTabBarControllerSwift</a> - 一个定制化的TabBarController库，可动画显示隐藏tabbar栏，可定制tabbar栏</li>
+</ul>
+<h3 id="HUD"><a href="#HUD" class="headerlink" title="HUD"></a>HUD</h3><ul>
+<li><a href="https://github.com/pkluz/PKHUD" target="_blank" rel="noopener">PKHUD</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/01/开发/使用Carthage发布自己创建的Framework并使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/01/开发/使用Carthage发布自己创建的Framework并使用/" itemprop="url">
+                  使用Carthage发布自己创建的Framework并使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-01 14:03:01 / 修改时间：17:02:45" itemprop="dateCreated datePublished" datetime="2018-11-01T14:03:01+08:00">2018-11-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/11/01/开发/使用Carthage发布自己创建的Framework并使用/" class="leancloud_visitors" data-flag-title="使用Carthage发布自己创建的Framework并使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Xcode 9.4.1</p>
+<h3 id="创建Framework"><a href="#创建Framework" class="headerlink" title="创建Framework"></a>创建Framework</h3><h4 id="1-新建工程"><a href="#1-新建工程" class="headerlink" title="1.新建工程"></a>1.新建工程</h4><p>打开Xcode，<code>command+n</code>新建工程，选择<code>Cocoa Touch Framework</code>，点击<code>next</code>，命名为<code>StringExtension</code>。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-3c0354763891ca67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建Framework"></p>
+<h4 id="2-创建文件"><a href="#2-创建文件" class="headerlink" title="2.创建文件"></a>2.创建文件</h4><p><code>StringExtension.swift</code>是不准备暴露出去的，<code>Test.swift</code>是准备暴露出去给外界调用的。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-1031b7b70e723eb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="StringExtension"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-ba0335fa34807f4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test"></p>
+<p><strong>需要暴露出来给外界调用的类或方法必须要加上关键字<code>public</code>。</strong></p>
+<h4 id="3-将Scheme设置为shared"><a href="#3-将Scheme设置为shared" class="headerlink" title="3.将Scheme设置为shared"></a>3.将<code>Scheme</code>设置为<code>shared</code></h4><p><img src="https://upload-images.jianshu.io/upload_images/1507703-e330b4d9de92f995.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="scheme"></p>
+<h4 id="4-使用Carthage构建Framework"><a href="#4-使用Carthage构建Framework" class="headerlink" title="4.使用Carthage构建Framework"></a>4.使用<code>Carthage</code>构建<code>Framework</code></h4><p>终端进入工程目录下，执行下面代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ carthage build --no-skip-current</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-302991dc8145b2f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="carthage build"></p>
+<p>执行完成以后会发现，目录下多了一个<code>Carthage</code>文件夹，我们的<code>Framework</code>就在该文件夹里面。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-ca81ab8e03318441.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="framework"></p>
+<h3 id="将Framework上传至Github"><a href="#将Framework上传至Github" class="headerlink" title="将Framework上传至Github"></a>将Framework上传至Github</h3><h4 id="1-新建仓库"><a href="#1-新建仓库" class="headerlink" title="1.新建仓库"></a>1.新建仓库</h4><p><img src="https://upload-images.jianshu.io/upload_images/1507703-a94c25ef68b39bfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="new repository"></p>
+<h4 id="2-初始化仓库"><a href="#2-初始化仓库" class="headerlink" title="2.初始化仓库"></a>2.初始化仓库</h4><p>终端进入工程目录下，执行下面代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ echo &quot;# StringExtension&quot; &gt;&gt; README.md</span><br><span class="line">$ git init</span><br><span class="line">$ git add README.md</span><br><span class="line">$ git commit -m &quot;first commit&quot;</span><br><span class="line">$ git remote add origin https://github.com/Geselle-Joy/StringExtension.git</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-cd262fac12adef0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="setup.png"></p>
+<h4 id="3-添加gitignore"><a href="#3-添加gitignore" class="headerlink" title="3.添加gitignore"></a>3.添加gitignore</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ touch .gitignore #这句话只是创建了gitignore文件，记得要打开添加内容</span><br><span class="line">$ git add .gitignore</span><br><span class="line">$ git commit -m &quot;add gitignore&quot;</span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+<h4 id="4-添加工程文件"><a href="#4-添加工程文件" class="headerlink" title="4.添加工程文件"></a>4.添加工程文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit -m &quot;add StringExtension&quot;</span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+<h4 id="5-添加版本标记"><a href="#5-添加版本标记" class="headerlink" title="5.添加版本标记"></a>5.添加版本标记</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git tag 1.0.0</span><br><span class="line">$ git push --tags</span><br></pre></td></tr></table></figure>
+<p>到这里我们自己创建的<code>framework</code>已经上传到<code>github</code>上了。</p>
+<h3 id="调用我们创建的Framework"><a href="#调用我们创建的Framework" class="headerlink" title="调用我们创建的Framework"></a>调用我们创建的Framework</h3><h4 id="1-用Xcode创建新项目"><a href="#1-用Xcode创建新项目" class="headerlink" title="1.用Xcode创建新项目"></a>1.用Xcode创建新项目</h4><p>创建项目，cd到工程目录</p>
+<h4 id="2-创建一个空的carthage文件"><a href="#2-创建一个空的carthage文件" class="headerlink" title="2.创建一个空的carthage文件"></a>2.创建一个空的carthage文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch Cartfile</span><br></pre></td></tr></table></figure>
+<h4 id="3-编辑Cartfile文件"><a href="#3-编辑Cartfile文件" class="headerlink" title="3.编辑Cartfile文件"></a>3.编辑Cartfile文件</h4><p>编辑<code>Cartfile</code>文件，输入如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">github &quot;Geselle-Joy/StringExtension&quot;</span><br></pre></td></tr></table></figure>
+<p>版本含义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~&gt; 3.0 表示使用版本3.0以上但是低于4.0的最新版本，如3.5, 3.9</span><br><span class="line">== 3.0 表示使用3.0版本</span><br><span class="line">&gt;= 3.0 表示使用3.0或更高的版本</span><br><span class="line"></span><br><span class="line">如果你没有指明版本号，则会自动使用最新的版本</span><br></pre></td></tr></table></figure>
+<h4 id="4-保存并关闭Cartfile文件，在终端执行命令"><a href="#4-保存并关闭Cartfile文件，在终端执行命令" class="headerlink" title="4.保存并关闭Cartfile文件，在终端执行命令"></a>4.保存并关闭Cartfile文件，在终端执行命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ carthage update --platform iOS</span><br></pre></td></tr></table></figure>
+<p>安装过程如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ testss carthage update --platform iOS</span><br><span class="line">*** Cloning StringExtension</span><br><span class="line">*** Checking out StringExtension at &quot;1.0.0&quot;</span><br><span class="line">*** xcodebuild output can be found in /var/folders/8w/s8bn_8c56p9czz75nqdqmp2m0000gn/T/carthage-xcodebuild.ecw6rz.log</span><br><span class="line">*** Building scheme &quot;StringExtension&quot; in StringExtension.xcodeproj</span><br></pre></td></tr></table></figure>
+<p><code>carthage</code>会为你下载和编译所需要的第三方库，当命令执行完毕，在你的项目文件夹中会出现一个名为<code>Carthage</code>的文件夹和<code>Cartfile.resolved</code>的文件。</p>
+<p>在<code>~/Carthage/Build/iOS</code>文件夹里就可以看到我们自己创建的<code>StringExtension.framework</code>了。</p>
+<h4 id="5-导入framework"><a href="#5-导入framework" class="headerlink" title="5.导入framework"></a>5.导入framework</h4><p>打开你的项目，选择<code>target</code>, 再选择上方的<code>General</code>，将需要的<code>framework</code>文件拖到 <code>Linked frameworks and Binaries</code>内。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-1a87f2488b9913a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="import framework"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/01/教程/项目已添加到Git上以后再添加gitignore/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/01/教程/项目已添加到Git上以后再添加gitignore/" itemprop="url">
+                  项目已添加到Git上以后再添加gitignore
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-01 11:02:18 / 修改时间：11:21:15" itemprop="dateCreated datePublished" datetime="2018-11-01T11:02:18+08:00">2018-11-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/11/01/教程/项目已添加到Git上以后再添加gitignore/" class="leancloud_visitors" data-flag-title="项目已添加到Git上以后再添加gitignore">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>接手别人的项目的时候，总是发现<code>gitignore</code>并没有设置或者设置的有问题，所以需要对<code>gitignore</code>进行添加或更新。</p>
+<h4 id="1-为避免冲突，先拉取下远程仓库"><a href="#1-为避免冲突，先拉取下远程仓库" class="headerlink" title="1.为避免冲突，先拉取下远程仓库"></a>1.为避免冲突，先拉取下远程仓库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<h4 id="2-清除本地目录下的缓存"><a href="#2-清除本地目录下的缓存" class="headerlink" title="2.清除本地目录下的缓存"></a>2.清除本地目录下的缓存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br></pre></td></tr></table></figure>
+<h4 id="3-新建或更新-gitignore文件"><a href="#3-新建或更新-gitignore文件" class="headerlink" title="3.新建或更新.gitignore文件"></a>3.新建或更新<code>.gitignore</code>文件</h4><p>在项目的根目录下创建<code>.gitignore</code>文件，并添加相应的过滤规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim .gitignore</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里推荐一个网站：<a href="https://www.gitignore.io" target="_blank" rel="noopener">gitignore.io</a>，可以根据你项目的需要获取<code>gitignore</code></p>
+<p>或者也可以去 <a href="https://github.com/github/gitignore" target="_blank" rel="noopener">https://github.com/github/gitignore</a> 上找对应的<code>gitignore</code></p>
+</blockquote>
+<h4 id="4-再次添加所有文件到本地仓库缓存中"><a href="#4-再次添加所有文件到本地仓库缓存中" class="headerlink" title="4.再次添加所有文件到本地仓库缓存中"></a>4.再次添加所有文件到本地仓库缓存中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<h4 id="5-添加commit"><a href="#5-添加commit" class="headerlink" title="5.添加commit"></a>5.添加<code>commit</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;add gitignore&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="6-提交到远程仓库"><a href="#6-提交到远程仓库" class="headerlink" title="6.提交到远程仓库"></a>6.提交到远程仓库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/25/教程/pandoc安装使用教程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/25/教程/pandoc安装使用教程/" itemprop="url">
+                  pandoc安装使用教程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-25 14:33:01 / 修改时间：15:04:33" itemprop="dateCreated datePublished" datetime="2018-10-25T14:33:01+08:00">2018-10-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/10/25/教程/pandoc安装使用教程/" class="leancloud_visitors" data-flag-title="pandoc安装使用教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>pandoc</code>是一款开源转换工具，可以实现常见的格式转换。支持全平台操作，以命令行的方式进行转换。</p>
+<p><a href="https://github.com/jgm/pandoc/releases" target="_blank" rel="noopener">Github下载地址</a></p>
+<p><a href="http://pandoc.org/installing.html" target="_blank" rel="noopener">官网安装指导</a></p>
+<p><a href="https://www.yangzhiping.com/tech/pandoc.html" target="_blank" rel="noopener">Markdown写作进阶：Pandoc入门浅谈</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>pandoc</code>的安装很简单，官网也提供了很多安装方式，比较简便的有：</p>
+<ul>
+<li><p>从<code>Github</code>下载安装包</p>
+</li>
+<li><p>通过<code>HomeBrew</code>安装：在终端输入 <code>brew install pandoc</code></p>
+</li>
+</ul>
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 将file.md文件转换为file.docx文件。</span><br><span class="line"></span><br><span class="line">pandoc -f markdown -t docx file.md -o file.docx</span><br><span class="line"></span><br><span class="line"># 如果未指定-f、-t，pandoc则会根据输入文件输出文件的后缀来转换</span><br><span class="line"></span><br><span class="line">pandoc input.txt -o output.pdf</span><br><span class="line"></span><br><span class="line">-f: 指定输入格式，比如docx、epub、md、html等</span><br><span class="line"></span><br><span class="line">-t: 指定输出格式，比如docx、epub、md、html等</span><br><span class="line"></span><br><span class="line">-o: 输出到file文件</span><br><span class="line"></span><br><span class="line">--verbost: 显示详细调试信息</span><br><span class="line"></span><br><span class="line">--log： 指定输出日志信息</span><br><span class="line"></span><br><span class="line">--list-input-formats：列出支持的输入格式。</span><br><span class="line"></span><br><span class="line">--list-output-formats：列出支持的输出格式。</span><br><span class="line"></span><br><span class="line">--list-extensions：列表支持Markdown扩展，后面跟一个+或者-说明是否在pandoc的Markdown中默认启用。</span><br><span class="line"></span><br><span class="line">--list-highlight-languages:列出语法突出显示支持的语言。</span><br><span class="line"></span><br><span class="line">--list-highlight-styles:列出支持语法高亮的样式。。</span><br><span class="line"></span><br><span class="line">-v: 打印版本信息。</span><br><span class="line"></span><br><span class="line">-h：显示语法帮助</span><br></pre></td></tr></table></figure>
+<p>更多详细命令，参看<a href="http://pandoc.org/MANUAL.html" target="_blank" rel="noopener">官方文档</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/22/开发/如何验证生产环境Push推送/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/22/开发/如何验证生产环境Push推送/" itemprop="url">
+                  如何验证生产环境Push推送
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-22 15:51:50 / 修改时间：22:12:57" itemprop="dateCreated datePublished" datetime="2018-10-22T15:51:50+08:00">2018-10-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/10/22/开发/如何验证生产环境Push推送/" class="leancloud_visitors" data-flag-title="如何验证生产环境Push推送">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在测试推送的时候，发现在测试环境测试的时候，是没有问题的，不论APP在前台还是在后台都可以收到推送，但是在生产环境，一直收不到推送。查了查资料后了解到，在生产换成测推送的时候，需要生成Ad-Hoc Profile。</p>
+<h4 id="生成Ad-Hoc-Profile"><a href="#生成Ad-Hoc-Profile" class="headerlink" title="生成Ad-Hoc Profile"></a>生成Ad-Hoc Profile</h4><p>生成Profile，下载安装</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-a058376fc6c46af1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Ad-Hoc"></p>
+<h4 id="更改Scheme"><a href="#更改Scheme" class="headerlink" title="更改Scheme"></a>更改Scheme</h4><ul>
+<li><code>Product</code> —&gt;<code>Scheme</code> —&gt;<code>Edit Scheme</code></li>
+<li>更改<code>Build Configuration</code>为<code>Release</code></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-30fbde1369cd1da1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="scheme"></p>
+<h4 id="更改Signing"><a href="#更改Signing" class="headerlink" title="更改Signing"></a>更改Signing</h4><p>选中自己刚才生成的<code>Profile</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-d2f8ebdeafe8ece4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="signing"></p>
+<h4 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h4><p><code>Product</code> —&gt; <code>Archive</code>，等打包完成后，<code>Window</code> —&gt; <code>Organizer</code>，选择你刚才打的包。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-55f4df85ce2a4f28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="archive"></p>
+<p>选择<code>Export</code>。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-f2269d84ef7b7b6a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="export"></p>
+<p>选择<code>Ad Hoc</code>。然后一步一步导出<code>ipa</code>包。拿到<code>ipa</code>包以后，使用<code>itools</code>安装至真机上，开始测试。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/17/教程/Xcode清理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/17/教程/Xcode清理/" itemprop="url">
+                  Xcode清理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 18:05:00" itemprop="dateCreated datePublished" datetime="2018-10-17T18:05:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-25 15:11:04" itemprop="dateModified" datetime="2018-10-25T15:11:04+08:00">2018-10-25</time>
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/10/17/教程/Xcode清理/" class="leancloud_visitors" data-flag-title="Xcode清理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>Devices</strong></p>
+<p><code>~/Library/Developer/CoreSimulator/Devices</code></p>
+<p>该目录是存放模拟器，里面每个模拟器标识符代表一台设备，具体可见device_set.plist</p>
+<p><strong>DerivedData</strong></p>
+<p><code>~/Library/Developer/Xcode/DerivedData</code></p>
+<p>该文件夹存放项目的索引文件等，可以全部删除，或者删除不常用的项目，再次打开项目会自动生成。</p>
+<p><strong>DeviceSupport</strong></p>
+<p><code>~/Library/Developer/Xcode/iOS DeviceSupport</code></p>
+<p>该目录是真机调试时产生的，删除后下次调试时会自动生成。</p>
+<p><strong>Archives</strong></p>
+<p><code>~/Library/Developer/Xcode/Archives</code></p>
+<p>该文件夹存放app打包生成的文件，可以删掉不需要的项目打包文件。</p>
+<p><strong>Runtimes</strong></p>
+<p><code>/Library/Developer/CoreSimulator/Profiles/Runtimes</code></p>
+<p>该文件夹存放手动下载的Simulator。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/16/教程/Xcode Simulator手动下载/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/16/教程/Xcode Simulator手动下载/" itemprop="url">
+                  Xcode Simulator手动下载
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-16 14:25:41" itemprop="dateCreated datePublished" datetime="2018-10-16T14:25:41+08:00">2018-10-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-17 18:04:32" itemprop="dateModified" datetime="2018-10-17T18:04:32+08:00">2018-10-17</time>
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/10/16/教程/Xcode Simulator手动下载/" class="leancloud_visitors" data-flag-title="Xcode Simulator手动下载">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Xcode本身会自带对应版本的模拟器，如果想下载之前版本的模拟器，可以从<code>Perferences</code> –&gt;<code>Components</code>–&gt;<code>Simulators</code>里下载。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-fbeeb3d438a00b7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Simulate.png"></p>
+<p>文件下载地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/Caches/com.apple.dt.Xcode/Downloads</span><br></pre></td></tr></table></figure>
+<p>最终下载并安装完成的模拟器被放置在这个位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Library/Developer/CoreSimulator/Profiles/Runtimes</span><br></pre></td></tr></table></figure>
+<p>但是从<code>Xcode</code>里下载的话，进度很慢，所以决定采用一下方案：</p>
+<h3 id="一、获取dmg链接并下载"><a href="#一、获取dmg链接并下载" class="headerlink" title="一、获取dmg链接并下载"></a>一、获取dmg链接并下载</h3><ol>
+<li><p>打开终端，输入以下命令，启动<code>Xcode</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Applications/Xcode.app/Contents/MacOS/Xcode</span><br></pre></td></tr></table></figure>
+<p>这样是为了将<code>Xcode</code>的一些输出信息直接显示在终端上查看，待会我们会在这里看到<code>Simulator</code>的下载地址</p>
+</li>
+<li><p>选择想要下载的模拟器，点击下载，过几秒后，取消下载。这是终端上会出现如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DVTDownloadable: Download Cancelled. Downloadable: https://devimages-cdn.apple.com/downloads/xcode/simulators/com.apple.pkg.iPhoneSimulatorSDK11_4-11.4.1.1527703358.dmg.</span><br></pre></td></tr></table></figure>
+<p>其中的<code>url</code>就是我们需要的<code>Simulator</code>的直接下载地址，可以将之拷贝到迅雷等工具中下载。</p>
+</li>
+</ol>
+<h3 id="二、安装Simulator"><a href="#二、安装Simulator" class="headerlink" title="二、安装Simulator"></a>二、安装Simulator</h3><ol>
+<li>进入<code>~/Library/Caches</code>文件夹，找到<code>com.apple.dt.Xcode</code>文件，右键选择<code>显示包内容</code></li>
+<li>进入 <code>Downloads</code> 目录 (如果没有，则手动创建一个 <code>Downloads</code> 目录)</li>
+<li>将下载好的<code>dmg</code>文件移动到 <code>Downloads</code> 目录 (不要改动文件名)</li>
+<li>重启 <code>Xcode</code>，回到 <code>Components</code> 面板，点击对应下载好的<code>Simulator</code></li>
+<li>静静等待奇迹的发生~~~</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/11/开发/升级Xcode10后遇到的问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/11/开发/升级Xcode10后遇到的问题/" itemprop="url">
+                  升级Xcode10后遇到的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-11 17:38:14" itemprop="dateCreated datePublished" datetime="2018-10-11T17:38:14+08:00">2018-10-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-16 14:01:52" itemprop="dateModified" datetime="2018-10-16T14:01:52+08:00">2018-10-16</time>
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/10/11/开发/升级Xcode10后遇到的问题/" class="leancloud_visitors" data-flag-title="升级Xcode10后遇到的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-Multiple-commands-produce"><a href="#1-Multiple-commands-produce" class="headerlink" title="1. Multiple  commands produce"></a>1. Multiple  commands produce</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Multiple commands produce &apos;/Users/joy/Library/Developer/Xcode/DerivedData/FKY-cpdtnacrrykispgfanfwxzyhrnge/Build/Products/Debug-iphonesimulator/FKY-TEST.app/Info.plist&apos;:</span><br><span class="line">1) Target &apos;FKY-TEST&apos; (project &apos;FKY&apos;) has copy command from &apos;/Users/joy/Documents/1药网Git/fangkuaiyi_ios/FKY/FKYSwift/Vendor/SKPhotoBrowser/Info.plist&apos; to &apos;/Users/joy/Library/Developer/Xcode/DerivedData/FKY-cpdtnacrrykispgfanfwxzyhrnge/Build/Products/Debug-iphonesimulator/FKY-TEST.app/Info.plist&apos;</span><br><span class="line">2) Target &apos;FKY-TEST&apos; (project &apos;FKY&apos;) has copy command from &apos;/Users/joy/Documents/1药网Git/fangkuaiyi_ios/FKY/Supporting Files/Info.plist&apos; to &apos;/Users/joy/Library/Developer/Xcode/DerivedData/FKY-cpdtnacrrykispgfanfwxzyhrnge/Build/Products/Debug-iphonesimulator/FKY-TEST.app/Info.plist&apos;</span><br><span class="line">3) Target &apos;FKY-TEST&apos; (project &apos;FKY&apos;) has process command with output &apos;/Users/joy/Library/Developer/Xcode/DerivedData/FKY-cpdtnacrrykispgfanfwxzyhrnge/Build/Products/Debug-iphonesimulator/FKY-TEST.app/Info.plist&apos;</span><br></pre></td></tr></table></figure>
+<p>报错原因：<strong>重复</strong></p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>修改 Xcode 的配置暂时解决了编译报错的问题。</p>
+<p><code>Xcode</code> -&gt; <code>File</code> -&gt; <code>Workspace settings</code> -&gt; <code>Build System</code>，选择 <code>Legacy Build System</code> 。</p>
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><ol>
+<li>选择打开所在的项目<code>Target</code> -&gt; <code>Build Phases</code> -&gt; <code>Copy Bundle Resources</code> </li>
+<li>删除报错的那些文件</li>
+</ol>
+<h2 id="2-library-not-found-for-lstdc-6-0-9"><a href="#2-library-not-found-for-lstdc-6-0-9" class="headerlink" title="2. library not found for -lstdc++.6.0.9"></a>2. library not found for -lstdc++.6.0.9</h2><p>Xcode10不支持<code>libstdc++</code>系列的库了、需要删掉并且换成<code>libc++</code>系列的库。有些第三方由于没有更新，会牵扯到这个库，所以运行后报错。</p>
+<h3 id="方案一-1"><a href="#方案一-1" class="headerlink" title="方案一"></a>方案一</h3><p>打开<code>Build Phases</code> -&gt; <code>Link Binary With Libraries</code>，删除<code>lstdc++.6.0.9</code>依赖</p>
+<blockquote>
+<p>有可能还有删除<code>Build Setting</code> -&gt; <code>Other Linker Flags</code>里的<code>-l&quot;stdc++.6.0.9&quot;</code></p>
+</blockquote>
+<p>但是现在部分第三方SDK依旧要依赖于<code>lstdc++.6.0.9.tbd</code>动态库，如果对代码进行改动或者修改 Xcode 的配置，可能会造成其他问题，例如在Xcode9.4上再次运行的时候可能会出现报错等等。</p>
+<h3 id="方案二-1"><a href="#方案二-1" class="headerlink" title="方案二"></a>方案二</h3><p>最简单解决该问题的方法就是从 Xcode9.4 中找到动态库<code>lstdc++.6.0.9.tbd</code>、<code>libstdc++.6.tbd</code>、<code>libstdc++.tbd</code>文件复制到 Xcode10 下就可以完美解决问题。</p>
+<ul>
+<li><p>真机</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模拟器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/lib/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><a href="https://pan.baidu.com/s/1T_TtQTh5Ff0bHM4Hcfj0tg" target="_blank" rel="noopener">libstdc++文件下载链接</a></p>
+<h2 id="3-ld-symbol-s-not-found-for-architecture-x86-64"><a href="#3-ld-symbol-s-not-found-for-architecture-x86-64" class="headerlink" title="3. ld: symbol(s) not found for architecture x86_64"></a>3. ld: symbol(s) not found for architecture x86_64</h2><p>前面两个问题解决后，就遇到了这个问题，目前，在模拟器运行的时候会报这个错误，而使用真机运行的话没有问题，猜测应该是iOS12 模拟器的问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">ld: warning: ignoring file /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/lib/libstdc++.6.0.9.tbd, missing required architecture x86_64 in file /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.0.sdk/usr/lib/libstdc++.6.0.9.tbd (3 slices)</span><br><span class="line">ld: warning: ignoring file /Users/joy/Documents/1药网Git/fangkuaiyi_ios/FKY/Vendors/AipOcrSdk/IdcardQuality.framework/IdcardQuality, missing required architecture x86_64 in file /Users/joy/Documents/1药网Git/fangkuaiyi_ios/FKY/Vendors/AipOcrSdk/IdcardQuality.framework/IdcardQuality (3 slices)</span><br><span class="line"></span><br><span class="line">Undefined symbols for architecture x86_64:</span><br><span class="line">  &quot;std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::basic_string(char const*, std::allocator&lt;char&gt; const&amp;)&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::string::assign(std::string const&amp;)&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;::open(char const*, std::_Ios_Openmode)&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;::close()&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::string::_Rep::_S_empty_rep_storage&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::ios_base::Init::~Init()&quot;, referenced from:</span><br><span class="line">      __GLOBAL__sub_I_BVMDOfflineMapMerge.cpp in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;::~basic_fstream()&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::string::_Rep::_M_destroy(std::allocator&lt;char&gt; const&amp;)&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::ostream::tellp()&quot;, referenced from:</span><br><span class="line">      _baidu_framework::MergeDataPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, _baidu_framework::tagVectorMapFile&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::ostream::write(char const*, long)&quot;, referenced from:</span><br><span class="line">      _baidu_framework::MergeNamePart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::MergeIndexPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::MergeDataPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, _baidu_framework::tagVectorMapFile&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::istream::seekg(long long, std::_Ios_Seekdir)&quot;, referenced from:</span><br><span class="line">      _baidu_framework::MergeIndexPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::MergeDataPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, _baidu_framework::tagVectorMapFile&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::CheckPatchMd5(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::ios_base::Init::Init()&quot;, referenced from:</span><br><span class="line">      __GLOBAL__sub_I_BVMDOfflineMapMerge.cpp in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;::basic_fstream()&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::istream::tellg()&quot;, referenced from:</span><br><span class="line">      _baidu_framework::MergeNamePart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::MergeIndexPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::MergeDataPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, _baidu_framework::tagVectorMapFile&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::CheckPatchMd5(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::__throw_length_error(char const*)&quot;, referenced from:</span><br><span class="line">      std::vector&lt;_baidu_vi::CVPtrRef&lt;_baidu_framework::CTextureData&gt;, std::allocator&lt;_baidu_vi::CVPtrRef&lt;_baidu_framework::CTextureData&gt; &gt; &gt;::_M_fill_insert(__gnu_cxx::__normal_iterator&lt;_baidu_vi::CVPtrRef&lt;_baidu_framework::CTextureData&gt;*, std::vector&lt;_baidu_vi::CVPtrRef&lt;_baidu_framework::CTextureData&gt;, std::allocator&lt;_baidu_vi::CVPtrRef&lt;_baidu_framework::CTextureData&gt; &gt; &gt; &gt;, unsigned long, _baidu_vi::CVPtrRef&lt;_baidu_framework::CTextureData&gt; const&amp;) in BaiduMapAPI_Map(TextureDataLoader.o)</span><br><span class="line">  &quot;std::istream::read(char*, long)&quot;, referenced from:</span><br><span class="line">      _baidu_framework::MergeNamePart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::MergeIndexPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::MergeDataPart(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, _baidu_framework::tagVectorMapFile&amp;, int) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::CheckPatchMd5(std::basic_fstream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">  &quot;std::basic_filebuf&lt;char, std::char_traits&lt;char&gt; &gt;::is_open() const&quot;, referenced from:</span><br><span class="line">      _baidu_framework::HandleBasemapMerge(_baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, _baidu_vi::CVString const&amp;, char const*) in BaiduMapAPI_Map(BVMDOfflineMapMerge.o)</span><br><span class="line">ld: symbol(s) not found for architecture x86_64</span><br><span class="line">clang: error: linker command failed with exit code 1 (use -v to see invocation)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/10/教程/Mac下用Python写iOS自动化测试/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/10/教程/Mac下用Python写iOS自动化测试/" itemprop="url">
+                  Mac下用Python写iOS自动化测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-10 14:45:56" itemprop="dateCreated datePublished" datetime="2018-10-10T14:45:56+08:00">2018-10-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-14 17:28:14" itemprop="dateModified" datetime="2018-10-14T17:28:14+08:00">2018-10-14</time>
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/10/10/教程/Mac下用Python写iOS自动化测试/" class="leancloud_visitors" data-flag-title="Mac下用Python写iOS自动化测试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装libimobiledevice"><a href="#安装libimobiledevice" class="headerlink" title="安装libimobiledevice"></a>安装libimobiledevice</h2><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>移除所以的 iOS 设备，然后在终端输入一下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall ideviceinstaller</span><br><span class="line">brew uninstall libimobiledevice</span><br><span class="line">brew install --HEAD libimobiledevice</span><br><span class="line">brew link --overwrite libimobiledevice</span><br><span class="line">brew install --HEAD  ideviceinstaller</span><br><span class="line">brew link --overwrite ideviceinstaller</span><br><span class="line">sudo rm -rf /var/db/lockdown/*</span><br></pre></td></tr></table></figure>
+<p>连接一台iOS设备，并信任，然后输入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R 777 /var/db/lockdown/</span><br></pre></td></tr></table></figure>
+<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><p>在运行<code>brew install --HEAD libimobiledevice</code>这段代码时遇到问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Last 15 lines from /Users/joy/Library/Logs/Homebrew/libimobiledevice/01.autogen.sh:</span><br><span class="line">checking dynamic linker characteristics... darwin18.0.0 dyld</span><br><span class="line">checking how to hardcode library paths into programs... immediate</span><br><span class="line">checking for pkg-config... /usr/local/opt/pkg-config/bin/pkg-config</span><br><span class="line">checking pkg-config is at least version 0.9.0... yes</span><br><span class="line">checking for libusbmuxd &gt;= 1.1.0... no</span><br><span class="line">configure: error: Package requirements (libusbmuxd &gt;= 1.1.0) were not met:</span><br><span class="line"></span><br><span class="line">Requested &apos;libusbmuxd &gt;= 1.1.0&apos; but version of libusbmuxd is 1.0.10</span><br><span class="line"></span><br><span class="line">Consider adjusting the PKG_CONFIG_PATH environment variable if you</span><br><span class="line">installed software in a non-standard prefix.</span><br><span class="line"></span><br><span class="line">Alternatively, you may set the environment variables libusbmuxd_CFLAGS</span><br><span class="line">and libusbmuxd_LIBS to avoid the need to call pkg-config.</span><br><span class="line">See the pkg-config man page for more details.</span><br></pre></td></tr></table></figure>
+<p>看上去是<code>libusbmuxd</code>的版本不对。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.methodname.com/webdriveragenthe-wda/" target="_blank" rel="noopener">使用Python写iOS自动化测试</a></p>
+<p><a href="https://blog.csdn.net/youxiansanren/article/details/49335385" target="_blank" rel="noopener">iOS+Python+Appium真机自动化测试实战</a></p>
+<p><a href="https://blog.csdn.net/pengyuan_D/article/details/79932981" target="_blank" rel="noopener">Python + Appium+ IOS自动化测试</a></p>
+<p><a href="https://www.jianshu.com/p/505525e2bb01" target="_blank" rel="noopener">MAC下搭建 appium+ios+python 自动化测试环境</a></p>
+<p><a href="https://blog.csdn.net/PRIMEFJT/article/details/78947480" target="_blank" rel="noopener">iOS WebDriverAgent 环境搭建</a></p>
+<p><a href="https://www.jianshu.com/p/2f3155593d2f" target="_blank" rel="noopener">获取手机已安装app的bundleid</a></p>
+<p><a href="https://blog.csdn.net/kmkm3333/article/details/79008716" target="_blank" rel="noopener">安装和使用ideviceinstaller时遇到的坑</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="乔羽 / Geselle-Joy">
+            
+              <p class="site-author-name" itemprop="name">乔羽 / Geselle-Joy</p>
+              <p class="site-description motion-element" itemprop="description">Efforts to become the person I want to be.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Geselle-Joy" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/96ef11d38b00" target="_blank" title="简书"><i class="fa fa-fw fa-book"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://juejin.im/user/589c225661ff4b006b3140a6" target="_blank" title="掘金"><i class="fa fa-fw fa-cogs"></i>掘金</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/1822593915/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博"><i class="fa fa-fw fa-globe"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chengluffy.github.io" title="败寇路飞" target="_blank">败寇路飞</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乔羽 / Geselle-Joy</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://gesellejoy.disqus.com/count.js" async></script>
+  
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Rf6dglrTvJaecQzm147kv1Y3-gzGzoHsz", "naYjjqUq3HgaspsbCc45Io6H");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
