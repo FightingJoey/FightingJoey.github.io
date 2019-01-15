@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  <meta name="baidu-site-verification" content="QBiIZlhg1Z">
+
+
+
+  <meta name="google-site-verification" content="8b4O8NqoCE_ObwFghNQGLCCDzFQBbnfur2gvs1E0pGE">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="true">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="true">
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="API设计考虑提供给开发者的内容你标记为 Public 的内容都是非常重要的，它将是框架的使用者能看到的内容，提供什么样的API一定程度上决定了其他开发者如何使用你的框架。 尽可能小的访问权限 在API设计的时候，从原则上讲我应该尽可能提供较少的接口来完成必要的任务，这有助于在框架的初期控制住框架的复杂度，而之后随着逐步开发和框架使用场景的扩展，我们可以添加一些公共的接口啊，或者将原来标记为 Pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何打造一个让人愉悦的框架">
+<meta property="og:url" content="https://devqiaoyu.tech/2018/12/30/私密/如何打造一个让人愉悦的框架/index.html">
+<meta property="og:site_name" content="乔羽的技术博客">
+<meta property="og:description" content="API设计考虑提供给开发者的内容你标记为 Public 的内容都是非常重要的，它将是框架的使用者能看到的内容，提供什么样的API一定程度上决定了其他开发者如何使用你的框架。 尽可能小的访问权限 在API设计的时候，从原则上讲我应该尽可能提供较少的接口来完成必要的任务，这有助于在框架的初期控制住框架的复杂度，而之后随着逐步开发和框架使用场景的扩展，我们可以添加一些公共的接口啊，或者将原来标记为 Pr">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1507703-b29a0925e3020e4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1507703-5a41347573d4f635.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-30T14:36:21.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何打造一个让人愉悦的框架">
+<meta name="twitter:description" content="API设计考虑提供给开发者的内容你标记为 Public 的内容都是非常重要的，它将是框架的使用者能看到的内容，提供什么样的API一定程度上决定了其他开发者如何使用你的框架。 尽可能小的访问权限 在API设计的时候，从原则上讲我应该尽可能提供较少的接口来完成必要的任务，这有助于在框架的初期控制住框架的复杂度，而之后随着逐步开发和框架使用场景的扩展，我们可以添加一些公共的接口啊，或者将原来标记为 Pr">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1507703-b29a0925e3020e4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="乔羽的技术博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://devqiaoyu.tech/2018/12/30/私密/如何打造一个让人愉悦的框架/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>如何打造一个让人愉悦的框架 | 乔羽的技术博客</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ca17fff7ec3d7f6b92d63c70eefbb02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/Geselle-Joy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">乔羽的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/12/30/私密/如何打造一个让人愉悦的框架/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何打造一个让人愉悦的框架
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-30 20:19:07 / 修改时间：22:36:21" itemprop="dateCreated datePublished" datetime="2018-12-30T20:19:07+08:00">2018-12-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2018/12/30/私密/如何打造一个让人愉悦的框架/" class="leancloud_visitors" data-flag-title="如何打造一个让人愉悦的框架">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：2.3k</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：9min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="API设计"><a href="#API设计" class="headerlink" title="API设计"></a>API设计</h3><h4 id="考虑提供给开发者的内容"><a href="#考虑提供给开发者的内容" class="headerlink" title="考虑提供给开发者的内容"></a>考虑提供给开发者的内容</h4><p>你标记为 Public 的内容都是非常重要的，它将是框架的使用者能看到的内容，提供什么样的API一定程度上决定了其他开发者如何使用你的框架。</p>
+<p><strong>尽可能小的访问权限</strong></p>
+<p>在API设计的时候，从原则上讲我应该尽可能提供较少的接口来完成必要的任务，这有助于在框架的初期控制住框架的复杂度，而之后随着逐步开发和框架使用场景的扩展，我们可以添加一些公共的接口啊，或者将原来标记为 Private 的内容标记为 Public，供外界来使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// Do this</span><br><span class="line">public func mustMethod() &#123; ... &#125;</span><br><span class="line">func onlyUsedInFramework() &#123; ... &#125;</span><br><span class="line">private func onlyUsedInFile() &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">// Don&apos;t do this</span><br><span class="line">public func mustMethod() &#123; ... &#125;</span><br><span class="line">public func onlyUsedInFramework() &#123; ... &#125;</span><br><span class="line">public func onlyUsedInFile() &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="命名，是否清晰易懂完整"><a href="#命名，是否清晰易懂完整" class="headerlink" title="命名，是否清晰易懂完整"></a>命名，是否清晰易懂完整</h4><p>在 Cocoa 的世界里，精确比简短更有吸引力。</p>
+<p>举个例子，可能相较于简短的 remove，可能 removeAt 更能表达出从一个集合中移除某个元素的方法，而 remove 可能导致误解，是移除特定的 Int 呢？还是从某个 Index 去移除呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Do this</span><br><span class="line">public mutating func removeAt(position: Index) -&gt; Element</span><br><span class="line"></span><br><span class="line">// Don&apos;t do this</span><br><span class="line">public mutating func remove(i: Int) -&gt; Element // &lt;- index or element?</span><br></pre></td></tr></table></figure>
+<p>同样的 recursivelyFetch 表达了递归的获取全部内容，而 fetch 可能会被理解为仅获取当前的输入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Do this</span><br><span class="line">public func recursivelyFetch(urls: [(String, Range&lt;Version&gt;)]) throws -&gt; [T]</span><br><span class="line"></span><br><span class="line">// Don&apos;t do this</span><br><span class="line">public func fetch(urls: [(String, Range&lt;Version&gt;)]) throws -&gt; [T] // &lt;- how?</span><br></pre></td></tr></table></figure>
+<p>另外需要注意的是，方法名应该是动词或者动词开头的短语，而属性名应该是名词，当遇到冲突时，比方说这里的 displayName 既可以是名词也可以是动词短语，这个时候就应该特别注意属性和方法的上下文造成的理解不同，更好的一种方式是避免这种名动皆可的词语，比如说把 displayName 换成 screenName 可能是更好的选择。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public var displayName: String</span><br><span class="line">public var screenName: String // &lt;- Better</span><br><span class="line"></span><br><span class="line">// Don&apos;t do this</span><br><span class="line">public func displayName() -&gt; String // &lt;- none or verb?</span><br></pre></td></tr></table></figure>
+<h4 id="注释文档"><a href="#注释文档" class="headerlink" title="注释文档"></a>注释文档</h4><p>在命名 API 的时候一个有用的诀窍是为你的 API 编写文档，如果你不能用一句话表述清楚这个方法具体做了什么，这往往意味着你的这个 API 的名字是有改进的余地的。好的 API 呢就是可以上有经验的开发者猜的八九不离十。</p>
+<p><strong>理想状态：代码不需要文档就能被看懂</strong></p>
+<h4 id="Swift-API-Design-Guidelines"><a href="#Swift-API-Design-Guidelines" class="headerlink" title="Swift API Design Guidelines"></a>Swift API Design Guidelines</h4><p>关于API的命名，苹果官方给出了Swift API 开发指南，<a href="https://swift.org/documentation/api-design-guidelines/" target="_blank" rel="noopener">Swift API Design Guidelines</a>，遵守这个准则才能和其他开发者一道用约定俗成的一种方式来进行交流，这对提高框架的质量非常、非常、非常、重要！</p>
+<h4 id="优先测试，测试驱动开发"><a href="#优先测试，测试驱动开发" class="headerlink" title="优先测试，测试驱动开发"></a>优先测试，测试驱动开发</h4><p>你应该是你开发的框架的第一个使用者，其实最简单的使用你的框架就是编写测试，在APP开发中，单元测试很多时候被我们忽略掉了，但是在框架开发里这是一个非常重要的细节，恐怕没有人敢使用没有经过测试的框架，除了保证功能正确以外，通过测试你还能第一时间发现框架里不合理的地方，并进行改善。</p>
+<h4 id="命名冲突"><a href="#命名冲突" class="headerlink" title="命名冲突"></a>命名冲突</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// F1.framework</span><br><span class="line">extension UIImage &#123;</span><br><span class="line">    public method() &#123; print(&quot;F1&quot;) &#125;</span><br><span class="line">&#125;</span><br><span class="line">// F2.framework</span><br><span class="line">extension UIImage &#123;</span><br><span class="line">    public method() &#123; print(&quot;F2&quot;) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在OC中，另一个特别突出的问题就是，静态库里一个常见的同样的符号在链接的时候导致冲突，在 Swift 中我们可以通过 model 和 import 来提供一个像类似于命名空间这样的代码隔离，从而避免这种符号冲突，但是对系统已有的类，添加 Extension 的时候还是要特别注意，比如说我们在这里，框架F1和框架F2，都是UIImage 定义的一个 method 的方法，然后分别输出自己来自哪一个框架。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// app</span><br><span class="line">import F1</span><br><span class="line">import F2</span><br><span class="line">UIImage().method()</span><br><span class="line">// Ambiguous use of &apos;method()&apos;</span><br></pre></td></tr></table></figure>
+<p>如果我们需要在同一个文件里同时引用F1和F2的话，编译器会很不高兴，因为它不知道具体要执行哪个方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// app</span><br><span class="line">import F1 </span><br><span class="line">UIImage().method()</span><br><span class="line">// 输出 F2 (结果不确定)</span><br></pre></td></tr></table></figure>
+<p>虽然命名空间已经被隔离了，但是这里 UIImage 是一个 NSObject，它的 Instance 实际上还是依赖于 OC 的 Runtime，这两个框架F1和F2都在 App 启动的时候被加载，运行时究竟调用了哪个，是以加载顺序为依据的，并不能确定，所以这种问题如果实际遇到的话就会非常难以调试，尽量避免。</p>
+<p><strong>对于 Cocoa 类型的 Extension 必须添加前缀</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// Do this</span><br><span class="line">// F1.framework</span><br><span class="line">extension UIImage &#123;</span><br><span class="line">    public f1_method() &#123; print(&quot;F1&quot;) &#125;</span><br><span class="line">&#125;</span><br><span class="line">// F2.framework</span><br><span class="line">extension UIImage &#123;</span><br><span class="line">    public f2_method() &#123; print(&quot;F2&quot;) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="发布框架"><a href="#发布框架" class="headerlink" title="发布框架"></a>发布框架</h3><h4 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pod spec create MyFramework </span><br><span class="line"></span><br><span class="line">Pod::Spec.new do |s|</span><br><span class="line">  s.name = &quot;MyFramework&quot;</span><br><span class="line">  s.version = &quot;1.0.2&quot;</span><br><span class="line">  s.summary = &quot;My first framework&quot;</span><br><span class="line">  s.description  = &lt;&lt;-DESC</span><br><span class="line">                    It&apos;s my first framework.</span><br><span class="line">                   DESC</span><br><span class="line">  s.ios.deployment_target = &quot;8.0&quot;</span><br><span class="line">  s.source       = &#123; :git =&gt; &quot;https://github.com/onevcat/myframework.git&quot;,</span><br><span class="line">                     :tag =&gt; s.version &#125;</span><br><span class="line">  s.source_files  = &quot;Class/*.&#123;h,swift&#125;&quot;</span><br><span class="line">  s.public_header_files = [&quot;MyFramework/MyFramework.h&quot;]</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>提交到 CocoaPods </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 打 tag</span><br><span class="line"> git tag 1.0.2 &amp;&amp; git push origin --tags </span><br><span class="line"></span><br><span class="line"># podspec 文法检查</span><br><span class="line"> pod spec lint MyFramework.podspec </span><br><span class="line"></span><br><span class="line"># 提交到 CocoaPods 中心仓库</span><br><span class="line"> pod trunk push MyFramework.podspec</span><br></pre></td></tr></table></figure>
+<h4 id="Carthage"><a href="#Carthage" class="headerlink" title="Carthage"></a>Carthage</h4><p>很简单，将<code>Target</code>的<code>Scheme</code>设置为<code>shared</code></p>
+<h3 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Podfile</span><br><span class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6.1&apos;</span><br><span class="line"># 2.6.x 兼容 (2.6.1, 2.6.2, 2.6.9 等，不包含 2.7)</span><br><span class="line"></span><br><span class="line"># Podfile</span><br><span class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</span><br><span class="line"># 2.x 兼容 (2.6.1, 2.7, 2.8 等，不包含 3.0)</span><br><span class="line"></span><br><span class="line"># Cartfile</span><br><span class="line">github &quot;Mantle/Mantle&quot; &gt;= 1.1</span><br><span class="line"># 大于等于 1.1 (1.1，1.1.4, 1.3, 2.1 等)</span><br></pre></td></tr></table></figure>
+<h4 id="版本兼容"><a href="#版本兼容" class="headerlink" title="版本兼容"></a>版本兼容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x(major).y(minor).z(patch)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>major - 公共 API 改动或者删减，用户必须要修改自己的代码才能够继续使用你的框架。</li>
+<li>minor - 新添加了公共 API，但是现有用户不需要修改代码就可以继续使用。</li>
+<li>patch - bug 修正等，API 没有变更。</li>
+</ul>
+<p><strong>0.x.y 只遵守最后一条</strong>，还未到达1.0.0的框架，表示还在早起开发，没有正式发布，API 在调整中，开发者想干什么就干什么。</p>
+<p><strong>使用Git tag 进行版本标记</strong>，框架的版本应该是和Git的tag相对应的，你的用户/包管理系统期望合理的兼容版本。</p>
+<h4 id="Version和Build"><a href="#Version和Build" class="headerlink" title="Version和Build"></a>Version和Build</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// MyFramework.h</span><br><span class="line">//! Project version string for MyFramework.</span><br><span class="line">FOUNDATION_EXPORT const unsigned char MyFrameworkVersionString[]; // 1.8.3</span><br><span class="line">//! Project version number for MyFramework.</span><br><span class="line">FOUNDATION_EXPORT double MyFrameworkVersionNumber; // 347</span><br><span class="line"></span><br><span class="line">// Exported module map</span><br><span class="line">//! Project version number for MyFramework. </span><br><span class="line">public var MyFrameworkVersionNumber: Double </span><br><span class="line">// 并没有导出 MyFrameworkVersionString</span><br></pre></td></tr></table></figure>
+<p>框架的用户如果希望在运行时知道使用框架的版本号的话，他们会使用上面的两个属性进行访问，如果提供了的话，那么在框架迁移的时候比较有用，作为开发者，应该顺便维护下这两个值来帮助用户确定所使用的框架版本。</p>
+<h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><p>在框架开发中，一个优秀的集成环境也是至关重要的，CI 可以保证潜在的贡献者在有保证的情况下对代码进行修改，可以大幅减小我们维护框架的压力。</p>
+<p>TRAVIS CI, CIRCLE CI, COVERALLS, CODECOV…</p>
+<h3 id="自动化的发布流程"><a href="#自动化的发布流程" class="headerlink" title="自动化的发布流程"></a>自动化的发布流程</h3><p><a href="https://fastlane.tools" target="_blank" rel="noopener">FASTLANE</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># Fastfile</span><br><span class="line">desc &quot;Release new version&quot;</span><br><span class="line">lane :release do |options|</span><br><span class="line">  target_version = options[:version]</span><br><span class="line">  raise &quot;The version is missed.&quot; if target_version.nil?</span><br><span class="line">  ensure_git_branch												# 确认 master 分支</span><br><span class="line">  ensure_git_status_clean										# 确认没有未提交的文件</span><br><span class="line">  scan															# 运行测试</span><br><span class="line">  </span><br><span class="line">  sync_build_number_to_git										# 将 build 号设为 git commit 数</span><br><span class="line">  increment_version_number(version_number: target_version)		# 设置版本号</span><br><span class="line">  version_bump_podspec(path: &quot;Kingfisher.podspec&quot;,</span><br><span class="line">             version_number: target_version)					# 更新 podspec</span><br><span class="line">  git_commit_all(message: &quot;Bump version to #&#123;target_version&#125;&quot;)	# 提交版本号修改</span><br><span class="line">  add_git_tag tag: target_version								# 设置 tag</span><br><span class="line">  push_to_git_remote											# 推送到 git 仓库</span><br><span class="line">  pod_push														# 提交到 CocoaPods</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">$ fastlane release version:1.8.4</span><br></pre></td></tr></table></figure>
+<p>值得参考的例子：<a href="https://github.com/AFNetworking/fastlane" target="_blank" rel="noopener">AFNETWORKING/FASTLANE</a></p>
+<h3 id="优秀框架的特征"><a href="#优秀框架的特征" class="headerlink" title="优秀框架的特征"></a>优秀框架的特征</h3><ul>
+<li>详尽的文档说明</li>
+<li>可以指导后来开发者和协作者快速上手的注释</li>
+<li>完善的测试保证</li>
+<li>代码质量</li>
+<li>让使用者了解更新变化的更新日志</li>
+<li>issue的相应速度</li>
+</ul>
+<h4 id="COCOAPODS-QUALITY"><a href="#COCOAPODS-QUALITY" class="headerlink" title="COCOAPODS QUALITY"></a>COCOAPODS QUALITY</h4><p>这是一个为开源框架打分的索引类的项目，它会按照项目的受欢迎程度和上面提到的标准来为开源框架进行一个初步的评判。</p>
+<p><a href="HTTPS://COCOAPODS.ORG/PODS/KINGFISHER/QUALITY" target="_blank" rel="noopener">COCOAPODS QUALITY</a></p>
+<p><a href="https://guides.cocoapods.org/making/quality-indexes" target="_blank" rel="noopener">QUALITY INDEXES GUIDE</a></p>
+<h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><h4 id="兼容性保证"><a href="#兼容性保证" class="headerlink" title="兼容性保证"></a>兼容性保证</h4><p>这里指的是逻辑上的兼容性，最可能出现的问题就是在不同版本中对数据持久化部分的处理是否兼容，包括数据库，属性增添，Key-archiving等等，比如说从老版本过来，添了一个属性，如何把旧版本的数据迁移过来，处理不当的话就可能导致 Crash。</p>
+<h4 id="重复依赖"><a href="#重复依赖" class="headerlink" title="重复依赖"></a>重复依赖</h4><ul>
+<li><p>将<code>EMBEDDED_CONTENT_CONTAINS_SWIFT</code>设置为 NO</p>
+</li>
+<li><p>不要将依赖的 framework copy 到 你自己的 Framework 中，而是要使用如 PodFile 的方式来管理依赖</p>
+</li>
+</ul>
+<h4 id="不同的框架依赖可能无法兼容"><a href="#不同的框架依赖可能无法兼容" class="headerlink" title="不同的框架依赖可能无法兼容"></a>不同的框架依赖可能无法兼容</h4><p><img src="https://upload-images.jianshu.io/upload_images/1507703-b29a0925e3020e4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="错误依赖"></p>
+<p>在开发框架的时候，如果要依赖别的框架，最好使用最宽松的依赖条件。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1507703-5a41347573d4f635.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正确依赖"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-apple"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="https://cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.28.11/sweetalert2.all.js"></script>
+  <p><span>本文作者:</span><a href="/" title="访问 乔羽 / Geselle-Joy 的个人博客">乔羽 / Geselle-Joy</a></p>
+  <p><span>发布时间:</span>2018年12月30日 - 20:19</p>
+  <p><span>最后更新:</span>2018年12月30日 - 22:36</p>
+  <p><span>原始链接:</span><a href="/2018/12/30/私密/如何打造一个让人愉悦的框架/" title="如何打造一个让人愉悦的框架">https://devqiaoyu.tech/2018/12/30/私密/如何打造一个让人愉悦的框架/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://devqiaoyu.tech/2018/12/30/私密/如何打造一个让人愉悦的框架/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          type: 'success',
+          title: '复制成功',
+          showCloseButton: false,
+          showCancelButton: false,
+          showConfirmButton: false,
+          timer: 1000
+          });
+        });
+    });
+</script>
+
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.JPG" alt="乔羽 / Geselle-Joy 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.JPG" alt="乔羽 / Geselle-Joy 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/18/私密/聊聊程序员的升职加薪/" rel="next" title="聊聊程序员的升职加薪">
+                <i class="fa fa-chevron-left"></i> 聊聊程序员的升职加薪
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/私密/乔羽简历/" rel="prev" title="乔羽简历">
+                乔羽简历 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="乔羽 / Geselle-Joy">
+            
+              <p class="site-author-name" itemprop="name">乔羽 / Geselle-Joy</p>
+              <p class="site-description motion-element" itemprop="description">Efforts to become the person I want to be.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Geselle-Joy" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/96ef11d38b00" target="_blank" title="简书"><i class="fa fa-fw fa-book"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://juejin.im/user/589c225661ff4b006b3140a6" target="_blank" title="掘金"><i class="fa fa-fw fa-cogs"></i>掘金</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/1822593915/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博"><i class="fa fa-fw fa-globe"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chengluffy.github.io" title="败寇路飞" target="_blank">败寇路飞</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#API设计"><span class="nav-number">1.</span> <span class="nav-text">API设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#考虑提供给开发者的内容"><span class="nav-number">1.1.</span> <span class="nav-text">考虑提供给开发者的内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名，是否清晰易懂完整"><span class="nav-number">1.2.</span> <span class="nav-text">命名，是否清晰易懂完整</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释文档"><span class="nav-number">1.3.</span> <span class="nav-text">注释文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Swift-API-Design-Guidelines"><span class="nav-number">1.4.</span> <span class="nav-text">Swift API Design Guidelines</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先测试，测试驱动开发"><span class="nav-number">1.5.</span> <span class="nav-text">优先测试，测试驱动开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名冲突"><span class="nav-number">1.6.</span> <span class="nav-text">命名冲突</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布框架"><span class="nav-number">2.</span> <span class="nav-text">发布框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CocoaPods"><span class="nav-number">2.1.</span> <span class="nav-text">CocoaPods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Carthage"><span class="nav-number">2.2.</span> <span class="nav-text">Carthage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本管理"><span class="nav-number">3.</span> <span class="nav-text">版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#版本兼容"><span class="nav-number">3.1.</span> <span class="nav-text">版本兼容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Version和Build"><span class="nav-number">3.2.</span> <span class="nav-text">Version和Build</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续集成"><span class="nav-number">4.</span> <span class="nav-text">持续集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动化的发布流程"><span class="nav-number">5.</span> <span class="nav-text">自动化的发布流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优秀框架的特征"><span class="nav-number">6.</span> <span class="nav-text">优秀框架的特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#COCOAPODS-QUALITY"><span class="nav-number">6.1.</span> <span class="nav-text">COCOAPODS QUALITY</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能的问题"><span class="nav-number">7.</span> <span class="nav-text">可能的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#兼容性保证"><span class="nav-number">7.1.</span> <span class="nav-text">兼容性保证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重复依赖"><span class="nav-number">7.2.</span> <span class="nav-text">重复依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同的框架依赖可能无法兼容"><span class="nav-number">7.3.</span> <span class="nav-text">不同的框架依赖可能无法兼容</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乔羽 / Geselle-Joy</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://gesellejoy.disqus.com/count.js" async></script>
+  
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("kt4DtswEU5O1ai3p21JDDtcx-gzGzoHsz", "xDVU6YprjN3Vwg96PCaM1bw8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>

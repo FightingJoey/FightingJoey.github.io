@@ -2282,7 +2282,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-14 17:28:14" itemprop="dateModified" datetime="2018-10-14T17:28:14+08:00">2018-10-14</time>
+                <time title="修改时间：2018-11-30 10:02:20" itemprop="dateModified" datetime="2018-11-30T10:02:20+08:00">2018-11-30</time>
               
             
           </span>
@@ -2312,7 +2312,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-file-word"></i>
             </span>
-            <span class="post-count">字数：299</span>
+            <span class="post-count">字数：1.3k</span>
             <span class="leancloud-visitors-count"></span>
           
 
@@ -2321,7 +2321,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-file-word"></i>
             </span>
-            <span class="post-count">阅读时长：1min</span>
+            <span class="post-count">阅读时长：5min</span>
             <span class="leancloud-visitors-count"></span>
           
 
@@ -2344,20 +2344,66 @@
       
         
           
-            <h2 id="安装libimobiledevice"><a href="#安装libimobiledevice" class="headerlink" title="安装libimobiledevice"></a>安装libimobiledevice</h2><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>移除所以的 iOS 设备，然后在终端输入一下代码</p>
+            <p>安装环境：</p>
+<ul>
+<li>MacOS Mojave 10.14</li>
+<li>Xcode10.1</li>
+</ul>
+<h2 id="安装libimobiledevice"><a href="#安装libimobiledevice" class="headerlink" title="安装libimobiledevice"></a>安装libimobiledevice</h2><h3 id="网上查到的教程"><a href="#网上查到的教程" class="headerlink" title="网上查到的教程"></a>网上查到的教程</h3><p>移除所有的 iOS 设备，然后在终端输入以下代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall ideviceinstaller</span><br><span class="line">brew uninstall libimobiledevice</span><br><span class="line">brew install --HEAD libimobiledevice</span><br><span class="line">brew link --overwrite libimobiledevice</span><br><span class="line">brew install --HEAD  ideviceinstaller</span><br><span class="line">brew link --overwrite ideviceinstaller</span><br><span class="line">sudo rm -rf /var/db/lockdown/*</span><br></pre></td></tr></table></figure>
 <p>连接一台iOS设备，并信任，然后输入以下代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R 777 /var/db/lockdown/</span><br></pre></td></tr></table></figure>
-<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><p>在运行<code>brew install --HEAD libimobiledevice</code>这段代码时遇到问题：</p>
+<p>查看手机信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ideviceinfo -d</span><br></pre></td></tr></table></figure>
+<p>查看手机上安装的所有APP的 BundleId</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ideviceinstaller -l</span><br></pre></td></tr></table></figure>
+<h3 id="实际安装过程"><a href="#实际安装过程" class="headerlink" title="实际安装过程"></a>实际安装过程</h3><h4 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h4><p>在运行<code>brew install --HEAD libimobiledevice</code>这段代码时遇到问题：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Last 15 lines from /Users/joy/Library/Logs/Homebrew/libimobiledevice/01.autogen.sh:</span><br><span class="line">checking dynamic linker characteristics... darwin18.0.0 dyld</span><br><span class="line">checking how to hardcode library paths into programs... immediate</span><br><span class="line">checking for pkg-config... /usr/local/opt/pkg-config/bin/pkg-config</span><br><span class="line">checking pkg-config is at least version 0.9.0... yes</span><br><span class="line">checking for libusbmuxd &gt;= 1.1.0... no</span><br><span class="line">configure: error: Package requirements (libusbmuxd &gt;= 1.1.0) were not met:</span><br><span class="line"></span><br><span class="line">Requested &apos;libusbmuxd &gt;= 1.1.0&apos; but version of libusbmuxd is 1.0.10</span><br><span class="line"></span><br><span class="line">Consider adjusting the PKG_CONFIG_PATH environment variable if you</span><br><span class="line">installed software in a non-standard prefix.</span><br><span class="line"></span><br><span class="line">Alternatively, you may set the environment variables libusbmuxd_CFLAGS</span><br><span class="line">and libusbmuxd_LIBS to avoid the need to call pkg-config.</span><br><span class="line">See the pkg-config man page for more details.</span><br></pre></td></tr></table></figure>
-<p>看上去是<code>libusbmuxd</code>的版本不对。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.methodname.com/webdriveragenthe-wda/" target="_blank" rel="noopener">使用Python写iOS自动化测试</a></p>
+<p>看上去是<code>libusbmuxd</code>的版本不对。在网上查了很多方案以后，发现只能编译安装1.1.0版本。</p>
+<h4 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h4><p>编译安装的时候需要依赖于很多库，不过由于我一开始使用<code>brew install --HEAD libimobiledevice</code>的时候，自动给我安装好了依赖的库，所以就不需要我再一一编译安装了。</p>
+<h5 id="编译安装libusbmuxd-1-1-0"><a href="#编译安装libusbmuxd-1-1-0" class="headerlink" title="编译安装libusbmuxd-1.1.0"></a>编译安装libusbmuxd-1.1.0</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/libimobiledevice/libusbmuxd.git</span><br><span class="line">cd libusbmuxd</span><br><span class="line">./autogen.sh</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h5 id="编译安装libimobiledevice"><a href="#编译安装libimobiledevice" class="headerlink" title="编译安装libimobiledevice"></a>编译安装libimobiledevice</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/libimobiledevice/libimobiledevice.git</span><br><span class="line">cd libimobiledevice</span><br><span class="line">./autogen.sh</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>在运行 <code>./autogen.sh</code> 又遇到问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">checking for openssl &gt;= 0.9.8... no</span><br><span class="line">configure: error: OpenSSL support explicitly requested but OpenSSL could not be found</span><br></pre></td></tr></table></figure>
+<p>我确认我安装的<code>openssl</code>版本都是1.0以上，但还是报<code>openssl</code>版本错误。在网上查到，依赖库可以使用<code>openssl</code>或<code>GnuTLS</code>，所以我决定用另一个试一试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install GnuTLS</span><br></pre></td></tr></table></figure>
+<p>安装完依赖库以后，输入以下代码重新编译安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./autogen.sh --disable-openssl</span><br></pre></td></tr></table></figure>
+<p>又遇到一个新的问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: libgcrypt is required to build libimobiledevice with GnuTLS</span><br></pre></td></tr></table></figure>
+<p>需要安装<code>libgcrypt</code>库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install libgcrypt</span><br></pre></td></tr></table></figure>
+<p>安装完成后，重新编译安装，OK，No problem~</p>
+<h5 id="编译安装ideveceinstaller"><a href="#编译安装ideveceinstaller" class="headerlink" title="编译安装ideveceinstaller"></a>编译安装ideveceinstaller</h5><p>我本来想用 HomeBrew 安装，结果发现在 HomeBrew 安装 ideveceinstaller 时，它依赖于libimobiledevice，会自动下载某个稳定版的 libimobiledevice ，所以最好还是只能编译安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/libimobiledevice/ideviceinstaller.git</span><br><span class="line">cd ideviceinstaller</span><br><span class="line">./autogen.sh</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h2><h3 id="安装WebDriverAgent"><a href="#安装WebDriverAgent" class="headerlink" title="安装WebDriverAgent"></a>安装WebDriverAgent</h3><h4 id="真机安装WebDriverAgent"><a href="#真机安装WebDriverAgent" class="headerlink" title="真机安装WebDriverAgent"></a>真机安装WebDriverAgent</h4><p><a href="https://testerhome.com/topics/7220" target="_blank" rel="noopener">ATX 文档 - iOS 真机如何安装 WebDriverAgent</a></p>
+<p>从<code>GitHub</code>上下载代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/facebook/WebDriverAgent</span><br></pre></td></tr></table></figure>
+<p>运行初始化脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Scripts/bootstrap.sh</span><br></pre></td></tr></table></figure>
+<p>该脚本会使用<a href="https://github.com/Carthage/Carthage" target="_blank" rel="noopener">Carthage</a>下载所有的依赖，使用<code>npm</code>打包响应的js文件</p>
+<p>执行完成后，直接双击打开<code>WebDriverAgent.xcodeproj</code>这个文件。</p>
+<p>设置好<code>Team</code>、<code>Profile</code>、<code>Signing Certificate</code>以后，选择真机，<code>Product</code> -&gt; <code>Test</code>。</p>
+<p>一切正常的话，手机上会出现一个无图标的<code>WebDriverAgent</code>应用，启动之后，马上又返回到桌面。这是很正常的不要奇怪。</p>
+<p>此时控制台界面可以看到设备的IP。</p>
+<p>通过上面给出的IP和端口，加上<code>/status</code>合成一个url地址。例如<code>http://10.0.0.1:8100/status</code>，然后浏览器打开。如果出现一串JSON输出，说明WDA安装成功了。</p>
+<blockquote>
+<p>而inspector的地址是<code>http://localhost:8100/inspector</code>， inspector 是用来查看UI的图层，方便写测试脚本用的</p>
+</blockquote>
+<h4 id="使用终端替代Xcode"><a href="#使用终端替代Xcode" class="headerlink" title="使用终端替代Xcode"></a>使用终端替代Xcode</h4><p>通常来说为了持续集成，能够全部自动化比较好一些</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 解锁keychain，以便可以正常的签名应用，</span><br><span class="line">PASSWORD=&quot;replace-with-your-password&quot;</span><br><span class="line">security unlock-keychain -p $PASSWORD ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"># 获取设备的UDID</span><br><span class="line">UDID=$(idevice_id -l | head -n1)</span><br><span class="line"></span><br><span class="line"># 运行测试</span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination &quot;id=$UDID&quot; test</span><br></pre></td></tr></table></figure>
+<h4 id="安装Python3-wda"><a href="#安装Python3-wda" class="headerlink" title="安装Python3 wda"></a>安装Python3 wda</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --pre facebook-wda</span><br></pre></td></tr></table></figure>
+<p>这个时候就可以来写python脚本了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">import wda</span><br><span class="line"></span><br><span class="line">c = wda.Client(url=&apos;http://169.254.16.231:8100&apos;)</span><br><span class="line"></span><br><span class="line">index = 0</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    # 打开测试APP</span><br><span class="line">    with c.session(&apos;com.jifen.qukan&apos;) as s:</span><br><span class="line">        # 此时的s就是当前打开app的回话对象，我们可以通过它来操作app的内容</span><br><span class="line">        # 具体的语法可以在wda的README.md里面找到，这里就不说了</span><br><span class="line">		if s(type=&apos;Button&apos;, name=u&apos;视频&apos;).exists:</span><br><span class="line">			s(type=&apos;Button&apos;, name=u&apos;视频&apos;).tap()</span><br><span class="line">		</span><br><span class="line">		time.sleep(3)</span><br><span class="line"></span><br><span class="line">		while(True):</span><br><span class="line">			pushSubVC(s)</span><br><span class="line">			</span><br><span class="line">def pushSubVC(s):</span><br><span class="line">	global index</span><br><span class="line">	es = s(label=&apos;home content ext&apos;).find_elements()</span><br><span class="line">	i = 1</span><br><span class="line">	for e in es:</span><br><span class="line">		print(i)</span><br><span class="line">		i+=1</span><br><span class="line">	d = es[index]</span><br><span class="line">	rect = d.bounds</span><br><span class="line">	x = rect.x</span><br><span class="line">	y = rect.y</span><br><span class="line">	index=index+1</span><br><span class="line">	s.click(x,y-20)</span><br><span class="line">	time.sleep(63)</span><br><span class="line">	if s(label=&apos;home content back white&apos;).exists:</span><br><span class="line">		d = s(label=&apos;home content back white&apos;)</span><br><span class="line">		d.tap()</span><br><span class="line">	if s(type=&apos;ScrollView&apos;).exists:</span><br><span class="line">		d = s(type=&apos;ScrollView&apos;)</span><br><span class="line">		d.scroll(direction=&apos;down&apos;,distance=0.4)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><h3 id="安装libimobiledevice-1"><a href="#安装libimobiledevice-1" class="headerlink" title="安装libimobiledevice"></a>安装libimobiledevice</h3><p><a href="https://www.jianshu.com/p/2f3155593d2f" target="_blank" rel="noopener">获取手机已安装app的bundleid</a></p>
+<p><a href="https://blog.csdn.net/kmkm3333/article/details/79008716" target="_blank" rel="noopener">安装和使用ideviceinstaller时遇到的坑</a></p>
+<p><a href="https://www.jianshu.com/p/aff1773943fd" target="_blank" rel="noopener">libimobiledevice安装（Mac）</a></p>
+<p><a href="https://www.jianshu.com/p/31de4b15b347" target="_blank" rel="noopener">编译安装libimobiledevice</a></p>
+<h3 id="自动化测试-1"><a href="#自动化测试-1" class="headerlink" title="自动化测试"></a>自动化测试</h3><p><a href="https://blog.methodname.com/webdriveragenthe-wda/" target="_blank" rel="noopener">使用Python写iOS自动化测试</a></p>
+<p><a href="https://blog.csdn.net/PRIMEFJT/article/details/78947480" target="_blank" rel="noopener">iOS WebDriverAgent 环境搭建</a></p>
 <p><a href="https://blog.csdn.net/youxiansanren/article/details/49335385" target="_blank" rel="noopener">iOS+Python+Appium真机自动化测试实战</a></p>
 <p><a href="https://blog.csdn.net/pengyuan_D/article/details/79932981" target="_blank" rel="noopener">Python + Appium+ IOS自动化测试</a></p>
 <p><a href="https://www.jianshu.com/p/505525e2bb01" target="_blank" rel="noopener">MAC下搭建 appium+ios+python 自动化测试环境</a></p>
-<p><a href="https://blog.csdn.net/PRIMEFJT/article/details/78947480" target="_blank" rel="noopener">iOS WebDriverAgent 环境搭建</a></p>
-<p><a href="https://www.jianshu.com/p/2f3155593d2f" target="_blank" rel="noopener">获取手机已安装app的bundleid</a></p>
-<p><a href="https://blog.csdn.net/kmkm3333/article/details/79008716" target="_blank" rel="noopener">安装和使用ideviceinstaller时遇到的坑</a></p>
 
           
         
@@ -2450,7 +2496,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2506,7 +2552,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2592,7 +2638,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
