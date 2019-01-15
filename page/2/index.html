@@ -399,1068 +399,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/09/26/教程/PDF转Img/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乔羽的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/26/教程/PDF转Img/" itemprop="url">
-                  PDF转Img
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-26 21:56:12" itemprop="dateCreated datePublished" datetime="2018-09-26T21:56:12+08:00">2018-09-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-27 10:07:44" itemprop="dateModified" datetime="2018-09-27T10:07:44+08:00">2018-09-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/教程/" itemprop="url" rel="index"><span itemprop="name">教程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-             <span id="/2018/09/26/教程/PDF转Img/" class="leancloud_visitors" data-flag-title="PDF转Img">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">字数：128</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">阅读时长：1min</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">from wand.image import Image</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def convert_pdf_to_jpg(filePath,filename):</span><br><span class="line">    with Image(filename=filePath, resolution=150) as img :</span><br><span class="line">        with img.convert(&apos;jpeg&apos;) as converted:</span><br><span class="line">            fileNa = &apos;image/&apos; + filename + &apos;.jpeg&apos;</span><br><span class="line">            print(fileNa)</span><br><span class="line">            converted.save(filename=fileNa)</span><br><span class="line"></span><br><span class="line">def findPDFs(f,s,pdfs,files):</span><br><span class="line"></span><br><span class="line">    fs = os.listdir(f)</span><br><span class="line">    for f1 in fs:</span><br><span class="line">        tmp_path = os.path.join(f,f1)</span><br><span class="line">        if not os.path.isdir(tmp_path):</span><br><span class="line">            if s in os.path.splitext(f1)[1]:</span><br><span class="line">                files.append(f1[:-4])</span><br><span class="line">                pdfs.append(tmp_path)</span><br><span class="line">        else:</span><br><span class="line">            findPDFs(tmp_path, s, pdfs, files)</span><br><span class="line"></span><br><span class="line">    # for pdf in pdfs:</span><br><span class="line">    #     convert_pdf_to_jpg(pdf)</span><br><span class="line"></span><br><span class="line">def pdfToImg(pdfPaths, names):</span><br><span class="line">    if len(pdfPaths) == len(names):</span><br><span class="line">        for i in range(0,len(pdfPaths)):</span><br><span class="line">            convert_pdf_to_jpg(pdfPaths[i], names[i])</span><br><span class="line">            pass</span><br><span class="line"></span><br><span class="line">pdfs = []</span><br><span class="line">files = []</span><br><span class="line">path = os.getcwd()</span><br><span class="line">findPDFs(path,&quot;pdf&quot;,pdfs,files)</span><br><span class="line">pdfToImg(pdfs,files)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/09/23/开发/iOS开发小技巧/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乔羽的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/开发/iOS开发小技巧/" itemprop="url">
-                  iOS开发小技巧
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-23 21:19:56" itemprop="dateCreated datePublished" datetime="2018-09-23T21:19:56+08:00">2018-09-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-20 17:33:22" itemprop="dateModified" datetime="2018-11-20T17:33:22+08:00">2018-11-20</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-             <span id="/2018/09/23/开发/iOS开发小技巧/" class="leancloud_visitors" data-flag-title="iOS开发小技巧">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">字数：280</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">阅读时长：1min</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="获取Cell在tableView和当前屏幕中的位置"><a href="#获取Cell在tableView和当前屏幕中的位置" class="headerlink" title="获取Cell在tableView和当前屏幕中的位置"></a>获取Cell在tableView和当前屏幕中的位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//获取某个cell在当前tableView上的坐标位置</span><br><span class="line">CGRect rectInTableView = [tableView rectForRowAtIndexPath:indexPath];</span><br><span class="line">//获取cell在当前屏幕的位置</span><br><span class="line">CGRect rectInSuperview = [tableView convertRect:rectInTableView toView:[tableView superview]];</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/23/开发/iOS开发小技巧/#更多" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/08/22/开发/正则表达式验证/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乔羽的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/22/开发/正则表达式验证/" itemprop="url">
-                  正则表达式验证
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-22 11:33:23" itemprop="dateCreated datePublished" datetime="2018-08-22T11:33:23+08:00">2018-08-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-27 10:10:41" itemprop="dateModified" datetime="2018-09-27T10:10:41+08:00">2018-09-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-             <span id="/2018/08/22/开发/正则表达式验证/" class="leancloud_visitors" data-flag-title="正则表达式验证">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">字数：3k</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">阅读时长：16min</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="是否为电话号码【简单写法】"><a href="#是否为电话号码【简单写法】" class="headerlink" title="是否为电话号码【简单写法】"></a>是否为电话号码【简单写法】</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/*!</span><br><span class="line"> *  是否为电话号码【简单写法】</span><br><span class="line"> *</span><br><span class="line"> *  @param pattern 传入需要检测的字符串</span><br><span class="line"> *</span><br><span class="line"> *  @return 返回检测结果 是或者不是</span><br><span class="line"> */</span><br><span class="line">+(BOOL)GS_isPhoneNumber:(NSString *)phoneNum</span><br><span class="line">&#123;</span><br><span class="line">    NSString *MOBILE = @&quot;^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|70)\\d&#123;8&#125;$&quot;;</span><br><span class="line">    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;, MOBILE];</span><br><span class="line">    return [regextestmobile evaluateWithObject:phoneNum];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/22/开发/正则表达式验证/#更多" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/07/28/开发/OC优秀的第三方库/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乔羽的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/开发/OC优秀的第三方库/" itemprop="url">
-                  OC优秀的第三方库
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-28 15:30:59" itemprop="dateCreated datePublished" datetime="2018-07-28T15:30:59+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-27 10:09:57" itemprop="dateModified" datetime="2018-09-27T10:09:57+08:00">2018-09-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-             <span id="/2018/07/28/开发/OC优秀的第三方库/" class="leancloud_visitors" data-flag-title="OC优秀的第三方库">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">字数：1.2k</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">阅读时长：4min</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="0C优秀的第三方库"><a href="#0C优秀的第三方库" class="headerlink" title="0C优秀的第三方库"></a>0C优秀的第三方库</h3><h4 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h4><ul>
-<li><p><a href="https://github.com/xueyongwei/XYWSoundChanger" target="_blank" rel="noopener">XYWSoundChanger</a> - iOS视频变声器，对录制或下载的视频进行变声，对视频原声处理成大叔、萝莉、搞怪等效果</p>
-</li>
-<li><p><a href="https://github.com/ChangbaDevs/KTVVideoProcess" target="_blank" rel="noopener">KTVVideoProcess</a> - 来自Changba iOS团队的高性能视频效果处理框架</p>
-</li>
-<li><p><a href="https://github.com/yasginiwa/YGPlayer" target="_blank" rel="noopener">YGPlayer</a> - iOS video player.（iOS播放器）</p>
-</li>
-<li><p><a href="https://github.com/36Kr-Mobile/KRVideoPlayer" target="_blank" rel="noopener">KRVideoPlayer</a> - 36氪开源的视频播放器</p>
-</li>
-</ul>
-<h4 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h4><ul>
-<li><a href="https://github.com/douban/DOUAudioStreamer" target="_blank" rel="noopener">DOUAudioStreamer</a> - 豆瓣开源的音频播放器</li>
-</ul>
-<h4 id="AR"><a href="#AR" class="headerlink" title="AR"></a>AR</h4><ul>
-<li><p><a href="https://github.com/SherlockQi/HeavenMemoirs" target="_blank" rel="noopener">HeavenMemoirs</a> - AR相册</p>
-</li>
-<li><p><a href="https://github.com/ProjectDent/ARKit-CoreLocation" target="_blank" rel="noopener">ARKit-CoreLocation</a> - 将AR的高精度与GPS数据的比例结合起来</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/开发/OC优秀的第三方库/#更多" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乔羽的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/开发/Swift优秀的第三方库/" itemprop="url">
-                  Swift优秀的第三方库
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-28 15:30:41" itemprop="dateCreated datePublished" datetime="2018-07-28T15:30:41+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-27 16:17:29" itemprop="dateModified" datetime="2018-12-27T16:17:29+08:00">2018-12-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-             <span id="/2018/07/28/开发/Swift优秀的第三方库/" class="leancloud_visitors" data-flag-title="Swift优秀的第三方库">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">字数：1.6k</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">阅读时长：6min</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Swift优秀的第三方库"><a href="#Swift优秀的第三方库" class="headerlink" title="Swift优秀的第三方库"></a>Swift优秀的第三方库</h3><p><a href="http://dev.swiftguide.cn" target="_blank" rel="noopener">Swift开发资源汇总</a></p>
-<p><a href="https://github.com/imlifengfeng/iOSBlogAndTools" target="_blank" rel="noopener">iOS开发优秀博客和软件推荐</a></p>
-<h4 id="数据库、数据存储"><a href="#数据库、数据存储" class="headerlink" title="数据库、数据存储"></a>数据库、数据存储</h4><ul>
-<li><p><a href="https://github.com/realm/realm-cocoa" target="_blank" rel="noopener">realm-cocoa</a> - Realm 是一个移动端数据库：Core Data 和 SQLite 的替代品</p>
-</li>
-<li><p><a href="https://github.com/square/Valet" target="_blank" rel="noopener">Valet</a> - Valet 可以让你安全地在 iOS 或 OS X 钥匙链中存储数据，而不需要掌握任何钥匙链工作的知识。它支持在一台设备的多个应用（同一个开发者）间分享数据，以及在一个应用中在多个设备间利用 iCloud 进行分享。支持 Touch ID</p>
-</li>
-<li><p><a href="https://github.com/stephencelis/SQLite.swift" target="_blank" rel="noopener">SQLite.swift</a> - 简单、轻量，使用上最SQL的SQLite封装库</p>
-</li>
-<li><p><a href="https://github.com/modo-studio/SugarRecord" target="_blank" rel="noopener">SugarRecord</a> - 基于CoreData与REALM的好用封装</p>
-</li>
-</ul>
-<h4 id="网络库、Network"><a href="#网络库、Network" class="headerlink" title="网络库、Network"></a>网络库、Network</h4><ul>
-<li><p><a href="https://github.com/Moya/Moya" target="_blank" rel="noopener">Moya</a> - 用 Swift 写的网络抽象层</p>
-</li>
-<li><p><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener">Alamofire</a></p>
-</li>
-<li><p><a href="https://github.com/netguru/ResponseDetective" target="_blank" rel="noopener">ResponseDetective</a> - 一个非嵌入式框架，用于拦截应用程序和服务器之间的任何传出请求和传入响应以用于调试目的。</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/开发/Swift优秀的第三方库/#更多" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/03/15/教程/MacOS 终端 iTerm2 并配置 zsh/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2484,11 +1422,1071 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2017/11/07/开发/iOS多线程深入解析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/开发/iOS多线程深入解析/" itemprop="url">
+                  iOS多线程 Swift4 GCD深入解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-07 16:07:17" itemprop="dateCreated datePublished" datetime="2017-11-07T16:07:17+08:00">2017-11-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-27 10:09:32" itemprop="dateModified" datetime="2018-09-27T10:09:32+08:00">2018-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2017/11/07/开发/iOS多线程深入解析/" class="leancloud_visitors" data-flag-title="iOS多线程 Swift4 GCD深入解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：4k</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：16min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="iOS多线程深入解析"><a href="#iOS多线程深入解析" class="headerlink" title="iOS多线程深入解析"></a>iOS多线程深入解析</h1><h2 id="必要的概念"><a href="#必要的概念" class="headerlink" title="必要的概念"></a>必要的概念</h2><h3 id="进程-线程"><a href="#进程-线程" class="headerlink" title="进程/线程"></a>进程/线程</h3><p><strong>进程</strong>：进程指在系统中能独立运行并作为资源分配的基本单位，它是由一组机器指令、数据和堆栈等组成的，是一个能独立运行的活动实体。</p>
+<p><strong>线程</strong>：线程是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。</p>
+<p><strong>操作系统引入进程的目的</strong>：为了使多个程序能并发执行，以提高资源的利用率和系统的吞吐量。</p>
+<p><strong>操作系统引入线程的目的</strong>：在操作系统中再引入线程，则是为了减少程序在并发执行时所付出的时空开销，使<code>OS</code>具有更好的并发性。多线程技术可以提高程序的执行效率。</p>
+<blockquote>
+<p>在引入线程的OS中，通常把进程作为资源分配的基本单位，而把线程作为独立运行和独立调度的基本单位。</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/07/开发/iOS多线程深入解析/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2017/10/22/教程/Ubuntu Anaconda安装TensorFlow-GPU/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/22/教程/Ubuntu Anaconda安装TensorFlow-GPU/" itemprop="url">
+                  Ubuntu Anaconda安装TensorFlow-GPU
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-10-22 19:24:18" itemprop="dateCreated datePublished" datetime="2017-10-22T19:24:18+08:00">2017-10-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-27 10:08:22" itemprop="dateModified" datetime="2018-09-27T10:08:22+08:00">2018-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/教程/" itemprop="url" rel="index"><span itemprop="name">教程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2017/10/22/教程/Ubuntu Anaconda安装TensorFlow-GPU/" class="leancloud_visitors" data-flag-title="Ubuntu Anaconda安装TensorFlow-GPU">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：1.2k</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：5min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Ubuntu-Anaconda安装TensorFlow-GPU"><a href="#Ubuntu-Anaconda安装TensorFlow-GPU" class="headerlink" title="Ubuntu Anaconda安装TensorFlow-GPU"></a>Ubuntu Anaconda安装TensorFlow-GPU</h1><p>目前时间是<code>2017.10.22</code>，目前的<code>CUDA</code>最新版本是<code>CUDA9</code>，<code>TensorFlow</code>的版本是<code>1.3</code>，一开始安装<code>CUDA9</code>，后来发现<code>TensorFlow</code>不支持，网上有人说可以通过源代码安装<code>TensorFlow</code>，但是我觉得太麻烦了，后来就换了<code>CUDA8</code>，中间遇到了很多版本不对应所产生的问题，下面详细列一下本次安装所使用的安装包的版本号：（亲测可安装成功）</p>
+<ul>
+<li>CUDA: <code>cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb</code></li>
+<li>cudnn: <code>cudnn-8.0-linux-x64-v5.1.tar</code></li>
+<li>Anaconda: <code>Anaconda3-5.0.0.1-Linux-x86_64.sh</code></li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/22/教程/Ubuntu Anaconda安装TensorFlow-GPU/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2017/10/21/教程/制作Mac系统盘/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/21/教程/制作Mac系统盘/" itemprop="url">
+                  制作Mac系统盘
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-10-21 18:35:00" itemprop="dateCreated datePublished" datetime="2017-10-21T18:35:00+08:00">2017-10-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-27 10:08:41" itemprop="dateModified" datetime="2018-09-27T10:08:41+08:00">2018-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/教程/" itemprop="url" rel="index"><span itemprop="name">教程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2017/10/21/教程/制作Mac系统盘/" class="leancloud_visitors" data-flag-title="制作Mac系统盘">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：667</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：2min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="一、准备工作："><a href="#一、准备工作：" class="headerlink" title="一、准备工作："></a>一、准备工作：</h2><ul>
+<li>准备一个<code>8GB</code>或以上容量的<code>U</code>盘，确保里面的数据已经妥善备份好（该过程会抹掉 U 盘全部数据）</li>
+<li>首先，从<code>AppSotre</code>下载<code>macOS</code>原版安装包。目前是<code>macOS High Sierra.app</code></li>
+</ul>
+<h2 id="二、格式化优盘"><a href="#二、格式化优盘" class="headerlink" title="二、格式化优盘"></a>二、格式化优盘</h2><ul>
+<li>插入你的 U 盘，然后在「应用程序」-&gt;「实用工具」里面找到并打开「磁盘工具」</li>
+<li>在左方列表中找到 U 盘的名称并点击</li>
+<li>右边顶部选择「分区」，然后在「分区布局」选择「1个分区」</li>
+<li>在分区信息中的 「名称」输入「ABCD」 (由于后面的命令中会用到此名称，如果你要修改成其他(英文)，请务必对应修改后面的命令)</li>
+<li>在「格式」中选择 「Mac OS 扩展 (日志式)」</li>
+<li>这时，先别急着点“应用”，还要先在 「选项」里面，选择「GUID 分区表」</li>
+<li>开始格式化</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/21/教程/制作Mac系统盘/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2017/09/29/开发/适配iOS11（常用）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/29/开发/适配iOS11（常用）/" itemprop="url">
+                  适配iOS11（常用）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-29 17:24:28" itemprop="dateCreated datePublished" datetime="2017-09-29T17:24:28+08:00">2017-09-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-27 10:10:49" itemprop="dateModified" datetime="2018-09-27T10:10:49+08:00">2018-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2017/09/29/开发/适配iOS11（常用）/" class="leancloud_visitors" data-flag-title="适配iOS11（常用）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：1.2k</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：4min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="导航栏变化"><a href="#导航栏变化" class="headerlink" title="导航栏变化"></a>导航栏变化</h3><h4 id="高度变化"><a href="#高度变化" class="headerlink" title="高度变化"></a>高度变化</h4><p>在iOS11中导航栏多了一个<code>LargeTitleView</code>，专门专门显示大字标题。该<code>LargeTitleView</code>的高度为<strong>52p</strong>。</p>
+<ul>
+<li>iPhoneX之前的机型，默认高度<strong>64p</strong>，如果显示大字标题，总高度为<strong>20+44+52=116p</strong></li>
+<li>iPhoneX，<strong>statusbar=44</strong>，默认高度<strong>88p</strong>，如果显示大字标题，总高度为<strong>44+44+52=140p</strong></li>
+</ul>
+<blockquote>
+<p>iPhoneX底部还多了一个半角的矩形，使得tabbar多出来了<strong>34p</strong>的高度</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/29/开发/适配iOS11（常用）/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2017/09/29/开发/Swift3 迁移至 Swift4遇到的问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/29/开发/Swift3 迁移至 Swift4遇到的问题/" itemprop="url">
+                  Swift3 迁移至 Swift4遇到的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-29 17:11:29" itemprop="dateCreated datePublished" datetime="2017-09-29T17:11:29+08:00">2017-09-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-27 10:10:05" itemprop="dateModified" datetime="2018-09-27T10:10:05+08:00">2018-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+             <span id="/2017/09/29/开发/Swift3 迁移至 Swift4遇到的问题/" class="leancloud_visitors" data-flag-title="Swift3 迁移至 Swift4遇到的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：373</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：1min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="1-The-use-of-Swift-3-objc-inference-in-Swift-4-mode-is-deprecated-警告"><a href="#1-The-use-of-Swift-3-objc-inference-in-Swift-4-mode-is-deprecated-警告" class="headerlink" title="1.The use of Swift 3 @objc inference in Swift 4 mode is deprecated.警告"></a>1.<code>The use of Swift 3 @objc inference in Swift 4 mode is deprecated.</code>警告</h3><p>选择<code>Target</code>-&gt;<code>Build Settings</code>，搜索<code>Swift3</code>，在<code>Swift3 @objc Inference</code>中，把<code>On</code>改为<code>Off</code>或者<code>Defalut</code>。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/29/开发/Swift3 迁移至 Swift4遇到的问题/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2533,7 +2531,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2589,7 +2587,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
