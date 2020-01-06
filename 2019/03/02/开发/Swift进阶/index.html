@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+  <meta name="baidu-site-verification" content="QBiIZlhg1Z">
+
+
+
+  <meta name="google-site-verification" content="8b4O8NqoCE_ObwFghNQGLCCDzFQBbnfur2gvs1E0pGE">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="true">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="true">
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Swift进阶[TOC] 1.guard的设计理念什么是 guard 与if语句相同的是，guard也是基于一个表达式的布尔值去判断一段代码是否该被执行。 与if语句不同的是，guard语句判断其后的表达式布尔值为false时，才会执行之后代码块里的代码，如果为true，则跳过整个guard语句，继续执行下面的代码；而且guard语句只会有一个代码块，不像if语句可以if else多个代码块。 可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift进阶">
+<meta property="og:url" content="https://fightingjoey.github.io/2019/03/02/开发/Swift进阶/index.html">
+<meta property="og:site_name" content="乔羽的技术博客">
+<meta property="og:description" content="Swift进阶[TOC] 1.guard的设计理念什么是 guard 与if语句相同的是，guard也是基于一个表达式的布尔值去判断一段代码是否该被执行。 与if语句不同的是，guard语句判断其后的表达式布尔值为false时，才会执行之后代码块里的代码，如果为true，则跳过整个guard语句，继续执行下面的代码；而且guard语句只会有一个代码块，不像if语句可以if else多个代码块。 可">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-05T15:04:03.327Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift进阶">
+<meta name="twitter:description" content="Swift进阶[TOC] 1.guard的设计理念什么是 guard 与if语句相同的是，guard也是基于一个表达式的布尔值去判断一段代码是否该被执行。 与if语句不同的是，guard语句判断其后的表达式布尔值为false时，才会执行之后代码块里的代码，如果为true，则跳过整个guard语句，继续执行下面的代码；而且guard语句只会有一个代码块，不像if语句可以if else多个代码块。 可">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="乔羽的技术博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://fightingjoey.github.io/2019/03/02/开发/Swift进阶/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Swift进阶 | 乔羽的技术博客</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ca17fff7ec3d7f6b92d63c70eefbb02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/FightingJoey"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">乔羽的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2019/03/02/开发/Swift进阶/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift进阶
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-02 11:08:23" itemprop="dateCreated datePublished" datetime="2019-03-02T11:08:23+08:00">2019-03-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-05 23:04:03" itemprop="dateModified" datetime="2019-03-05T23:04:03+08:00">2019-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2019/03/02/开发/Swift进阶/" class="leancloud_visitors" data-flag-title="Swift进阶">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：13k</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：49min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Swift进阶"><a href="#Swift进阶" class="headerlink" title="Swift进阶"></a>Swift进阶</h1><p>[TOC]</p>
+<h2 id="1-guard的设计理念"><a href="#1-guard的设计理念" class="headerlink" title="1.guard的设计理念"></a>1.guard的设计理念</h2><h3 id="什么是-guard"><a href="#什么是-guard" class="headerlink" title="什么是 guard"></a>什么是 guard</h3><ul>
+<li>与if语句相同的是，<code>guard</code>也是基于一个表达式的布尔值去判断一段代码是否该被执行。</li>
+<li>与if语句不同的是，<code>guard</code>语句判断其后的表达式布尔值为<code>false</code>时，才会执行之后代码块里的代码，如果为<code>true</code>，则跳过整个<code>guard</code>语句，继续执行下面的代码；而且<code>guard</code>语句只会有一个代码块，不像<code>if</code>语句可以<code>if else</code>多个代码块。</li>
+<li>可以把<code>guard</code>近似的看做是<code>Assert</code></li>
+<li>使用<code>guard</code>语法，可以先对每个条件逐一做检查，如果不符合条件判断就退出（或者进行其他某些操作）。</li>
+</ul>
+<h3 id="设计理念"><a href="#设计理念" class="headerlink" title="设计理念"></a>设计理念</h3><p><strong>增强程序可读性。保持代码美观。</strong></p>
+<p>很多情况下我们会遇到if金字塔( if 太多，首行缩进太严重，大块代码都被挤到一块儿)，尤其是在闭包里面使用 if 嵌套对于可读性来说简直是灾难。guard这时可以帮我们解套。</p>
+<h2 id="2-为什么引入值类型"><a href="#2-为什么引入值类型" class="headerlink" title="2.为什么引入值类型"></a>2.为什么引入值类型</h2><ol>
+<li><p>值类型存储在栈上，引用类型存储在堆上，效率比较高</p>
+</li>
+<li><p>使用值类型，有可能在编译器就把问题暴露出来。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 我们都知道let是常量(常量的值是不允许改变的)，引用类型和值类型的let在逻辑上是有本质不同的。</span><br><span class="line"></span><br><span class="line">let arr1 = NSMutableArray.init(array: [&quot;123&quot;,&quot;123&quot;,&quot;456&quot;], copyItems: false)</span><br><span class="line">arr1.removeObject(at: 0)</span><br><span class="line">//以上编译不会报错，由于arr1是引用类型，存储的是指针，指针不变就没问题，对指向的对象没有限制</span><br><span class="line"></span><br><span class="line">let arr2 = [&quot;123&quot;,&quot;123&quot;,&quot;123&quot;]</span><br><span class="line">arr2.remove(at: 0)</span><br><span class="line">//以上编译会报错，由于arr2是值类型</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>值类型，每个实例保持一份数据拷贝，就不会出现一个实例的值在其他位置被修改的情况。</p>
+</li>
+</ol>
+<h2 id="3-值类型和引用类型的区别"><a href="#3-值类型和引用类型的区别" class="headerlink" title="3.值类型和引用类型的区别"></a>3.值类型和引用类型的区别</h2><p>源地址：<a href="https://www.cnblogs.com/luoxiaofu/p/8528383.html" target="_blank" rel="noopener">swift的值类型和引用类型</a></p>
+<h3 id="值类型（Value-Type）"><a href="#值类型（Value-Type）" class="headerlink" title="值类型（Value Type）"></a>值类型（Value Type）</h3><p><strong>值类型，即每个实例保持一份数据拷贝。</strong></p>
+<p>在 Swift 中，典型的有 struct，enum，以及 tuple 都是值类型。而平时使用的 <code>Int</code>， <code>Double</code>，<code>Float</code>，<code>String</code>，<code>Array</code>，<code>Dictionary</code>，<code>Set</code> 其实都是用结构体实现的，也是值类型。</p>
+<p>Swift 中，值类型的赋值为深拷贝（Deep Copy），值语义（Value Semantics）即新对象和源对象是独立的，当改变新对象的属性，源对象不会受到影响，反之同理。</p>
+<p>如果声明一个值类型的<strong>常量</strong>，那么就意味着该常量是不可变的（无论内部数据为 <code>var</code>/<code>let</code>）。</p>
+<h3 id="引用类型（Reference-Type）"><a href="#引用类型（Reference-Type）" class="headerlink" title="引用类型（Reference Type）"></a>引用类型（Reference Type）</h3><p><strong>引用类型，即所有实例共享一份数据拷贝。</strong></p>
+<p>在 Swift 中，class 和闭包是引用类型。引用类型的赋值是浅拷贝（Shallow Copy），引用语义（Reference Semantics）即新对象和源对象的变量名不同，但其引用（指向的内存空间）是一样的，因此当使用新对象操作其内部数据时，源对象的内部数据也会受到影响。</p>
+<p>如果声明一个引用类型的<strong>常量</strong>，那么就意味着该常量的引用不能改变（即不能被同类型变量赋值），但指向的内存中所存储的<strong>变量</strong>是可以改变的。</p>
+<h3 id="函数传参"><a href="#函数传参" class="headerlink" title="函数传参"></a>函数传参</h3><p>在 Swift 中，函数的参数默认为<strong>常量</strong>，即在函数体内只能访问参数，而不能修改参数值。具体来说：</p>
+<ol>
+<li>值类型作为参数传入时，函数体内部不能修改其值</li>
+<li>引用类型作为参数传入时，函数体内部不能修改其指向的内存地址，但是可以修改其内部的变量值</li>
+</ol>
+<p>但是如果要改变参数值或引用，那么就可以在函数体内部直接<strong>声明同名变量</strong>，并把原有变量赋值于新变量，那么这个新的变量就可以更改其值或引用。</p>
+<p><strong>当值类型的变量作为参数被传入函数时，相当于创建了新的常量并初始化为传入的变量值，该参数的作用域及生命周期仅存在于函数体内。</strong></p>
+<p><strong>当引用类型的变量作为参数被传入函数时，相当于创建了新的常量并初始化为传入的变量引用，当函数体内操作参数指向的数据，函数体外也受到了影响。</strong></p>
+<h3 id="嵌套类型"><a href="#嵌套类型" class="headerlink" title="嵌套类型"></a>嵌套类型</h3><h4 id="值类型嵌套值类型"><a href="#值类型嵌套值类型" class="headerlink" title="值类型嵌套值类型"></a>值类型嵌套值类型</h4><p>值类型嵌套值类型时，赋值时创建了新的变量，两者是独立的，嵌套的值类型变量也会创建新的变量，这两者也是独立的。</p>
+<h4 id="值类型嵌套引用类型"><a href="#值类型嵌套引用类型" class="headerlink" title="值类型嵌套引用类型"></a>值类型嵌套引用类型</h4><p>值类型嵌套引用类型时，赋值时创建了新的变量，两者是独立的，但嵌套的引用类型指向的是同一块内存空间，当改变值类型内部嵌套的引用类型变量值时（除了重新初始化），其他对象的该属性也会随之改变。</p>
+<h4 id="引用类型嵌套值类型"><a href="#引用类型嵌套值类型" class="headerlink" title="引用类型嵌套值类型"></a>引用类型嵌套值类型</h4><p>引用类型嵌套值类型时，赋值时创建了新的变量，但是新变量和源变量指向同一块内存，因此改变源变量的内部值，会影响到其他变量的值。</p>
+<h4 id="引用类型嵌套引用类型"><a href="#引用类型嵌套引用类型" class="headerlink" title="引用类型嵌套引用类型"></a>引用类型嵌套引用类型</h4><p>引用类型嵌套引用类型时，赋值时创建了新的变量，但是新变量和源变量指向同一块内存，内部引用类型变量也指向同一块内存地址，改变引用类型嵌套的引用类型的值，也会影响到其他变量的值。</p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>我们经常会处理一些需要有明确的生命周期的对象，我们会去初始化这样的对象，改变它，最后摧毁它。举个例子，一个文件句柄 (file handle) 就有着清晰的生命周期：我们会打开它，对其进行一些操作，然后在使用结束后我们需要把它关闭。如果我们想要打开两个拥有不同属性的文件句柄，我们就需要保证它们是独立的。想要比较两个文件句柄，我们可以检查它们是否指向着同样的内存地址。因为我们对地址进行比较，所以文件句柄最好是由引用类型来进行实现。这也正是 Foundation 框架中 FileHandle 类所做的事情。</p>
+<p>其他一些类型并不需要生命周期。比如一个 URL 在创建后就不会再被更改。更重要的是，它在被摧毁时并不需要进行额外的操作 (对比文件句柄，在摧毁时你需要将其关闭)。当我们比较两个 URL 变量时，我们并不关心它们是否指向内存中的同一地址，我们所比较的是它们是否指向同样的 URL。因为我们通过它们的属性来比较 URL，我们将其称为值。在 Objective-C 里，我们用 NSURL 来实现一个不可变的对象。不过在 Swift 中对应的 URL 却是一个结构体。</p>
+<p>软件中拥有生命周期的对象非常多 — 比如文件句柄，通知中心，网络接口，数据库连接，view controller 都是很好的例子。对于这些类型，我们想在初始化和销毁的时候进行特定的操作。在对它们进行比较的时候，我们也不是去比较它们的属性，而是检查两者的内存地址是否一样。所有这些类型的实现都使用了对象，它们全都是引用类型。</p>
+<p>在大多数软件里值类型也扮演着重要的角色。URL，二进制数据，日期，错误，字符串，通知以及数字等，这些类型只通过它们的属性来定义。当对它们进行比较的时候，我们不关心内存地址。所有这些类型都可以使用结构体来实现。</p>
+<p>值永远不会改变，它们具有不可变的特性。这 (在绝大多数情况下) 是一件好事，因为使用不变的数据可以让代码更容易被理解。不可变性也让代码天然地具有线程安全的特性，因为不能改变的东西是可以在线程之间安全地共享的。</p>
+<p>Swift 中，结构体是用来构建值类型的。结构体不能通过引用来进行比较，你只能通过它们的属性来比较两个结构体。虽然我们可以用 var 来在结构体中声明可变的变量属性，但是这个可变性只体现在变量本身上，而不是指里面的值。改变一个结构体变量的属性，在概念上来说，和为整个变量赋值一个全新的结构体是等价的。我们总是使用一个新的结构体，并设置被改变的属性值，然后用它替代原来的结构体。</p>
+<p>结构体只有一个持有者。比如，当我们将结构体变量传递给一个函数时，函数将接收到结构体的复制，它也只能改变它自己的这份复制。这叫做<strong>值语义</strong> (value semantics)，有时候也被叫做复制语义。而对于对象来说，它们是通过传递引用来工作的，因此类对象会拥有很多持有者，这被叫做<strong>引用语义</strong> (reference semantics)。</p>
+<p>因为结构体只有一个持有者，所以它不可能造成引用循环。而对于类和函数这样的引用类型，我们需要特别小心，避免造成引用循环的问题。</p>
+<p>值总是需要复制这件事情听来可能有点低效，不过，编译器可以帮助我们进行优化，以避免很多不必要的复制操作。因为结构体非常基础和简单，所以这是可能的。结构体复制的时候发生的是按照字节进行的浅复制。除非结构体中含有类，否则复制时都不需要考虑其中属性的引用计数。当使用 let 来声明结构体时，编译器可以确定之后这个结构体的任何一个字节都不会被改变。另外，和 C++ 中类似的值类型不同，开发者没有办法知道和干预何时会发生结构体的复制。这些简化给了编译器更多的可能性，来排除那些不必要的复制，或者使用传递引用而非值的方式来优化一个常量结构体。</p>
+<p>编译器所做的对于值类型的复制优化和值语义类型的写时复制行为并不是一回事儿。写时复制必须由开发者来实现，想要实现写时复制，你需要检测所包含的类是否有共享的引用。</p>
+<p>和自动移除不必要的值类型复制不同，写时复制是需要自己实现的。不过编译器会移除那些不必要的“无效”浅复制，以及像是数组这样的类型中的代码会执行“智能的”写时复制，两者互为补充，都是对值类型的优化。我们接下来很快就会看到如何实现你自己的写时复制机制的例子。</p>
+<p>如果你的结构体只由其他结构体组成，那编译器可以确保不可变性。同样地，当使用结构体时，编译器也可以生成非常快的代码。举个例子，对一个只含有结构体的数组进行操作的效率，通常要比对一个含有对象的数组进行操作的效率高得多。这是因为结构体通常要更直接：值是直接存储在数组的内存中的。而对象的数组中包含的只是对象的引用。最后，在很多情况下，编译器可以将结构体放到栈上，而不用放在堆里。</p>
+<p>当和 Cocoa 以及 Objective-C 交互时，我们可能通常都需要类。比如在实现一个 table view 的代理时，我们除了使用类以外别无它选。Apple 的很多框架都重度依赖于子类，不过在某些问题领域，我们仍然能创建一个对象为值的类。举个例子，在 Core Image 框架里，CIImage 对象是不可变的：它们代表了一个永不变化的图像。</p>
+<p>有些时候，决定你的新类型应该是结构体还是类并不容易。两者表现得不太一样，知晓其中的区别将有助于作出决定。</p>
+<h2 id="4-类方法-class-和-static的区别"><a href="#4-类方法-class-和-static的区别" class="headerlink" title="4.类方法 .class 和 .static的区别"></a>4.类方法 .class 和 .static的区别</h2><ol>
+<li>在Swift中 static 和 class 都表示“类型范围作用域”的关键字。在所有类型中（class、static、enum）中，我们可以使用 .static 来描述类型作用域，.class 是专门用于修饰class类型的。</li>
+<li>.static 可以修饰属性（计算、存储）和方法，而且所修饰的属性和方法不可以被子类重写。</li>
+<li>.class 可以修饰方法和计算属性，但是不能修饰存储属性，而且所修饰的属性和方法是可以被子类重写的，重写的时候可以使用 .class 修饰，也可以使用 .static 修饰。</li>
+<li>在 Protocol 中定义类方法的时候，推荐使用 .static，因为它是通用的。</li>
+</ol>
+<h2 id="5-Swift语言的优势"><a href="#5-Swift语言的优势" class="headerlink" title="5.Swift语言的优势"></a>5.Swift语言的优势</h2><h3 id="Swift代码更好写"><a href="#Swift代码更好写" class="headerlink" title="Swift代码更好写"></a>Swift代码更好写</h3><p>从Objective-C中迁移来的API写法更简洁，更易于阅读和维护。类型推断使代码更简洁，更健壮，去掉了引用头文件并提供名称空间。内存自动管理，不需要键入分号。</p>
+<ul>
+<li>类型推断（从此不用在定义时就显示的给出变量类型，编译器可以靠上下文进行推断）</li>
+<li>引入了命名空间，从此不用再import其他文件</li>
+<li>告别MRC，全面使用ARC</li>
+<li>结构体可添加方法、支持拓展、支持协议</li>
+<li>函数支持可选参数，支持多返回值，支持函数入参，为函数式编程提供了强大支持。</li>
+<li>可嵌套可添加方法可传参的枚举</li>
+<li>支持泛型</li>
+<li>多种编程范式支持</li>
+<li>可选链式调用</li>
+<li>支持面向协议编程，复用性更强</li>
+</ul>
+<h3 id="Swift更安全"><a href="#Swift更安全" class="headerlink" title="Swift更安全"></a>Swift更安全</h3><blockquote>
+<p>Swift的nil和OC的nil不是同样的概念，在OC中，nil是一个指向不存在对象的指针。在Swift中，nil并不是一个指针，而是代表一个特定类型值不存在。不光是对象，基本类型、结构体、枚举都可以被设置为nil</p>
+</blockquote>
+<p>OC允许变量为nil，而nil并不明确的代表没有，而代表指向空对象的指针，它还是个指针，而空指针无法很明确的表示不存在。而Swift提出了可选（Optional）的概念，从此，变量只有存在和不存在两种状态、方法调用因此也只存在调了和没调两种情况，去除了OC对于nil指针的种种不确定性。有了存在和不存在，就可以很明确的指出合法和非法，例如对于存在的对象一定可以调用它的方法、不存在的就一定不去调用了；String到Int类型转换成功就一定会返回一个特定类型的对象，失败就一定返回不存在。而这一强大特性又可以被用在各种类型上，在很大程度上提高了语言的严谨性。</p>
+<blockquote>
+<p>Swift是个类型安全的语言，类型安全的语言需要开发者清楚每个变量的类型。如果你需要一个String类型的参数，就绝不能错误地将Int传递给它。正因为Swift是类型安全的，它在编译期对你的代码进行类型检测并指出错误，可以今早发现代码中的类型错误。</p>
+</blockquote>
+<p>除了“可选”的概念之外，类型安全也是Swift安全性的一大体现。在OC中，如果将一个CGFloat赋值给NSInteger，并不会使代码编译不过，但是冥冥之中就损失了精度。在之后的计算中就有可能因为精度问题而导致Bug，而这些Bug有时候是不好被发现的。在Swift中，不同类型之间的赋值都需要经过类型转换，否则编译器会报错。在写类型转换代码的同时，正是你考虑精度的时刻，这样的设计最开始会让你觉得Swift好烦人、好不智能，就像个老太太一样唠唠叨叨，但就是这样的机制保证了类型安全、使得语言更加严谨，代码运行结果更加可预测。</p>
+<h3 id="Swift更快"><a href="#Swift更快" class="headerlink" title="Swift更快"></a>Swift更快</h3><p><a href="https://xiaozhuanlan.com/topic/6314975280" target="_blank" rel="noopener">Swift性能分析</a></p>
+<h3 id="Swift开源"><a href="#Swift开源" class="headerlink" title="Swift开源"></a>Swift开源</h3><h3 id="Swift跨平台"><a href="#Swift跨平台" class="headerlink" title="Swift跨平台"></a>Swift跨平台</h3><h2 id="6-结构体和类"><a href="#6-结构体和类" class="headerlink" title="6.结构体和类"></a>6.结构体和类</h2><h3 id="结构体和类的区别"><a href="#结构体和类的区别" class="headerlink" title="结构体和类的区别"></a>结构体和类的区别</h3><ul>
+<li>结构体 (和枚举) 是值类型，而类是引用类型。在设计结构体时，我们可以要求编译器保证不可变性。而对于类来说，我们就得自己来确保这件事情。</li>
+<li><p>使用类，我们可以通过继承来共享代码。而结构体 (以及枚举) 是不能被继承的。想要在不同的结构体或者枚举之间共享代码，我们需要使用不同的技术，比如像是组合、泛型以及协议扩展等。</p>
+</li>
+<li><p>内存的管理方式有所不同。结构体可以被直接持有及访问，但是类的实例只能通过引用来间接地访问。结构体不会被引用，但是会被复制。也就是说，结构体的持有者是唯一的，但是类却能有很多个持有者。</p>
+</li>
+</ul>
+<h3 id="结构体和类的使用时机"><a href="#结构体和类的使用时机" class="headerlink" title="结构体和类的使用时机"></a>结构体和类的使用时机</h3><ul>
+<li><p>当我们需要一个简单不需要继承、不多变的数据时候我们首选结构体，因为在数据结构上来说结构体的存取效率是高于类的，</p>
+</li>
+<li><p>反之当我们需要一个数据结构比较大，需要继承，变化比较多的时候我们选择类，因为在变化的过程中结构体可能会发生写时复制，而类不会；</p>
+</li>
+</ul>
+<p><strong>下面举一个简单的例子：</strong>以Array和NSMutableArray来说：</p>
+<ul>
+<li><p>当有一个数组，数据量相对比较小，也不用去经常改变它，只是用来存数据和取数据，我们首先Array；</p>
+</li>
+<li><p>当数组的数据量很大的时候，并且经常要去对他进行添加，删除等操作，并且经常赋值给其他变量的话就推荐使用NSMutableArray。</p>
+</li>
+</ul>
+<h2 id="7-谈谈对swift中extension的理解"><a href="#7-谈谈对swift中extension的理解" class="headerlink" title="7.谈谈对swift中extension的理解"></a>7.谈谈对swift中extension的理解</h2><ul>
+<li>首先extension在swift中类似oc的类目，可以扩展方法，计算属性，不能添加存储属性；</li>
+<li>可以通过extension让类实现某个协议，一般这个用的也比较多，比如实现Comparable这个协议；</li>
+<li>还有一个很重要的，就是可以通过extension对协议进行扩展，添加默认实现，属于黑魔法吧，非常好用。</li>
+</ul>
+<h2 id="8-Swift写时复制"><a href="#8-Swift写时复制" class="headerlink" title="8.Swift写时复制"></a>8.Swift写时复制</h2><h3 id="为什么会有写时复制"><a href="#为什么会有写时复制" class="headerlink" title="为什么会有写时复制"></a>为什么会有写时复制</h3><p>在 Swift 中，典型的有 struct，enum，以及 tuple 都是值类型。而平时使用的 <code>Int</code>， <code>Double</code>， <code>Float</code>， <code>String</code>， <code>Array</code>， <code>Dictionary</code>，<code>Set</code> 其实都是用结构体实现的，也是值类型。</p>
+<p>Swift 中，值类型的赋值为深拷贝（Deep Copy），值语义（Value Semantics）即新对象和源对象是独立的，当改变新对象的属性，源对象不会受到影响，反之同理。</p>
+<p>如果声明一个值类型的<strong>常量</strong>，那么就意味着该常量是不可变的（无论内部数据为 <code>var</code>/<code>let</code>）。</p>
+<p>这样看来一切都没问题，但是在写代码的时候，这些值类型每次赋值的时候真的是重新在内存中拷贝一份吗？如果一个数组里存了上万个元素，现在把它赋值给另一个变量，就必须要拷贝所有元素，即使这两个数组的内容是完全一致的，那可以预见这对性能会造成多么糟糕的影响。</p>
+<p>既然我们能够想到这样的问题，那苹果的工程师肯定也想到了。如何才能避免不必要的复制呢，Swift给出了优化方案：<strong>Copy-On-Write</strong>（写时复制），即只有当这个值需要改变时才进行复制行为。在Swift标准库中，Array、Dictionary和Set都是通过写时复制来实现的。</p>
+<h3 id="什么是写时复制？"><a href="#什么是写时复制？" class="headerlink" title="什么是写时复制？"></a>什么是写时复制？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = [1,2,3]</span><br><span class="line">var y = x</span><br><span class="line">// 断点</span><br></pre></td></tr></table></figure>
+<p>这个时候我们打印一下 x 和 y 的内存地址，这里我用的是 lldb 命令<code>fr v -R [object]</code> 来查看对象内存结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R x</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) x = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600001c0ac40 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R y</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) y = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600001c0ac40 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由此我们可以看到 x 和 y 的内存地址都是<code>0x0000600001c0ac40</code>，说明 x 和 y 此时是共享同一个实例。这个时候我们再加上下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y.append(4)</span><br><span class="line">// 断点</span><br></pre></td></tr></table></figure>
+<p>然后再打印一下地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R x</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) x = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x000060000126b180 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R y</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) y = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600002301b60 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到 x 和 y 的内存地址不在相同了，说明此时它们不再共享同一个实例，y 进行了数据拷贝。</p>
+<p>Array 结构体内部含有指向某块内存的引用。这块内存就是用来存储数组中元素。x 和 y 两个数组一开始是共享同一块内存。不过，当我们改变 y 的时候，这个共享会被检测到，内存中的数据被拷贝出来，改变以后赋值给了 y。<strong>昂贵的元素复制操作只在必要的时候发生，这就是写时复制。</strong></p>
+<h4 id="内部实现"><a href="#内部实现" class="headerlink" title="内部实现"></a>内部实现</h4><p>在结构体内部存储了一个指向实际数据的引用，在不进行修改操作的普通传递过程中，都是将内部的引用的引用计数+1，在进行修改时，对内部的引用做一次copy操作，再在这个复制出来的数据上进行真正的修改，从而保持其他的引用者不受影响。</p>
+<h3 id="值类型嵌套引用类型-1"><a href="#值类型嵌套引用类型-1" class="headerlink" title="值类型嵌套引用类型"></a>值类型嵌套引用类型</h3><p>上面我们提到的 Array 内部元素是 Int，两者都是值类型，那么如果 Array 内部的元素是引用类型呢，情况会不会发生变化？我们一起来看一下~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Student &#123;</span><br><span class="line">	var name: String</span><br><span class="line">	init(name: String) &#123;</span><br><span class="line">		self.name = name</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct School &#123;</span><br><span class="line">	var student = Student(name: &quot;小明&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let school1 = School()</span><br><span class="line">var school2 = school1</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点1</span><br><span class="line"></span><br><span class="line">school2.student.name = &quot;小红&quot;</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点2</span><br><span class="line"></span><br><span class="line">school2.student = Student(name: &quot;小李&quot;)</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点3</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">小明</span><br><span class="line">小明</span><br><span class="line">小红</span><br><span class="line">小红</span><br><span class="line">小红</span><br><span class="line">小李</span><br></pre></td></tr></table></figure>
+<p>断点1，school1 和 school2 的内存结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02356</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02356</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当<code>school1</code> 赋值给<code>school2</code> 后，<code>school1.student</code>和<code>school2.student</code>的内存地址都是<code>0x00006000024053e0</code>，其引用类型实例变量 <code>name</code> 的地址也都是 <code>0x9000000105a02356</code> ，它们共享同一个实例，其引用类型的实例变量也共享。</p>
+<h4 id="1-修改结构体内引用类型的实例变量的值"><a href="#1-修改结构体内引用类型的实例变量的值" class="headerlink" title="1.修改结构体内引用类型的实例变量的值"></a>1.修改结构体内引用类型的实例变量的值</h4><p>断点2，school1 和 school2 的内存结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而执行<code>school2.student.name = &quot;小红&quot;</code> 后，<code>school1.student</code> 与 <code>school2.student</code> 的内存地址不变，其实例变量 <code>name</code> 内存地址都发生改变且相同，还是共享同一个实例变量，也就是说，虽然对值类型有所修改，但没有发生拷贝行为。</p>
+<h4 id="2-修改结构体内引用类型的值"><a href="#2-修改结构体内引用类型的值" class="headerlink" title="2.修改结构体内引用类型的值"></a>2.修改结构体内引用类型的值</h4><p>断点3，school1 和 school2 的内存结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x0000600002405400 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02362</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>school2.student</code> 和<code>school2.student.name</code> 的内存地址都发生变化，而<code>school1.student</code> 和<code>school1.student.name</code> 的内存地址不变，说明，此时对结构体进行了拷贝行为，而<code>student</code> 这个引用类型是直接指向另一个实例，而不是对原实例进行修改。</p>
+<h3 id="自定义Struct如何实现写时复制"><a href="#自定义Struct如何实现写时复制" class="headerlink" title="自定义Struct如何实现写时复制"></a>自定义Struct如何实现写时复制</h3><p>作为一个结构体的作者，你并不能免费获得这种特性，你需要自己进行实现。当你自己的类型内部含有一个或多个可变引用，同时你想要保持值语义，并且避免不必要的复制时，为你的类型实现写时复制是有意义的。</p>
+<p>在 Swift 中，我们可以使用 <code>isKnownUniquelyReferenced</code> 函数来检查某个引用只有一个持有者。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">struct School &#123;</span><br><span class="line">    private var student = Student(name: &quot;小明&quot;)</span><br><span class="line"></span><br><span class="line">    var studentName: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return student.name</span><br><span class="line">        &#125;</span><br><span class="line">        set &#123;</span><br><span class="line">            if isKnownUniquelyReferenced(&amp;student) &#123;</span><br><span class="line">                student.name = newValue</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                student = Student(name: newValue)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="9-Swift可选类型"><a href="#9-Swift可选类型" class="headerlink" title="9.Swift可选类型"></a>9.Swift可选类型</h2><h3 id="为什么引入可选类型？"><a href="#为什么引入可选类型？" class="headerlink" title="为什么引入可选类型？"></a>为什么引入可选类型？</h3><blockquote>
+<p>Swift的nil和OC的nil不是同样的概念，在OC中，nil是一个指向不存在对象的指针。在Swift中，nil并不是一个指针，而是代表一个特定类型值不存在。不光是对象，基本类型、结构体、枚举都可以被设置为nil</p>
+</blockquote>
+<p>OC允许变量为nil，而nil并不明确的代表没有，而代表指向空对象的指针，它还是个指针，而空指针无法很明确的表示不存在。而Swift提出了可选（Optional）的概念，从此，变量只有存在和不存在两种状态、方法调用因此也只存在调了和没调两种情况，去除了OC对于nil指针的种种不确定性。有了存在和不存在，就可以很明确的指出合法和非法，例如对于存在的对象一定可以调用它的方法、不存在的就一定不去调用了；String到Int类型转换成功就一定会返回一个特定类型的对象，失败就一定返回不存在。而这一强大特性又可以被用在各种类型上，在很大程度上提高了语言的严谨性。</p>
+<h3 id="可选类型的底层逻辑"><a href="#可选类型的底层逻辑" class="headerlink" title="可选类型的底层逻辑"></a>可选类型的底层逻辑</h3><p>Swift实际上是使用枚举来实现可选类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">enum Optional&lt;T&gt; : Reflectable, NilLiteralConvertible &#123;</span><br><span class="line">    case None</span><br><span class="line">    case Some(T)</span><br><span class="line">    init()</span><br><span class="line">    init(_ some: T)</span><br><span class="line"></span><br><span class="line">    /// Haskell&apos;s fmap, which was mis-named</span><br><span class="line">    func map&lt;U&gt;(f: (T) -&gt; U) -&gt; U?</span><br><span class="line">    func getMirror() -&gt; MirrorType</span><br><span class="line">    static func convertFromNilLiteral() -&gt; T?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当Optional没有值时，返回的 nil 其实就是Optional.None，即没有值。除了None以外，还有一个Some，当有值时就是被<code>Some&lt;T&gt;</code>包装的真正的值，所以我们拆包的动作其实就是将Some里面的值取出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var array = [&quot;one&quot;,&quot;two&quot;,&quot;three&quot;]</span><br><span class="line">switch array.index(of: &quot;four&quot;) &#123;</span><br><span class="line">case .some(let idx):</span><br><span class="line">	array.remove(at: idx)</span><br><span class="line">case .none:</span><br><span class="line">	break // 什么都不做</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个 switch 语句中我们使用了完整的可选值枚举语法，在当值为 some 的时候，将其中的“关联类型”进行了解包。这种做法非常安全，但是写起来和读起来都不是很顺畅。Swift 2.0 中引入了使用 ? 作为在 switch 中对 some 进行匹配的模式后缀的语法，另外，可选值遵守 NilLiteralConvertible 协议，因此你可以用 nil 来替代 .none：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">switch array.index(of: &quot;four&quot;) &#123;</span><br><span class="line">case let idx?:</span><br><span class="line">	array.remove(at: idx)</span><br><span class="line">case nil:</span><br><span class="line">	break // 什么都不做</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="可选值解包"><a href="#可选值解包" class="headerlink" title="可选值解包"></a>可选值解包</h3><h4 id="可选绑定"><a href="#可选绑定" class="headerlink" title="可选绑定"></a>可选绑定</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let str: String? = &quot;sss&quot;</span><br><span class="line">if let s = str &#123;</span><br><span class="line">    print(s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">guard let s = str else &#123;</span><br><span class="line">    return</span><br><span class="line">&#125;</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+<h4 id="强制解包"><a href="#强制解包" class="headerlink" title="强制解包"></a>强制解包</h4><p>当你确定自定义的可选类型一定有值时，可以使用操作符(!)进行强制解析，拿到数据，叹号表示”我知道一定有值，请使用它”,但是当你判断错误，可选值为nil时使用(!)进行强制解析，会有运行错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myStr:String? = nil</span><br><span class="line">myStr=&quot;强制解析，一定有值，否则运行出错&quot;</span><br><span class="line">print(myStr!)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>规则</strong>：当你能确定你的某个值不可能为 nil 时可以使用强制解包，你应当会<strong>希望</strong>如果它不巧意外的是 nil 的话，程序直接挂掉。</p>
+</blockquote>
+<h5 id="改进强制解包的错误信息"><a href="#改进强制解包的错误信息" class="headerlink" title="改进强制解包的错误信息"></a>改进强制解包的错误信息</h5><p>使用强制解包的时候，如果程序出错，你从输出中无法知道发生问题的原因是什么。当然你实际上可以加上注释来提醒这里为什么需要强制解包，那么为什么不考虑把这个注释直接作为错误信息呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">infix operator !!</span><br><span class="line"></span><br><span class="line">func !!&lt;T&gt;(wrapped:T?, failureText:@autoclosure() -&gt; String) -&gt; T &#123;</span><br><span class="line">    if let x = wrapped &#123;</span><br><span class="line">        return x</span><br><span class="line">    &#125;</span><br><span class="line">    fatalError(failureText())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样在出错的时候我们就可以在控制台看到错误信息了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let s = &quot;foo&quot;</span><br><span class="line">let i = Int(s) !! &quot;Expecting integer, got\&quot;\(s)\&quot;&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="在调试版本中进行断言"><a href="#在调试版本中进行断言" class="headerlink" title="在调试版本中进行断言"></a>在调试版本中进行断言</h5><p>在调试版本中我们可以让程序崩溃，但是在发布版本中，最好还是不要，而是提供一个默认值。我们可以选择在调试版本中使用断言，让程序崩溃，而在最终版本中，将它替换为默认值。</p>
+<p>我们可以实现一个 <code>!?</code> 操作符来代表这个行为，我们将这个操作定义为对失败的解包进行断言，并且在断言不触发的发布版本中将值替换为默认值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">infix operator !?</span><br><span class="line"></span><br><span class="line">func !?&lt;T: ExpressibleByIntegerLiteral&gt;(wrapped: T?, failureText: @autoclosure () -&gt; String) -&gt; T</span><br><span class="line">&#123;</span><br><span class="line">	assert(wrapped != nil, failureText())</span><br><span class="line">	return wrapped ?? 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，下面的代码将在调试时触发断言，但是在发布版本中打印 0：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let i = Int(s) !? &quot;Expecting integer, got \&quot;\(s)\&quot;</span><br></pre></td></tr></table></figure>
+<p>如果你想要显式地提供一个不同的默认值，或者是为非标准的类型提供这个操作符，我们可以定义一个接受多元组为参数的版本，多元组中包含默认值和错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func !?&lt;T&gt;(wrapped: T?, nilDefault: @autoclosure () -&gt; (value: T, text: String)) -&gt; T</span><br><span class="line">&#123;</span><br><span class="line">	assert(wrapped != nil, nilDefault().text)</span><br><span class="line">	return wrapped ?? nilDefault().value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 调试版本中断言，发布版本中返回 5</span><br><span class="line">Int(s) !? (5, &quot;Expected integer&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="隐式解包"><a href="#隐式解包" class="headerlink" title="隐式解包"></a>隐式解包</h4><p>通过在声明时的数据类型后面加一个感叹号(!)来实现:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var str: String! = &quot;Hello World!&quot;</span><br><span class="line">print(str) // Hello World!</span><br></pre></td></tr></table></figure>
+<p>可以看到没有使用(?)进行显式的折包也得到了Some中的值，这个语法相当于告诉编译器：在我们使用Optional值前，这个Optional值就会被初始化，并且总是会有值，所以当我们使用时，编译器就帮我做了一次拆包。如果你确信你的变量能保证被正确初始化，那就可以这么做，否则还是不要尝试为好。</p>
+<h3 id="可选值map和flatMap"><a href="#可选值map和flatMap" class="headerlink" title="可选值map和flatMap"></a>可选值map和flatMap</h3><h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>我们现在有一个字符数组，我们想要将第一个字符转换为字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let characters: [Character] = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span><br><span class="line">String(characters[0]) // a</span><br></pre></td></tr></table></figure>
+<p>不过，如果 characters 可能为空的话，我们在就需要用 if let，只在数组不为空的时候创建字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var firstCharAsString: String? = nil</span><br><span class="line">if let char = characters.first &#123;</span><br><span class="line">	firstCharAsString = String(char)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样一来，当字符数组至少含有一个元素时，firstCharAsString 将会是一个含有该元素的 String。如果字符数组为空的话，firstCharAsString 将会为 nil。</p>
+<p>这种获取一个可选值，并且在当它不是 nil 的时候进行转换的模式十分常见。Swift 中的可选值里专门有一个方法来处理这种情况，它叫做 map。这个方法接受一个闭包，如果可选值有内容，则调用这个闭包对其进行转换。上面的函数用 map 可以重写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let firstChar = characters.first.map &#123; String($0) &#125; // Optional(&quot;a&quot;)</span><br></pre></td></tr></table></figure>
+<p>显然，这个 map 和数组以及其他序列里的 map 方法非常类似。但是与序列中操作一系列值所不同的是，可选值的 map 方法只会操作一个值，那就是该可选值中的那个可能的值。你可以把可选值当作一个包含零个或者一个值的集合，这样 map 要么在零值的情况下不做处理，要么在有值的时候会对其进行转换。</p>
+<h4 id="flatmap"><a href="#flatmap" class="headerlink" title="flatmap"></a>flatmap</h4><p>如果你对一个可选值调用 map，但是你的转换函数本身也返回可选值结果的话，最终结果将是一个双重嵌套的可选值。举个例子，比如你想要获取数组的第一个字符串元素，并将它转换为数字。首先你使用数组上的 first，然后用 map 将它转换为数字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let stringNumbers = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;foo&quot;]</span><br><span class="line">let x = stringNumbers.first.map &#123; Int($0) &#125; // Optional(Optional(1))</span><br></pre></td></tr></table></figure>
+<p>问题在于，map 返回可选值 (first 可能会是 nil)，Int(String) 也返回可选值 (字符串可能不是一个整数)，最后 x 的结果将会是 <code>Int??</code>。</p>
+<p>flatMap 可以把结果展平为单个可选值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let y = stringNumbers.first.flatMap &#123; Int($0) &#125; // Optional(1)</span><br></pre></td></tr></table></figure>
+<p>这么做得到的结果 y 将是 <code>Int?</code>类型。</p>
+<h3 id="可选链"><a href="#可选链" class="headerlink" title="可选链"></a>可选链</h3><p>在 Objective-C 中，对 nil 发消息什么都不会发生。Swift 里，我们可以通过“可选链 (optional chaining)”来达到同样的效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delegate?.callback()</span><br></pre></td></tr></table></figure>
+<p>和 Objective-C 不同的是，Swift 编译器会在你的值是可选值的时候警告你。如果你的可选值值中确实有值，那么编译器能够保证方法肯定会被实际调用。如果没有值的话，这里的问号对代码的读者来说是一个清晰地信号，表示方法可能会不被调用。</p>
+<p>当你通过调用可选链得到一个返回值时，这个返回值本身也会是可选值。</p>
+<p>多次调用被链接在一起形成一个链，如果任何一个节点为空（nil）将导致整个链失效。</p>
+<h3 id="空和运算符"><a href="#空和运算符" class="headerlink" title="空和运算符 ??"></a>空和运算符 ??</h3><p>很多时候，你会想要解包一个可选值，如果可选值是 nil 时，就用一个默认值来替代它。你可以使用 <code>??</code> 空合运算符来完成这件事：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let stringteger = &quot;1&quot;</span><br><span class="line">let number = Int(stringteger) ?? 0</span><br></pre></td></tr></table></figure>
+<h2 id="10-Swift函数式编程"><a href="#10-Swift函数式编程" class="headerlink" title="10.Swift函数式编程"></a>10.Swift函数式编程</h2><h3 id="Swift函数"><a href="#Swift函数" class="headerlink" title="Swift函数"></a>Swift函数</h3><p>要理解 Swift 里面的函数和闭包，你需要切实弄明白三件事情，我们把这三件事按照重要程度进行了大致排序：</p>
+<ol>
+<li><strong>函数可以被赋值给变量，也能够作为函数的输入和输出</strong></li>
+<li><strong>函数可以捕获存在于他们作用范围之外的变量</strong></li>
+<li><strong>函数可以使用 <code>{}</code> 来声明为闭包表达式</strong></li>
+</ol>
+<p><strong>Swift对函数进行简化的特性：</strong></p>
+<ol>
+<li>如果你将闭包作为参数传递，并且你不再用这个闭包做其他事情的话，就没有必要现将它存储到一个局部变量中。</li>
+<li>如果编译器可以从上下文中推断出类型的话，你就不需要指明它了。</li>
+<li>如果闭包表达式的主体部分只包括一个单一的表达式的话，它将自动返回这个表达式的结果，你可以不写 return。</li>
+<li>Swift 会自动为函数的参数提供简写形式，<code>$0</code> 代表第一个参数，<code>$1</code> 代表第二个参数，以此类推。</li>
+<li>如果函数的最后一个参数是闭包表达式的话，你可以将这个闭包表达式移到函数调用的圆括号的外部。</li>
+<li>最后，如果一个函数除了闭包表达式外没有别的参数，那么方法名后面的调用时的圆括号也可以一并省略。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].map( &#123; (i: Int) -&gt; Int in return i * 2 &#125; )</span><br><span class="line">[1, 2, 3].map( &#123; i in return i * 2 &#125; )</span><br><span class="line">[1, 2, 3].map( &#123; i in i * 2 &#125; )</span><br><span class="line">[1, 2, 3].map( &#123; $0 * 2 &#125; )</span><br><span class="line">[1, 2, 3].map() &#123; $0 * 2 &#125;</span><br><span class="line">[1, 2, 3].map &#123; $0 * 2 &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><h4 id="map-1"><a href="#map-1" class="headerlink" title="map"></a>map</h4><p>可以对序列中的每一个元素做一次处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 计算字符串的长度</span><br><span class="line">let stringArray = [&quot;Objective-C&quot;, &quot;Swift&quot;, &quot;HTML&quot;, &quot;CSS&quot;, &quot;JavaScript&quot;]</span><br><span class="line">func stringCount(string: String) -&gt; Int &#123;</span><br><span class="line">    return string.characters.count</span><br><span class="line">&#125;</span><br><span class="line">stringArray.map(stringCount)</span><br><span class="line"></span><br><span class="line">stringArray.map(&#123;string -&gt; Int in</span><br><span class="line">    return string.characters.count</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// $0代表数组中的每一个元素</span><br><span class="line">stringArray.map&#123;</span><br><span class="line">    return $0.characters.count</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Map 的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">extension Array &#123;</span><br><span class="line">	func map&lt;T&gt;(_ transform: (Element) -&gt; T) -&gt; [T] &#123;</span><br><span class="line">		var result: [T] = []</span><br><span class="line">		result.reserveCapacity(count)</span><br><span class="line">		for x in self &#123;</span><br><span class="line">			result.append(transform(x))</span><br><span class="line">		&#125;</span><br><span class="line">		return result</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="flatmap-compactMap"><a href="#flatmap-compactMap" class="headerlink" title="flatmap(compactMap)"></a>flatmap(compactMap)</h4><p>和 map 一样，也是对序列元素进行变换，但是和 map 有几点不同：</p>
+<h5 id="1-flatMap返回后的数组中不存在nil，同时它会把Optional解包"><a href="#1-flatMap返回后的数组中不存在nil，同时它会把Optional解包" class="headerlink" title="1.flatMap返回后的数组中不存在nil，同时它会把Optional解包"></a>1.flatMap返回后的数组中不存在nil，同时它会把Optional解包</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let array = [&quot;Apple&quot;, &quot;Orange&quot;, &quot;Puple&quot;, &quot;&quot;]</span><br><span class="line"></span><br><span class="line">let arr1 = array.map &#123; a -&gt; Int? in</span><br><span class="line">    let length = a.characters.count</span><br><span class="line">    guard length &gt; 0 else &#123; return nil &#125;</span><br><span class="line">    return length  </span><br><span class="line">&#125;</span><br><span class="line">arr1 // [&#123;some 5&#125;, &#123;some 6&#125;, &#123;some 5&#125;, nil]</span><br><span class="line"></span><br><span class="line">let arr2 = array.flatMap &#123; a -&gt; Int? in</span><br><span class="line">    let length = a.characters.count</span><br><span class="line">    guard length &gt; 0 else &#123; return nil&#125;</span><br><span class="line">    return length    </span><br><span class="line">&#125;</span><br><span class="line">arr2 // [5, 6, 5]</span><br></pre></td></tr></table></figure>
+<h5 id="2-flatMap还能把数组中存有数组的数组（二维数组、N维数组）一同打开变成一个新的数组"><a href="#2-flatMap还能把数组中存有数组的数组（二维数组、N维数组）一同打开变成一个新的数组" class="headerlink" title="2.flatMap还能把数组中存有数组的数组（二维数组、N维数组）一同打开变成一个新的数组"></a>2.flatMap还能把数组中存有数组的数组（二维数组、N维数组）一同打开变成一个新的数组</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let array = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</span><br><span class="line"></span><br><span class="line">let arr1 = array.map&#123; $0 &#125;</span><br><span class="line">arr1 // [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</span><br><span class="line"></span><br><span class="line">let arr2 = array.flatMap&#123; $0 &#125;</span><br><span class="line">arr2 // [1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br></pre></td></tr></table></figure>
+<h5 id="3-flatMap也能把两个不同的数组合并成一个数组，这个合并的数组元素个数是前面两个数组元素个数的乘积"><a href="#3-flatMap也能把两个不同的数组合并成一个数组，这个合并的数组元素个数是前面两个数组元素个数的乘积" class="headerlink" title="3.flatMap也能把两个不同的数组合并成一个数组，这个合并的数组元素个数是前面两个数组元素个数的乘积"></a>3.flatMap也能把两个不同的数组合并成一个数组，这个合并的数组元素个数是前面两个数组元素个数的乘积</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let fruits = [&quot;Apple&quot;, &quot;Orange&quot;, &quot;Puple&quot;]</span><br><span class="line">let counts = [2, 3, 5]</span><br><span class="line"></span><br><span class="line">let array = counts.flatMap &#123; count in</span><br><span class="line">    fruits.map (&#123; fruit in</span><br><span class="line">         return fruit + &quot;  \(count)&quot;            </span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">array // [&quot;Apple 2&quot;, &quot;Orange 2&quot;, &quot;Puple 2&quot;, &quot;Apple 3&quot;, &quot;Orange 3&quot;, &quot;Puple 3&quot;, &quot;Apple 5&quot;, &quot;Orange 5&quot;, &quot;Puple 5&quot;]</span><br></pre></td></tr></table></figure>
+<p>flatmap 实现：(Swift 3)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extension Array &#123;</span><br><span class="line">	func flatMap&lt;T&gt;(_ transform: (Element) -&gt; [T]) -&gt; [T] &#123;</span><br><span class="line">		var result: [T] = []</span><br><span class="line">		for x in self &#123;</span><br><span class="line">			result.append(contentsOf: transform(x))</span><br><span class="line">		&#125;</span><br><span class="line">		return result</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><p>过滤，可以对序列中的元素按照某种规则进行一次过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 筛选出字符串的长度小于10的字符串</span><br><span class="line">let stringArray = [&quot;Objective-C&quot;, &quot;Swift&quot;, &quot;HTML&quot;, &quot;CSS&quot;, &quot;JavaScript&quot;]</span><br><span class="line">func stringCountLess10(string: String) -&gt; Bool &#123;</span><br><span class="line">    return string.characters.count &lt; 10</span><br><span class="line">&#125;</span><br><span class="line">stringArray.filter(stringCountLess10)</span><br><span class="line"></span><br><span class="line">stringArray.filter(&#123;string -&gt; Bool in</span><br><span class="line">    return string.characters.count &lt; 10</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// $0表示数组中的每一个元素</span><br><span class="line">stringArray.filter&#123;</span><br><span class="line">    return $0.characters.count &lt; 10</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>filter 实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extension Array &#123;</span><br><span class="line">	func filter(_ isIncluded: (Element) -&gt; Bool) -&gt; [Element] &#123;</span><br><span class="line">		var result: [Element] = []</span><br><span class="line">		for x in self where isIncluded(x) &#123;</span><br><span class="line">			result.append(x)</span><br><span class="line">		&#125;</span><br><span class="line">		return result</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><p>如何将序列元素合并到一个总和的值中</p>
+<p>map 和 filter 都作用在一个数组上，并产生另一个新的、经过修改的数组。不过有时候，你可能会想把所有元素合并为一个新的值。比如，要是我们想将元素的值全部加起来，可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let fibs = [1,1,2,3,5]</span><br><span class="line">var total = 0</span><br><span class="line">for num in fibs &#123;</span><br><span class="line">	total = total + num</span><br><span class="line">&#125;</span><br><span class="line">total = 12</span><br></pre></td></tr></table></figure>
+<p>reduce 方法对应这种模式，它把一个初始值 (在这里是 0) 以及一个将中间值 (total) 与序列中的元素 (num) 进行合并的函数进行了抽象。使用 reduce，我们可以将上面的例子重写为这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let sum = fibs.reduce(0) &#123; total, num in total + num &#125;</span><br><span class="line">// 运算符也是函数，所以我们也可以把上面的例子写成这样</span><br><span class="line">fibs.reduce(0, +)</span><br></pre></td></tr></table></figure>
+<p>reduce 的输出值的类型可以和输入的类型不同。举个例子，我们可以将一个整数的列表转换为一个字符串，这个字符串中每个数字后面跟一个空格：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let s = fibs.reduce(&quot;&quot;) &#123; str, num in str + &quot;\(num) &quot; &#125;</span><br><span class="line">print(s) // &quot;0 1 1 2 3 5&quot;</span><br></pre></td></tr></table></figure>
+<p>reduce 实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extension Array &#123;</span><br><span class="line">	func reduce&lt;Result&gt;(_ initialResult: Result, _ nextPartialResult: (Result, Element) -&gt; Result) -&gt; Result &#123;</span><br><span class="line">		var result = initialResult</span><br><span class="line">		for x in self &#123;</span><br><span class="line">			result = nextPartialResult(result, x)</span><br><span class="line">		&#125;</span><br><span class="line">		return result</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="11-Swift风格指南"><a href="#11-Swift风格指南" class="headerlink" title="11.Swift风格指南"></a>11.Swift风格指南</h2><ul>
+<li><p>对于命名，在使用时能清晰表意是最重要。因为 API 被使用的次数要远远多于被声明的次数，所以我们应当从使用者的角度来考虑它们的名字。尽快熟悉 Swift API 设计准则，并且在你自己的代码中坚持使用这些准则。</p>
+</li>
+<li><p>简洁经常有助于代码清晰，但是简洁本身不应该独自成为我们编码的目标。</p>
+</li>
+<li><p>务必为函数添加文档注释 — 特别是泛型函数。</p>
+</li>
+<li><p>类型使用大写字母开头，函数、变量和枚举成员使用小写字母开头，两者都使用驼峰式命名法。</p>
+</li>
+<li><p>使用类型推断。省略掉显而易见的类型会有助于提高可读性。</p>
+</li>
+<li>如果存在歧义或者在进行定义的时候不要使用类型推断。(比如 func 就需要显式地指定返回类型)</li>
+<li>优先选择结构体，只在确实需要使用到类特有的特性或者是引用语义时才使用类。</li>
+<li>除非你的设计就是希望某个类被继承使用，否则都应该将它们标记为 final。</li>
+<li>除非一个闭包后面立即跟随有左括号，否则都应该使用尾随闭包 (trailing closure) 的语法。</li>
+<li>使用 guard 来提早退出方法。</li>
+<li>避免对可选值进行强制解包和隐式强制解包。它们偶尔有用，但是经常需要使用它们的话往往意味着有其他不妥的地方。</li>
+<li>不要写重复的代码。如果你发现你写了好几次类似的代码片段的话，试着将它们提取到一个函数里，并且考虑将这个函数转化为协议扩展的可能性。</li>
+<li><p>试着去使用 map 和 reduce，但这不是强制的。当合适的时候，使用 for 循环也无可厚非。高阶函数的意义是让代码可读性更高。但是如果使用 reduce 的场景难以理解的话，强行使用往往事与愿违，这种时候简单的 for 循环可能会更清晰。</p>
+</li>
+<li><p>试着去使用不可变值：除非你需要改变某个值，否则都应该使用 let 来声明变量。不过如果能让代码更加清晰高效的话，也可以选择使用可变的版本。用函数将可变的部分封装起来，可以把它带来的副作用进行隔离。</p>
+</li>
+<li><p>Swift 的泛型可能会导致非常长的函数签名。坏消息是我们现在除了将函数声明强制写成几行以外，对此并没有什么好办法。我们会在示例代码中在这点上保持一贯性，这样你能看到我们是如何处理这个问题的。</p>
+</li>
+<li><p>除非你确实需要，否则不要使用 self.。在闭包表达式中，使用 self 是一个清晰的信号，表明闭包将会捕获 self。</p>
+</li>
+<li><p>尽可能地对现有的类型和协议进行扩展，而不是写一些全局函数。这有助于提高可读性，让别人更容易发现你的代码。</p>
+</li>
+</ul>
+<h2 id="12-Swift泛型"><a href="#12-Swift泛型" class="headerlink" title="12.Swift泛型"></a>12.Swift泛型</h2><h3 id="使用泛型进行代码设计"><a href="#使用泛型进行代码设计" class="headerlink" title="使用泛型进行代码设计"></a>使用泛型进行代码设计</h3><p>我们已经看到了很多将泛型用来为同样的功能提供多种实现的例子。我们可以编写泛型函数，但是却对某些特定的类型提供不同的实现。同样，使用协议扩展，我们还可以编写同时作用于很多类型的泛型算法。</p>
+<p>泛型在你进行程序设计时会非常有用，它能帮助你提取共通的功能，并且减少模板代码。在这一节中，我们会将一段普通的代码进行重构，使用泛型的方式提取出共通部分。除了可以创建泛型的方法以外，我们也可以创建泛型的数据类型。</p>
+<p>让我们来写一些与网络服务交互的函数。比如，获取用户列表的数据，并将它解析为 User 数据类型。我们创建一个 loadUsers 函数，它可以从网上异步加载用户，并且在完成后通过一个回调来传递获取到的用户列表。</p>
+<p>当我们用最原始的方式来实现的话，首先我们要创建 URL，然后我们同步地加载数据 (这里只是为了简化我们的例子，所以使用了同步方式。在你的产品中，你应当始终用异步方式加载你的数据)。接下来，我们解析 JSON，得到一个含有字典的数组。最后，我们将这些 JSON 对象变形为 User 结构体：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">func loadUsers(callback: ([User]?) -&gt; ()) &#123;</span><br><span class="line">	let usersURL = webserviceURL.appendingPathComponent(&quot;/users&quot;)</span><br><span class="line">	let data = try? Data(contentsOf: usersURL)</span><br><span class="line">	let json = data.flatMap &#123;</span><br><span class="line">		try? JSONSerialization.jsonObject(with: $0, options: [])</span><br><span class="line">	&#125;</span><br><span class="line">	let users = (json as? [Any]).flatMap &#123; jsonObject in</span><br><span class="line">		jsonObject.flatMap(User.init)</span><br><span class="line">	&#125;</span><br><span class="line">	callback(users)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>loadUsers 函数有三种可能发生错误的情况：URL 加载可能失败，JSON 解析可能失败，通过 JSON 数组构建用户对象也可能失败。在这三种情况下，我们都返回 nil。通过对可选值使用 flatMap，我们能确保只对那些成功的对象进行接下来的操作。不这么做的话，第一个失败操作造成的 nil 值将传播到接下来的操作，直至结束。我们在结束的时候会调用回调，传回一个有效的用户数组，或者传回 nil。</p>
+<p>现在，如果我们想要写一个相同的函数来加载其他资源，我们可能需要复制这里的大部分代码。打个比方，我们需要一个加载博客文章的函数，它看起来是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func loadBlogPosts(callback: ([BlogPost])? -&gt; ())</span><br></pre></td></tr></table></figure>
+<p>函数的实现和前面的用户函数几乎相同。不仅代码重复，两个方法同时也都很难测试，我们需要确保网络服务可以在测试是被访问到，或者是找到一个模拟这些请求的方法。因为函数接受并使用回调，我们还需要保证我们的测试是异步运行的。</p>
+<h3 id="提取共通功能"><a href="#提取共通功能" class="headerlink" title="提取共通功能"></a>提取共通功能</h3><p>相比于复制粘贴，将函数中 User 相关的部分提取出来，将其他部分进行重用，会是更好的方式。我们可以将 URL 路径和解析转换的函数作为参数传入。因为我们希望可以传入不同的转换函数，所以我们将 loadResource 声明为 A 的泛型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">func loadResource&lt;A&gt;(at path: String, parse: (Any) -&gt; A?, callback: (A?) -&gt; ())</span><br><span class="line">&#123;</span><br><span class="line">	let resourceURL = webserviceURL.appendingPathComponent(path)</span><br><span class="line">	let data = try? Data(contentsOf: resourceURL)</span><br><span class="line">	let json = data.flatMap &#123;</span><br><span class="line">		try? JSONSerialization.jsonObject(with: $0, options: [])</span><br><span class="line">	&#125;</span><br><span class="line">	callback(json.flatMap(parse))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们可以将 loadUsers 函数基于 loadResource 重写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func loadUsers(callback: ([User]?) -&gt; ()) &#123;</span><br><span class="line">	loadResource(at: &quot;/users&quot;, parse: jsonArray(User.init), callback: callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们使用了一个辅助函数，jsonArray，它首先尝试将一个 Any 转换为一个 Any 的数组，接着对每个元素用提供的解析函数进行解析，如果期间任何一步发生了错误，则返回 nil：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func jsonArray&lt;A&gt;(_ transform: @escaping (Any) -&gt; A?) -&gt; (Any) -&gt; [A]? &#123;</span><br><span class="line">	return &#123; array in</span><br><span class="line">		guard let arr = array as? [Any] else &#123;</span><br><span class="line">			return nil</span><br><span class="line">		&#125;</span><br><span class="line">		return arr.flatMap(transform)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于加载博客文章的函数，我们只需要替换请求路径和解析函数就行了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func loadBlogPosts(callback: ([BlogPost]?) -&gt; ()) &#123;</span><br><span class="line">	loadResource(at: &quot;/posts&quot;, parse: jsonArray(BlogPost.init), callback: callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这让我们能少写很多重复的代码。如果之后我们决定将同步 URL 处理重构为异步加载时，就不再需要分别更新 loadUsers 或者 loadBlogPosts 了。虽然这些方法现在很短，但是想测试它们也并不容易：它们基于回调，并且需要网络服务处于可用状态。</p>
+<h3 id="创建泛型数据类型"><a href="#创建泛型数据类型" class="headerlink" title="创建泛型数据类型"></a>创建泛型数据类型</h3><p>loadResource 函数中的 path 和 parse 耦合非常紧密，一旦你改变了其中一个，你很可能也需要改变另一个。我们可以将它们打包进一个结构体中，用来描述要加载的资源。和函数一样，这个结构体也可以是泛型的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct Resource&lt;A&gt; &#123;</span><br><span class="line">	let path: String</span><br><span class="line">	let parse: (Any) -&gt; A?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们可以在 Resource 上定义一个新的 loadResource 方法。它使用 resource 的属性来确定要加载的内容以及如何解析结果，这样一来，方法的参数就只剩回调函数了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">extension Resource &#123;</span><br><span class="line">	func loadSynchronously(callback: (A?) -&gt; ()) &#123;</span><br><span class="line">		let resourceURL = webserviceURL.appendingPathComponent(path)</span><br><span class="line">		let data = try? Data(contentsOf: resourceURL)</span><br><span class="line">		let json = data.flatMap &#123;</span><br><span class="line">			try? JSONSerialization.jsonObject(with: $0, options: [])</span><br><span class="line">		&#125;</span><br><span class="line">		callback(json.flatMap(parse))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相比于之前的用顶层函数来定义资源，我们现在可以定义 Resource 结构体实例，这让我们可以很容易地添加新的资源，而不必创建新的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let usersResource: Resource&lt;[User]&gt; = Resource(path: &quot;/users&quot;, parse: jsonArray(User.init))</span><br><span class="line">let postsResource: Resource&lt;[BlogPost]&gt; = Resource(path: &quot;/posts&quot;, parse: jsonArray(BlogPost.init))</span><br></pre></td></tr></table></figure>
+<p>现在，添加一个异步的处理方法就非常简单了，我们不需要改变任何现有的描述 API 接入点的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">extension Resource &#123;</span><br><span class="line">	func loadAsynchronously(callback: @escaping (A?) -&gt; ()) &#123;</span><br><span class="line">        let resourceURL = webserviceURL.appendingPathComponent(path)</span><br><span class="line">        let session = URLSession.shared</span><br><span class="line">        session.dataTask(with: resourceURL) &#123; data, response, error in</span><br><span class="line">        	let json = data.flatMap &#123;</span><br><span class="line">        		try? JSONSerialization.jsonObject(with: $0, options: [])</span><br><span class="line">        	&#125;</span><br><span class="line">        	callback(json.flatMap(self.parse))</span><br><span class="line">        &#125;.resume()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了使用了异步的 URLSession API 以外，和同步版本相比，还有一个本质上的不同是回调函数现在将从方法作用域中逃逸出来，所以它必须被标记为<code>@escaping</code>。</p>
+<p>现在，我们将接入点和网络请求完全解耦了。我们将 usersResource 和 postResource 归结为它们的最小版本，它们只负责描述去哪里寻找资源，以及如何解析它们。这种设计也是可扩展的：你可以进行更多配置，比如添加 HTTP 请求方法或是为请求加上一些 POST 数据等，你只需要简单地在 Resouce 上增加额外属性就可以了 (为了保持代码干净，你应该指定一些默认值。比如对 HTTP 请求方法，可以设定默认值为 GET)。</p>
+<p>测试也变得容易很多。Resource 结构体是完全同步，并且和网络解耦的。测试 Resource 是否配置正确是很简单的一件事。不过网络部分的代码依然难以测试，当然了，因为它天生就是异步的，并且依赖于网络。但是这个复杂度现在被很好地隔离到了 loadAsynchronously 方法中，而代码的其他部分都很简单，也没有受到异步代码的影响。</p>
+<p>在本节中，我们从一个非泛型的从网络加载数据的函数开始，接下来，我们用多个参数创建了一个泛型函数，允许我们用简短得多的方式重写代码。最后，我们把这些参数打包到一个单独的 Resource 数据类型中，这让代码的解耦更加彻底。对于具体资源类型的专用逻辑是于网络代码完全解耦的。更改网络层的内容不会对资源层有任何影响。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-apple"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="https://cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.28.11/sweetalert2.all.js"></script>
+  <p><span>本文作者:</span><a href="/" title="访问 乔羽 / FightingJoey 的个人博客">乔羽 / FightingJoey</a></p>
+  <p><span>发布时间:</span>2019年03月02日 - 11:08</p>
+  <p><span>最后更新:</span>2019年03月05日 - 23:04</p>
+  <p><span>原始链接:</span><a href="/2019/03/02/开发/Swift进阶/" title="Swift进阶">https://fightingjoey.github.io/2019/03/02/开发/Swift进阶/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fightingjoey.github.io/2019/03/02/开发/Swift进阶/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          type: 'success',
+          title: '复制成功',
+          showCloseButton: false,
+          showCancelButton: false,
+          showConfirmButton: false,
+          timer: 1000
+          });
+        });
+    });
+</script>
+
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.JPG" alt="乔羽 / FightingJoey 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.JPG" alt="乔羽 / FightingJoey 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/22/开发/Swift写时复制/" rel="next" title="Swift写时复制">
+                <i class="fa fa-chevron-left"></i> Swift写时复制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="乔羽 / FightingJoey">
+            
+              <p class="site-author-name" itemprop="name">乔羽 / FightingJoey</p>
+              <p class="site-description motion-element" itemprop="description">Efforts to become the person I want to be.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/FightingJoey" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/96ef11d38b00" target="_blank" title="简书"><i class="fa fa-fw fa-book"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://juejin.im/user/589c225661ff4b006b3140a6" target="_blank" title="掘金"><i class="fa fa-fw fa-cogs"></i>掘金</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/1822593915/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博"><i class="fa fa-fw fa-globe"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chengluffy.github.io" title="败寇路飞" target="_blank">败寇路飞</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift进阶"><span class="nav-number">1.</span> <span class="nav-text">Swift进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-guard的设计理念"><span class="nav-number">1.1.</span> <span class="nav-text">1.guard的设计理念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-guard"><span class="nav-number">1.1.1.</span> <span class="nav-text">什么是 guard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计理念"><span class="nav-number">1.1.2.</span> <span class="nav-text">设计理念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-为什么引入值类型"><span class="nav-number">1.2.</span> <span class="nav-text">2.为什么引入值类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-值类型和引用类型的区别"><span class="nav-number">1.3.</span> <span class="nav-text">3.值类型和引用类型的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型（Value-Type）"><span class="nav-number">1.3.1.</span> <span class="nav-text">值类型（Value Type）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型（Reference-Type）"><span class="nav-number">1.3.2.</span> <span class="nav-text">引用类型（Reference Type）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数传参"><span class="nav-number">1.3.3.</span> <span class="nav-text">函数传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套类型"><span class="nav-number">1.3.4.</span> <span class="nav-text">嵌套类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#值类型嵌套值类型"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">值类型嵌套值类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#值类型嵌套引用类型"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">值类型嵌套引用类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用类型嵌套值类型"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">引用类型嵌套值类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用类型嵌套引用类型"><span class="nav-number">1.3.4.4.</span> <span class="nav-text">引用类型嵌套引用类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展"><span class="nav-number">1.3.5.</span> <span class="nav-text">扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-类方法-class-和-static的区别"><span class="nav-number">1.4.</span> <span class="nav-text">4.类方法 .class 和 .static的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Swift语言的优势"><span class="nav-number">1.5.</span> <span class="nav-text">5.Swift语言的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift代码更好写"><span class="nav-number">1.5.1.</span> <span class="nav-text">Swift代码更好写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift更安全"><span class="nav-number">1.5.2.</span> <span class="nav-text">Swift更安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift更快"><span class="nav-number">1.5.3.</span> <span class="nav-text">Swift更快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift开源"><span class="nav-number">1.5.4.</span> <span class="nav-text">Swift开源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift跨平台"><span class="nav-number">1.5.5.</span> <span class="nav-text">Swift跨平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-结构体和类"><span class="nav-number">1.6.</span> <span class="nav-text">6.结构体和类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体和类的区别"><span class="nav-number">1.6.1.</span> <span class="nav-text">结构体和类的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体和类的使用时机"><span class="nav-number">1.6.2.</span> <span class="nav-text">结构体和类的使用时机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-谈谈对swift中extension的理解"><span class="nav-number">1.7.</span> <span class="nav-text">7.谈谈对swift中extension的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Swift写时复制"><span class="nav-number">1.8.</span> <span class="nav-text">8.Swift写时复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么会有写时复制"><span class="nav-number">1.8.1.</span> <span class="nav-text">为什么会有写时复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是写时复制？"><span class="nav-number">1.8.2.</span> <span class="nav-text">什么是写时复制？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内部实现"><span class="nav-number">1.8.2.1.</span> <span class="nav-text">内部实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型嵌套引用类型-1"><span class="nav-number">1.8.3.</span> <span class="nav-text">值类型嵌套引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-修改结构体内引用类型的实例变量的值"><span class="nav-number">1.8.3.1.</span> <span class="nav-text">1.修改结构体内引用类型的实例变量的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-修改结构体内引用类型的值"><span class="nav-number">1.8.3.2.</span> <span class="nav-text">2.修改结构体内引用类型的值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Struct如何实现写时复制"><span class="nav-number">1.8.4.</span> <span class="nav-text">自定义Struct如何实现写时复制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Swift可选类型"><span class="nav-number">1.9.</span> <span class="nav-text">9.Swift可选类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么引入可选类型？"><span class="nav-number">1.9.1.</span> <span class="nav-text">为什么引入可选类型？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选类型的底层逻辑"><span class="nav-number">1.9.2.</span> <span class="nav-text">可选类型的底层逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选值解包"><span class="nav-number">1.9.3.</span> <span class="nav-text">可选值解包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可选绑定"><span class="nav-number">1.9.3.1.</span> <span class="nav-text">可选绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强制解包"><span class="nav-number">1.9.3.2.</span> <span class="nav-text">强制解包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#改进强制解包的错误信息"><span class="nav-number">1.9.3.2.1.</span> <span class="nav-text">改进强制解包的错误信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在调试版本中进行断言"><span class="nav-number">1.9.3.2.2.</span> <span class="nav-text">在调试版本中进行断言</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐式解包"><span class="nav-number">1.9.3.3.</span> <span class="nav-text">隐式解包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选值map和flatMap"><span class="nav-number">1.9.4.</span> <span class="nav-text">可选值map和flatMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-number">1.9.5.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flatmap"><span class="nav-number">1.9.5.1.</span> <span class="nav-text">flatmap</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选链"><span class="nav-number">1.9.6.</span> <span class="nav-text">可选链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空和运算符"><span class="nav-number">1.9.7.</span> <span class="nav-text">空和运算符 ??</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Swift函数式编程"><span class="nav-number">1.10.</span> <span class="nav-text">10.Swift函数式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift函数"><span class="nav-number">1.10.1.</span> <span class="nav-text">Swift函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高阶函数"><span class="nav-number">1.10.2.</span> <span class="nav-text">高阶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#map-1"><span class="nav-number">1.10.2.1.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flatmap-compactMap"><span class="nav-number">1.10.2.2.</span> <span class="nav-text">flatmap(compactMap)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-flatMap返回后的数组中不存在nil，同时它会把Optional解包"><span class="nav-number">1.10.2.2.1.</span> <span class="nav-text">1.flatMap返回后的数组中不存在nil，同时它会把Optional解包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-flatMap还能把数组中存有数组的数组（二维数组、N维数组）一同打开变成一个新的数组"><span class="nav-number">1.10.2.2.2.</span> <span class="nav-text">2.flatMap还能把数组中存有数组的数组（二维数组、N维数组）一同打开变成一个新的数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-flatMap也能把两个不同的数组合并成一个数组，这个合并的数组元素个数是前面两个数组元素个数的乘积"><span class="nav-number">1.10.2.2.3.</span> <span class="nav-text">3.flatMap也能把两个不同的数组合并成一个数组，这个合并的数组元素个数是前面两个数组元素个数的乘积</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filter"><span class="nav-number">1.10.2.3.</span> <span class="nav-text">filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reduce"><span class="nav-number">1.10.2.4.</span> <span class="nav-text">reduce</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Swift风格指南"><span class="nav-number">1.11.</span> <span class="nav-text">11.Swift风格指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-Swift泛型"><span class="nav-number">1.12.</span> <span class="nav-text">12.Swift泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用泛型进行代码设计"><span class="nav-number">1.12.1.</span> <span class="nav-text">使用泛型进行代码设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提取共通功能"><span class="nav-number">1.12.2.</span> <span class="nav-text">提取共通功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建泛型数据类型"><span class="nav-number">1.12.3.</span> <span class="nav-text">创建泛型数据类型</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乔羽 / FightingJoey</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://gesellejoy.disqus.com/count.js" async></script>
+  
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("kt4DtswEU5O1ai3p21JDDtcx-gzGzoHsz", "xDVU6YprjN3Vwg96PCaM1bw8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":false},"log":false});</script></body>
+</html>

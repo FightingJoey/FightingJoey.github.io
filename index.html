@@ -160,7 +160,7 @@
   <meta name="description" content="Efforts to become the person I want to be.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="乔羽的技术博客">
-<meta property="og:url" content="https://devqiaoyu.tech/index.html">
+<meta property="og:url" content="https://fightingjoey.github.io/index.html">
 <meta property="og:site_name" content="乔羽的技术博客">
 <meta property="og:description" content="Efforts to become the person I want to be.">
 <meta property="og:locale" content="zh-CN">
@@ -175,7 +175,7 @@
 
 
 
-  <link rel="canonical" href="https://devqiaoyu.tech/">
+  <link rel="canonical" href="https://fightingjoey.github.io/">
 
 
 
@@ -246,7 +246,7 @@
   page-home">
     <div class="headband"></div>
 
-    <a href="https://github.com/Geselle-Joy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+    <a href="https://github.com/FightingJoey"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -399,10 +399,230 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2019/01/22/开发/Swift写时复制/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乔羽的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/22/开发/Swift写时复制/" itemprop="url">
+                  Swift写时复制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-22 17:27:03" itemprop="dateCreated datePublished" datetime="2019-01-22T17:27:03+08:00">2019-01-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-04 14:34:17" itemprop="dateModified" datetime="2019-03-04T14:34:17+08:00">2019-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+
+          
+          
+             <span id="/2019/01/22/开发/Swift写时复制/" class="leancloud_visitors" data-flag-title="Swift写时复制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">字数：1.8k</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+              <i class="fa fa-file-word"></i>
+            </span>
+            <span class="post-count">阅读时长：7min</span>
+            <span class="leancloud-visitors-count"></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="为什么会有写时复制"><a href="#为什么会有写时复制" class="headerlink" title="为什么会有写时复制"></a>为什么会有写时复制</h2><h3 id="为什么引入值类型"><a href="#为什么引入值类型" class="headerlink" title="为什么引入值类型"></a>为什么引入值类型</h3><p>在Swift中，Apple引入了值类型，相对于引用类型，值类型更加的高效和安全。</p>
+<ol>
+<li><p>值类型存储在栈上，引用类型存储在堆上，效率比较高</p>
+</li>
+<li><p>使用值类型，有可能在编译阶段就把问题暴露出来。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr1 = NSMutableArray.init(array: [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;], copyItems: false)</span><br><span class="line">arr1.removeObject(at: 0)</span><br><span class="line">//以上编译不会报错，由于arr1是引用类型，存储的是指针，指针不变就没问题，对指向的对象没有限制</span><br><span class="line"></span><br><span class="line">let arr2 = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br><span class="line">arr2.remove(at: 0)</span><br><span class="line">//以上编译会报错，由于arr2是值类型</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>值类型，即每个实例保持一份数据拷贝。</strong></p>
+<p>在 Swift 中，典型的有 struct，enum，以及 tuple 都是值类型。而平时使用的 <code>Int</code>， <code>Double</code>， <code>Float</code>， <code>String</code>， <code>Array</code>， <code>Dictionary</code>，<code>Set</code> 其实都是用结构体实现的，也是值类型。</p>
+<p>Swift 中，值类型的赋值为深拷贝（Deep Copy），值语义（Value Semantics）即新对象和源对象是独立的，当改变新对象的属性，源对象不会受到影响，反之同理。</p>
+<p>如果声明一个值类型的<strong>常量</strong>，那么就意味着该常量是不可变的（无论内部数据为 <code>var</code>/<code>let</code>）。</p>
+<p>这样看来一切都没问题，但是在写代码的时候，这些值类型每次赋值的时候真的是重新在内存中拷贝一份吗？如果一个数组里存了上万个元素，现在把它赋值给另一个变量，就必须要拷贝所有元素，即使这两个数组的内容是完全一致的，那可以预见这对性能会造成多么糟糕的影响。</p>
+<p>既然我们能够想到这样的问题，那苹果的工程师肯定也想到了。如何才能避免不必要的复制呢，Swift给出了优化方案：<strong>Copy-On-Write</strong>（写时复制），即只有当这个值需要改变时才进行复制行为。在Swift标准库中，Array、Dictionary和Set都是通过写时复制来实现的。</p>
+<h2 id="什么是写时复制？"><a href="#什么是写时复制？" class="headerlink" title="什么是写时复制？"></a>什么是写时复制？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = [1,2,3]</span><br><span class="line">var y = x</span><br><span class="line">// 断点</span><br></pre></td></tr></table></figure>
+<p>这个时候我们打印一下 x 和 y 的内存地址，这里我用的是 lldb 命令<code>fr v -R [object]</code> 来查看对象内存结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R x</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) x = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600001c0ac40 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R y</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) y = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600001c0ac40 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由此我们可以看到 x 和 y 的内存地址都是<code>0x0000600001c0ac40</code>，说明 x 和 y 此时是共享同一个实例。这个时候我们再加上下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y.append(4)</span><br><span class="line">// 断点</span><br></pre></td></tr></table></figure>
+<p>然后再打印一下地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R x</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) x = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x000060000126b180 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R y</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) y = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600002301b60 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到 x 和 y 的内存地址不在相同了，说明此时它们不再共享同一个实例，y 进行了数据拷贝。</p>
+<p>Array 结构体内部含有指向某块内存的引用。这块内存就是用来存储数组中元素。x 和 y 两个数组一开始是共享同一块内存。不过，当我们改变 y 的时候，这个共享会被检测到，内存中的数据被拷贝出来，改变以后赋值给了 y。<strong>昂贵的元素复制操作只在必要的时候发生，这就是写时复制。</strong></p>
+<h3 id="内部实现"><a href="#内部实现" class="headerlink" title="内部实现"></a>内部实现</h3><p>在结构体内部存储了一个指向实际数据的引用，在不进行修改操作的普通传递过程中，都是将内部的引用的引用计数+1，在进行修改时，对内部的引用做一次copy操作，再在这个复制出来的数据上进行真正的修改，从而保持其他的引用者不受影响。</p>
+<h2 id="值类型嵌套引用类型"><a href="#值类型嵌套引用类型" class="headerlink" title="值类型嵌套引用类型"></a>值类型嵌套引用类型</h2><p>上面我们提到的 Array 内部元素是 Int，两者都是值类型，那么如果 Array 内部的元素是引用类型呢，情况会不会发生变化？我们一起来看一下~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Student &#123;</span><br><span class="line">	var name: String</span><br><span class="line">	init(name: String) &#123;</span><br><span class="line">		self.name = name</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct School &#123;</span><br><span class="line">	var student = Student(name: &quot;小明&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let school1 = School()</span><br><span class="line">var school2 = school1</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点1</span><br><span class="line"></span><br><span class="line">school2.student.name = &quot;小红&quot;</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点2</span><br><span class="line"></span><br><span class="line">school2.student = Student(name: &quot;小李&quot;)</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点3</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">小明</span><br><span class="line">小明</span><br><span class="line">小红</span><br><span class="line">小红</span><br><span class="line">小红</span><br><span class="line">小李</span><br></pre></td></tr></table></figure>
+<p>断点1，school1 和 school2 的内存结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02356</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02356</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当<code>school1</code> 赋值给<code>school2</code> 后，<code>school1.student</code>和<code>school2.student</code>的内存地址都是<code>0x00006000024053e0</code>，其引用类型实例变量 <code>name</code> 的地址也都是 <code>0x9000000105a02356</code> ，它们共享同一个实例，其引用类型的实例变量也共享。</p>
+<h3 id="1-修改结构体内引用类型的实例变量的值"><a href="#1-修改结构体内引用类型的实例变量的值" class="headerlink" title="1.修改结构体内引用类型的实例变量的值"></a>1.修改结构体内引用类型的实例变量的值</h3><p>断点2，school1 和 school2 的内存结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而执行<code>school2.student.name = &quot;小红&quot;</code> 后，<code>school1.student</code> 与 <code>school2.student</code> 的内存地址不变，其实例变量 <code>name</code> 内存地址都发生改变且相同，还是共享同一个实例变量，也就是说，虽然对值类型有所修改，但没有发生拷贝行为。</p>
+<h3 id="2-修改结构体内引用类型的值"><a href="#2-修改结构体内引用类型的值" class="headerlink" title="2.修改结构体内引用类型的值"></a>2.修改结构体内引用类型的值</h3><p>断点3，school1 和 school2 的内存结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x0000600002405400 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02362</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>school2.student</code> 和<code>school2.student.name</code> 的内存地址都发生变化，而<code>school1.student</code> 和<code>school1.student.name</code> 的内存地址不变，说明，此时对结构体进行了拷贝行为，而<code>student</code> 这个引用类型是直接指向另一个实例，而不是对原实例进行修改。</p>
+<h2 id="自定义Struct如何实现写时复制"><a href="#自定义Struct如何实现写时复制" class="headerlink" title="自定义Struct如何实现写时复制"></a>自定义Struct如何实现写时复制</h2><p>作为一个结构体的作者，你并不能免费获得这种特性，你需要自己进行实现。当你自己的类型内部含有一个或多个可变引用，同时你想要保持值语义，并且避免不必要的复制时，为你的类型实现写时复制是有意义的。</p>
+<p>在 Swift 中，我们可以使用 <code>isKnownUniquelyReferenced</code> 函数来检查某个引用只有一个持有者。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">struct School &#123;</span><br><span class="line">    private var student = Student(name: &quot;小明&quot;)</span><br><span class="line"></span><br><span class="line">    var studentName: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return student.name</span><br><span class="line">        &#125;</span><br><span class="line">        set &#123;</span><br><span class="line">            if isKnownUniquelyReferenced(&amp;student) &#123;</span><br><span class="line">                student.name = newValue</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                student = Student(name: newValue)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/11/15/开发/WKWebView进阶填坑指南-Swift/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -619,10 +839,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/02/开发/纯Swift项目基础第三方库/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/11/02/开发/纯Swift项目基础第三方库/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -848,10 +1068,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/01/开发/使用Carthage发布自己创建的Framework并使用/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/11/01/开发/使用Carthage发布自己创建的Framework并使用/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -1053,10 +1273,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/11/01/教程/项目已添加到Git上以后再添加gitignore/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/11/01/教程/项目已添加到Git上以后再添加gitignore/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -1235,10 +1455,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/22/开发/如何验证生产环境Push推送/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/10/22/开发/如何验证生产环境Push推送/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -1421,10 +1641,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/11/开发/升级Xcode10后遇到的问题/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/10/11/开发/升级Xcode10后遇到的问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -1630,10 +1850,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/10/10/教程/Mac下用Python写iOS自动化测试/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/10/10/教程/Mac下用Python写iOS自动化测试/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -1873,10 +2093,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/08/22/开发/正则表达式验证/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/08/22/开发/正则表达式验证/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -2079,10 +2299,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/07/28/开发/OC优秀的第三方库/">
+    <link itemprop="mainEntityOfPage" href="https://fightingjoey.github.io/2018/07/28/开发/OC优秀的第三方库/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
+      <meta itemprop="name" content="乔羽 / FightingJoey">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -2288,231 +2508,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乔羽 / Geselle-Joy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乔羽的技术博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/开发/Swift优秀的第三方库/" itemprop="url">
-                  Swift优秀的第三方库
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-28 15:30:41" itemprop="dateCreated datePublished" datetime="2018-07-28T15:30:41+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-27 16:17:29" itemprop="dateModified" datetime="2018-12-27T16:17:29+08:00">2018-12-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-             <span id="/2018/07/28/开发/Swift优秀的第三方库/" class="leancloud_visitors" data-flag-title="Swift优秀的第三方库">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">字数：1.6k</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-              <i class="fa fa-file-word"></i>
-            </span>
-            <span class="post-count">阅读时长：6min</span>
-            <span class="leancloud-visitors-count"></span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Swift优秀的第三方库"><a href="#Swift优秀的第三方库" class="headerlink" title="Swift优秀的第三方库"></a>Swift优秀的第三方库</h3><p><a href="http://dev.swiftguide.cn" target="_blank" rel="noopener">Swift开发资源汇总</a></p>
-<p><a href="https://github.com/imlifengfeng/iOSBlogAndTools" target="_blank" rel="noopener">iOS开发优秀博客和软件推荐</a></p>
-<h4 id="数据库、数据存储"><a href="#数据库、数据存储" class="headerlink" title="数据库、数据存储"></a>数据库、数据存储</h4><ul>
-<li><p><a href="https://github.com/realm/realm-cocoa" target="_blank" rel="noopener">realm-cocoa</a> - Realm 是一个移动端数据库：Core Data 和 SQLite 的替代品</p>
-</li>
-<li><p><a href="https://github.com/square/Valet" target="_blank" rel="noopener">Valet</a> - Valet 可以让你安全地在 iOS 或 OS X 钥匙链中存储数据，而不需要掌握任何钥匙链工作的知识。它支持在一台设备的多个应用（同一个开发者）间分享数据，以及在一个应用中在多个设备间利用 iCloud 进行分享。支持 Touch ID</p>
-</li>
-<li><p><a href="https://github.com/stephencelis/SQLite.swift" target="_blank" rel="noopener">SQLite.swift</a> - 简单、轻量，使用上最SQL的SQLite封装库</p>
-</li>
-<li><p><a href="https://github.com/modo-studio/SugarRecord" target="_blank" rel="noopener">SugarRecord</a> - 基于CoreData与REALM的好用封装</p>
-</li>
-</ul>
-<h4 id="网络库、Network"><a href="#网络库、Network" class="headerlink" title="网络库、Network"></a>网络库、Network</h4><ul>
-<li><p><a href="https://github.com/Moya/Moya" target="_blank" rel="noopener">Moya</a> - 用 Swift 写的网络抽象层</p>
-</li>
-<li><p><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener">Alamofire</a></p>
-</li>
-<li><p><a href="https://github.com/netguru/ResponseDetective" target="_blank" rel="noopener">ResponseDetective</a> - 一个非嵌入式框架，用于拦截应用程序和服务器之间的任何传出请求和传入响应以用于调试目的。</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/开发/Swift优秀的第三方库/#更多" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2549,9 +2544,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="乔羽 / Geselle-Joy">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="乔羽 / FightingJoey">
             
-              <p class="site-author-name" itemprop="name">乔羽 / Geselle-Joy</p>
+              <p class="site-author-name" itemprop="name">乔羽 / FightingJoey</p>
               <p class="site-description motion-element" itemprop="description">Efforts to become the person I want to be.</p>
           </div>
 
@@ -2562,7 +2557,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2639,7 +2634,7 @@
             <div class="links-of-author motion-element">
               
                 <span class="links-of-author-item">
-                  <a href="https://github.com/Geselle-Joy" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  <a href="https://github.com/FightingJoey" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
                   
                 </span>
               
@@ -2704,11 +2699,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">乔羽 / Geselle-Joy</span>
+  <span class="author" itemprop="copyrightHolder">乔羽 / FightingJoey</span>
 
   
 

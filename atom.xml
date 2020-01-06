@@ -5,21 +5,42 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://devqiaoyu.tech/"/>
-  <updated>2018-11-15T10:28:47.429Z</updated>
-  <id>https://devqiaoyu.tech/</id>
+  <link href="https://fightingjoey.github.io/"/>
+  <updated>2019-03-04T06:34:17.661Z</updated>
+  <id>https://fightingjoey.github.io/</id>
   
   <author>
-    <name>乔羽 / Geselle-Joy</name>
+    <name>乔羽 / FightingJoey</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Swift写时复制</title>
+    <link href="https://fightingjoey.github.io/2019/01/22/%E5%BC%80%E5%8F%91/Swift%E5%86%99%E6%97%B6%E5%A4%8D%E5%88%B6/"/>
+    <id>https://fightingjoey.github.io/2019/01/22/开发/Swift写时复制/</id>
+    <published>2019-01-22T09:27:03.000Z</published>
+    <updated>2019-03-04T06:34:17.661Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="为什么会有写时复制"><a href="#为什么会有写时复制" class="headerlink" title="为什么会有写时复制"></a>为什么会有写时复制</h2><h3 id="为什么引入值类型"><a href="#为什么引入值类型" class="headerlink" title="为什么引入值类型"></a>为什么引入值类型</h3><p>在Swift中，Apple引入了值类型，相对于引用类型，值类型更加的高效和安全。</p><ol><li><p>值类型存储在栈上，引用类型存储在堆上，效率比较高</p></li><li><p>使用值类型，有可能在编译阶段就把问题暴露出来。比如</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr1 = NSMutableArray.init(array: [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;], copyItems: false)</span><br><span class="line">arr1.removeObject(at: 0)</span><br><span class="line">//以上编译不会报错，由于arr1是引用类型，存储的是指针，指针不变就没问题，对指向的对象没有限制</span><br><span class="line"></span><br><span class="line">let arr2 = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br><span class="line">arr2.remove(at: 0)</span><br><span class="line">//以上编译会报错，由于arr2是值类型</span><br></pre></td></tr></table></figure></li></ol><p><strong>值类型，即每个实例保持一份数据拷贝。</strong></p><p>在 Swift 中，典型的有 struct，enum，以及 tuple 都是值类型。而平时使用的 <code>Int</code>， <code>Double</code>， <code>Float</code>， <code>String</code>， <code>Array</code>， <code>Dictionary</code>，<code>Set</code> 其实都是用结构体实现的，也是值类型。</p><p>Swift 中，值类型的赋值为深拷贝（Deep Copy），值语义（Value Semantics）即新对象和源对象是独立的，当改变新对象的属性，源对象不会受到影响，反之同理。</p><p>如果声明一个值类型的<strong>常量</strong>，那么就意味着该常量是不可变的（无论内部数据为 <code>var</code>/<code>let</code>）。</p><p>这样看来一切都没问题，但是在写代码的时候，这些值类型每次赋值的时候真的是重新在内存中拷贝一份吗？如果一个数组里存了上万个元素，现在把它赋值给另一个变量，就必须要拷贝所有元素，即使这两个数组的内容是完全一致的，那可以预见这对性能会造成多么糟糕的影响。</p><p>既然我们能够想到这样的问题，那苹果的工程师肯定也想到了。如何才能避免不必要的复制呢，Swift给出了优化方案：<strong>Copy-On-Write</strong>（写时复制），即只有当这个值需要改变时才进行复制行为。在Swift标准库中，Array、Dictionary和Set都是通过写时复制来实现的。</p><h2 id="什么是写时复制？"><a href="#什么是写时复制？" class="headerlink" title="什么是写时复制？"></a>什么是写时复制？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = [1,2,3]</span><br><span class="line">var y = x</span><br><span class="line">// 断点</span><br></pre></td></tr></table></figure><p>这个时候我们打印一下 x 和 y 的内存地址，这里我用的是 lldb 命令<code>fr v -R [object]</code> 来查看对象内存结构。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R x</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) x = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600001c0ac40 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R y</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) y = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600001c0ac40 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>由此我们可以看到 x 和 y 的内存地址都是<code>0x0000600001c0ac40</code>，说明 x 和 y 此时是共享同一个实例。这个时候我们再加上下面的代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y.append(4)</span><br><span class="line">// 断点</span><br></pre></td></tr></table></figure><p>然后再打印一下地址：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R x</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) x = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x000060000126b180 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R y</span><br><span class="line">(Swift.Array&lt;Swift.Int&gt;) y = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = 0x0000600002301b60 &#123;</span><br><span class="line">          ......省略无用信息</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可以看到 x 和 y 的内存地址不在相同了，说明此时它们不再共享同一个实例，y 进行了数据拷贝。</p><p>Array 结构体内部含有指向某块内存的引用。这块内存就是用来存储数组中元素。x 和 y 两个数组一开始是共享同一块内存。不过，当我们改变 y 的时候，这个共享会被检测到，内存中的数据被拷贝出来，改变以后赋值给了 y。<strong>昂贵的元素复制操作只在必要的时候发生，这就是写时复制。</strong></p><h3 id="内部实现"><a href="#内部实现" class="headerlink" title="内部实现"></a>内部实现</h3><p>在结构体内部存储了一个指向实际数据的引用，在不进行修改操作的普通传递过程中，都是将内部的引用的引用计数+1，在进行修改时，对内部的引用做一次copy操作，再在这个复制出来的数据上进行真正的修改，从而保持其他的引用者不受影响。</p><h2 id="值类型嵌套引用类型"><a href="#值类型嵌套引用类型" class="headerlink" title="值类型嵌套引用类型"></a>值类型嵌套引用类型</h2><p>上面我们提到的 Array 内部元素是 Int，两者都是值类型，那么如果 Array 内部的元素是引用类型呢，情况会不会发生变化？我们一起来看一下~</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Student &#123;</span><br><span class="line">var name: String</span><br><span class="line">init(name: String) &#123;</span><br><span class="line">self.name = name</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct School &#123;</span><br><span class="line">var student = Student(name: &quot;小明&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let school1 = School()</span><br><span class="line">var school2 = school1</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点1</span><br><span class="line"></span><br><span class="line">school2.student.name = &quot;小红&quot;</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点2</span><br><span class="line"></span><br><span class="line">school2.student = Student(name: &quot;小李&quot;)</span><br><span class="line">print(school1.student.name)</span><br><span class="line">print(school2.student.name)</span><br><span class="line">// 断点3</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">小明</span><br><span class="line">小明</span><br><span class="line">小红</span><br><span class="line">小红</span><br><span class="line">小红</span><br><span class="line">小李</span><br></pre></td></tr></table></figure><p>断点1，school1 和 school2 的内存结构</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02356</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02356</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>当<code>school1</code> 赋值给<code>school2</code> 后，<code>school1.student</code>和<code>school2.student</code>的内存地址都是<code>0x00006000024053e0</code>，其引用类型实例变量 <code>name</code> 的地址也都是 <code>0x9000000105a02356</code> ，它们共享同一个实例，其引用类型的实例变量也共享。</p><h3 id="1-修改结构体内引用类型的实例变量的值"><a href="#1-修改结构体内引用类型的实例变量的值" class="headerlink" title="1.修改结构体内引用类型的实例变量的值"></a>1.修改结构体内引用类型的实例变量的值</h3><p>断点2，school1 和 school2 的内存结构</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>而执行<code>school2.student.name = &quot;小红&quot;</code> 后，<code>school1.student</code> 与 <code>school2.student</code> 的内存地址不变，其实例变量 <code>name</code> 内存地址都发生改变且相同，还是共享同一个实例变量，也就是说，虽然对值类型有所修改，但没有发生拷贝行为。</p><h3 id="2-修改结构体内引用类型的值"><a href="#2-修改结构体内引用类型的值" class="headerlink" title="2.修改结构体内引用类型的值"></a>2.修改结构体内引用类型的值</h3><p>断点3，school1 和 school2 的内存结构</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -R school1</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school1 = &#123;</span><br><span class="line">  student = 0x00006000024053e0 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a0235c</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -R school2</span><br><span class="line">(Copy_On_WriteTest.ViewController.School) school2 = &#123;</span><br><span class="line">  student = 0x0000600002405400 &#123;</span><br><span class="line">    name = &#123;</span><br><span class="line">      _guts = &#123;</span><br><span class="line">        _object = &#123;</span><br><span class="line">          _object = 0x9000000105a02362</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>school2.student</code> 和<code>school2.student.name</code> 的内存地址都发生变化，而<code>school1.student</code> 和<code>school1.student.name</code> 的内存地址不变，说明，此时对结构体进行了拷贝行为，而<code>student</code> 这个引用类型是直接指向另一个实例，而不是对原实例进行修改。</p><h2 id="自定义Struct如何实现写时复制"><a href="#自定义Struct如何实现写时复制" class="headerlink" title="自定义Struct如何实现写时复制"></a>自定义Struct如何实现写时复制</h2><p>作为一个结构体的作者，你并不能免费获得这种特性，你需要自己进行实现。当你自己的类型内部含有一个或多个可变引用，同时你想要保持值语义，并且避免不必要的复制时，为你的类型实现写时复制是有意义的。</p><p>在 Swift 中，我们可以使用 <code>isKnownUniquelyReferenced</code> 函数来检查某个引用只有一个持有者。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">struct School &#123;</span><br><span class="line">    private var student = Student(name: &quot;小明&quot;)</span><br><span class="line"></span><br><span class="line">    var studentName: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return student.name</span><br><span class="line">        &#125;</span><br><span class="line">        set &#123;</span><br><span class="line">            if isKnownUniquelyReferenced(&amp;student) &#123;</span><br><span class="line">                student.name = newValue</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                student = Student(name: newValue)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;为什么会有写时复制&quot;&gt;&lt;a href=&quot;#为什么会有写时复制&quot; class=&quot;headerlink&quot; title=&quot;为什么会有写时复制&quot;&gt;&lt;/a&gt;为什么会有写时复制&lt;/h2&gt;&lt;h3 id=&quot;为什么引入值类型&quot;&gt;&lt;a href=&quot;#为什么引入值类型&quot; class=&quot;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>WKWebView进阶填坑指南-Swift</title>
-    <link href="https://devqiaoyu.tech/2018/11/15/%E5%BC%80%E5%8F%91/WKWebView%E8%BF%9B%E9%98%B6%E5%A1%AB%E5%9D%91%E6%8C%87%E5%8D%97-Swift/"/>
-    <id>https://devqiaoyu.tech/2018/11/15/开发/WKWebView进阶填坑指南-Swift/</id>
+    <link href="https://fightingjoey.github.io/2018/11/15/%E5%BC%80%E5%8F%91/WKWebView%E8%BF%9B%E9%98%B6%E5%A1%AB%E5%9D%91%E6%8C%87%E5%8D%97-Swift/"/>
+    <id>https://fightingjoey.github.io/2018/11/15/开发/WKWebView进阶填坑指南-Swift/</id>
     <published>2018-11-15T03:47:35.000Z</published>
     <updated>2018-11-15T10:28:47.429Z</updated>
     
@@ -39,8 +60,8 @@
   
   <entry>
     <title>纯Swift项目基础第三方库</title>
-    <link href="https://devqiaoyu.tech/2018/11/02/%E5%BC%80%E5%8F%91/%E7%BA%AFSwift%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    <id>https://devqiaoyu.tech/2018/11/02/开发/纯Swift项目基础第三方库/</id>
+    <link href="https://fightingjoey.github.io/2018/11/02/%E5%BC%80%E5%8F%91/%E7%BA%AFSwift%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    <id>https://fightingjoey.github.io/2018/11/02/开发/纯Swift项目基础第三方库/</id>
     <published>2018-11-02T09:08:23.000Z</published>
     <updated>2018-11-17T04:19:26.715Z</updated>
     
@@ -61,8 +82,8 @@
   
   <entry>
     <title>使用Carthage发布自己创建的Framework并使用</title>
-    <link href="https://devqiaoyu.tech/2018/11/01/%E5%BC%80%E5%8F%91/%E4%BD%BF%E7%94%A8Carthage%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E5%88%9B%E5%BB%BA%E7%9A%84Framework%E5%B9%B6%E4%BD%BF%E7%94%A8/"/>
-    <id>https://devqiaoyu.tech/2018/11/01/开发/使用Carthage发布自己创建的Framework并使用/</id>
+    <link href="https://fightingjoey.github.io/2018/11/01/%E5%BC%80%E5%8F%91/%E4%BD%BF%E7%94%A8Carthage%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E5%88%9B%E5%BB%BA%E7%9A%84Framework%E5%B9%B6%E4%BD%BF%E7%94%A8/"/>
+    <id>https://fightingjoey.github.io/2018/11/01/开发/使用Carthage发布自己创建的Framework并使用/</id>
     <published>2018-11-01T06:03:01.000Z</published>
     <updated>2018-11-01T09:02:45.393Z</updated>
     
@@ -83,8 +104,8 @@
   
   <entry>
     <title>项目已添加到Git上以后再添加gitignore</title>
-    <link href="https://devqiaoyu.tech/2018/11/01/%E6%95%99%E7%A8%8B/%E9%A1%B9%E7%9B%AE%E5%B7%B2%E6%B7%BB%E5%8A%A0%E5%88%B0Git%E4%B8%8A%E4%BB%A5%E5%90%8E%E5%86%8D%E6%B7%BB%E5%8A%A0gitignore/"/>
-    <id>https://devqiaoyu.tech/2018/11/01/教程/项目已添加到Git上以后再添加gitignore/</id>
+    <link href="https://fightingjoey.github.io/2018/11/01/%E6%95%99%E7%A8%8B/%E9%A1%B9%E7%9B%AE%E5%B7%B2%E6%B7%BB%E5%8A%A0%E5%88%B0Git%E4%B8%8A%E4%BB%A5%E5%90%8E%E5%86%8D%E6%B7%BB%E5%8A%A0gitignore/"/>
+    <id>https://fightingjoey.github.io/2018/11/01/教程/项目已添加到Git上以后再添加gitignore/</id>
     <published>2018-11-01T03:02:18.000Z</published>
     <updated>2018-11-01T03:21:15.304Z</updated>
     
@@ -101,14 +122,14 @@
     </summary>
     
     
-      <category term="Git" scheme="https://devqiaoyu.tech/tags/Git/"/>
+      <category term="Git" scheme="https://fightingjoey.github.io/tags/Git/"/>
     
   </entry>
   
   <entry>
     <title>如何验证生产环境Push推送</title>
-    <link href="https://devqiaoyu.tech/2018/10/22/%E5%BC%80%E5%8F%91/%E5%A6%82%E4%BD%95%E9%AA%8C%E8%AF%81%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83Push%E6%8E%A8%E9%80%81/"/>
-    <id>https://devqiaoyu.tech/2018/10/22/开发/如何验证生产环境Push推送/</id>
+    <link href="https://fightingjoey.github.io/2018/10/22/%E5%BC%80%E5%8F%91/%E5%A6%82%E4%BD%95%E9%AA%8C%E8%AF%81%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83Push%E6%8E%A8%E9%80%81/"/>
+    <id>https://fightingjoey.github.io/2018/10/22/开发/如何验证生产环境Push推送/</id>
     <published>2018-10-22T07:51:50.000Z</published>
     <updated>2018-10-22T14:12:57.905Z</updated>
     
@@ -129,8 +150,8 @@
   
   <entry>
     <title>升级Xcode10后遇到的问题</title>
-    <link href="https://devqiaoyu.tech/2018/10/11/%E5%BC%80%E5%8F%91/%E5%8D%87%E7%BA%A7Xcode10%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://devqiaoyu.tech/2018/10/11/开发/升级Xcode10后遇到的问题/</id>
+    <link href="https://fightingjoey.github.io/2018/10/11/%E5%BC%80%E5%8F%91/%E5%8D%87%E7%BA%A7Xcode10%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://fightingjoey.github.io/2018/10/11/开发/升级Xcode10后遇到的问题/</id>
     <published>2018-10-11T09:38:14.000Z</published>
     <updated>2018-10-16T06:01:52.801Z</updated>
     
@@ -150,8 +171,8 @@
   
   <entry>
     <title>Mac下用Python写iOS自动化测试</title>
-    <link href="https://devqiaoyu.tech/2018/10/10/%E6%95%99%E7%A8%8B/Mac%E4%B8%8B%E7%94%A8Python%E5%86%99iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    <id>https://devqiaoyu.tech/2018/10/10/教程/Mac下用Python写iOS自动化测试/</id>
+    <link href="https://fightingjoey.github.io/2018/10/10/%E6%95%99%E7%A8%8B/Mac%E4%B8%8B%E7%94%A8Python%E5%86%99iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    <id>https://fightingjoey.github.io/2018/10/10/教程/Mac下用Python写iOS自动化测试/</id>
     <published>2018-10-10T06:45:56.000Z</published>
     <updated>2018-11-30T02:02:20.398Z</updated>
     
@@ -172,14 +193,14 @@
     </summary>
     
     
-      <category term="Mac" scheme="https://devqiaoyu.tech/tags/Mac/"/>
+      <category term="Mac" scheme="https://fightingjoey.github.io/tags/Mac/"/>
     
   </entry>
   
   <entry>
     <title>正则表达式验证</title>
-    <link href="https://devqiaoyu.tech/2018/08/22/%E5%BC%80%E5%8F%91/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E9%AA%8C%E8%AF%81/"/>
-    <id>https://devqiaoyu.tech/2018/08/22/开发/正则表达式验证/</id>
+    <link href="https://fightingjoey.github.io/2018/08/22/%E5%BC%80%E5%8F%91/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E9%AA%8C%E8%AF%81/"/>
+    <id>https://fightingjoey.github.io/2018/08/22/开发/正则表达式验证/</id>
     <published>2018-08-22T03:33:23.000Z</published>
     <updated>2018-09-27T02:10:41.492Z</updated>
     
@@ -191,15 +212,15 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
   </entry>
   
   <entry>
     <title>OC优秀的第三方库</title>
-    <link href="https://devqiaoyu.tech/2018/07/28/%E5%BC%80%E5%8F%91/OC%E4%BC%98%E7%A7%80%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    <id>https://devqiaoyu.tech/2018/07/28/开发/OC优秀的第三方库/</id>
+    <link href="https://fightingjoey.github.io/2018/07/28/%E5%BC%80%E5%8F%91/OC%E4%BC%98%E7%A7%80%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    <id>https://fightingjoey.github.io/2018/07/28/开发/OC优秀的第三方库/</id>
     <published>2018-07-28T07:30:59.000Z</published>
     <updated>2018-09-27T02:09:57.017Z</updated>
     
@@ -229,17 +250,17 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Objective-C" scheme="https://devqiaoyu.tech/tags/Objective-C/"/>
+      <category term="Objective-C" scheme="https://fightingjoey.github.io/tags/Objective-C/"/>
     
   </entry>
   
   <entry>
     <title>Swift优秀的第三方库</title>
-    <link href="https://devqiaoyu.tech/2018/07/28/%E5%BC%80%E5%8F%91/Swift%E4%BC%98%E7%A7%80%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
-    <id>https://devqiaoyu.tech/2018/07/28/开发/Swift优秀的第三方库/</id>
+    <link href="https://fightingjoey.github.io/2018/07/28/%E5%BC%80%E5%8F%91/Swift%E4%BC%98%E7%A7%80%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
+    <id>https://fightingjoey.github.io/2018/07/28/开发/Swift优秀的第三方库/</id>
     <published>2018-07-28T07:30:41.000Z</published>
     <updated>2018-12-27T08:17:29.997Z</updated>
     
@@ -270,17 +291,17 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Swift" scheme="https://devqiaoyu.tech/tags/Swift/"/>
+      <category term="Swift" scheme="https://fightingjoey.github.io/tags/Swift/"/>
     
   </entry>
   
   <entry>
     <title>MacOS 终端 iTerm2 并配置 zsh</title>
-    <link href="https://devqiaoyu.tech/2018/03/15/%E6%95%99%E7%A8%8B/MacOS%20%E7%BB%88%E7%AB%AF%20iTerm2%20%E5%B9%B6%E9%85%8D%E7%BD%AE%20zsh/"/>
-    <id>https://devqiaoyu.tech/2018/03/15/教程/MacOS 终端 iTerm2 并配置 zsh/</id>
+    <link href="https://fightingjoey.github.io/2018/03/15/%E6%95%99%E7%A8%8B/MacOS%20%E7%BB%88%E7%AB%AF%20iTerm2%20%E5%B9%B6%E9%85%8D%E7%BD%AE%20zsh/"/>
+    <id>https://fightingjoey.github.io/2018/03/15/教程/MacOS 终端 iTerm2 并配置 zsh/</id>
     <published>2018-03-15T09:29:12.000Z</published>
     <updated>2018-09-27T02:07:50.957Z</updated>
     
@@ -292,17 +313,17 @@
     
     </summary>
     
-      <category term="教程" scheme="https://devqiaoyu.tech/categories/%E6%95%99%E7%A8%8B/"/>
+      <category term="教程" scheme="https://fightingjoey.github.io/categories/%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="Mac" scheme="https://devqiaoyu.tech/tags/Mac/"/>
+      <category term="Mac" scheme="https://fightingjoey.github.io/tags/Mac/"/>
     
   </entry>
   
   <entry>
     <title>iOS WKWebView https 加载不受信任的站点</title>
-    <link href="https://devqiaoyu.tech/2018/03/07/%E5%BC%80%E5%8F%91/iOS%20WKWebView%20https%20%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%8F%97%E4%BF%A1%E4%BB%BB%E7%9A%84%E7%AB%99%E7%82%B9/"/>
-    <id>https://devqiaoyu.tech/2018/03/07/开发/iOS WKWebView https 加载不受信任的站点/</id>
+    <link href="https://fightingjoey.github.io/2018/03/07/%E5%BC%80%E5%8F%91/iOS%20WKWebView%20https%20%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%8F%97%E4%BF%A1%E4%BB%BB%E7%9A%84%E7%AB%99%E7%82%B9/"/>
+    <id>https://fightingjoey.github.io/2018/03/07/开发/iOS WKWebView https 加载不受信任的站点/</id>
     <published>2018-03-07T07:17:22.000Z</published>
     <updated>2018-09-27T02:09:26.030Z</updated>
     
@@ -315,17 +336,17 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="iOS" scheme="https://devqiaoyu.tech/tags/iOS/"/>
+      <category term="iOS" scheme="https://fightingjoey.github.io/tags/iOS/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu安装SublimeText3并配置相关内容</title>
-    <link href="https://devqiaoyu.tech/2017/12/23/%E6%95%99%E7%A8%8B/Ubuntu%E5%AE%89%E8%A3%85SublimeText3%E5%B9%B6%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/"/>
-    <id>https://devqiaoyu.tech/2017/12/23/教程/Ubuntu安装SublimeText3并配置相关内容/</id>
+    <link href="https://fightingjoey.github.io/2017/12/23/%E6%95%99%E7%A8%8B/Ubuntu%E5%AE%89%E8%A3%85SublimeText3%E5%B9%B6%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/"/>
+    <id>https://fightingjoey.github.io/2017/12/23/教程/Ubuntu安装SublimeText3并配置相关内容/</id>
     <published>2017-12-23T12:49:51.000Z</published>
     <updated>2018-09-27T02:08:32.027Z</updated>
     
@@ -337,21 +358,21 @@
     
     </summary>
     
-      <category term="教程" scheme="https://devqiaoyu.tech/categories/%E6%95%99%E7%A8%8B/"/>
+      <category term="教程" scheme="https://fightingjoey.github.io/categories/%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="Linux" scheme="https://devqiaoyu.tech/tags/Linux/"/>
+      <category term="Linux" scheme="https://fightingjoey.github.io/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Swift面向协议编程总结</title>
-    <link href="https://devqiaoyu.tech/2017/11/13/%E5%BC%80%E5%8F%91/Swift%E9%9D%A2%E5%90%91%E5%8D%8F%E8%AE%AE%E7%BC%96%E7%A8%8B/"/>
-    <id>https://devqiaoyu.tech/2017/11/13/开发/Swift面向协议编程/</id>
+    <link href="https://fightingjoey.github.io/2017/11/13/%E5%BC%80%E5%8F%91/Swift%E9%9D%A2%E5%90%91%E5%8D%8F%E8%AE%AE%E7%BC%96%E7%A8%8B/"/>
+    <id>https://fightingjoey.github.io/2017/11/13/开发/Swift面向协议编程/</id>
     <published>2017-11-13T07:27:38.000Z</published>
-    <updated>2018-12-26T10:14:08.637Z</updated>
+    <updated>2019-03-04T06:21:43.775Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Swift面向协议编程"><a href="#Swift面向协议编程" class="headerlink" title="Swift面向协议编程"></a>Swift面向协议编程</h2><p>所谓面向协议编程，就是使用<code>protocol</code>声明方法，然后使用<code>extension</code>提供默认的实现，只要需要使用到该方法的类遵循该<code>protocol</code>，就可以直接使用该<code>extension</code>的实现。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">protocol animal &#123;</span><br><span class="line">    var food: String &#123;get&#125;</span><br><span class="line">    func eat()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extension animal &#123;</span><br><span class="line">    func eat() &#123;</span><br><span class="line">        print(&quot;food name is \(food)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Cat: animal &#123;</span><br><span class="line">    </span><br><span class="line">    var food: String = &quot;mouse&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Dog:animal &#123;</span><br><span class="line">    var food: String = &quot;cat&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let cat = Cat()</span><br><span class="line">let dog = Dog()</span><br><span class="line">cat.eat()</span><br><span class="line">dog.eat()</span><br><span class="line"></span><br><span class="line">log:</span><br><span class="line">food name is mouse</span><br><span class="line">food name is cat</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="代码复用"><a href="#代码复用" class="headerlink" title="代码复用"></a>代码复用</h3><ul><li><strong>继承</strong>：会带来耦合。<ul><li>继承的代价：这并不是一个新颖的话题，自面向对象编程诞生之日起就饱受争议，我们经常要忍受着愈加繁杂和庞大的继承体系来获得代码的可重用性，而且随着继承层次的增加，代码的复杂性会加速增长，随之而来的bug也会越来越难以发现。这时我们可能需要依靠设计模式来找回我们的思路，然而大多数设计模式只能帮助你理顺你的代码结构，却在同时更加加深了你的代码的复杂度。</li></ul></li><li><strong><code>category</code>/<code>extension</code></strong>：会污染所有的类</li><li><strong>面向协议编程</strong>：<code>protocol</code>+<code>extension</code> 最大程度地减少了耦合</li></ul><h3 id="面向协议编程的好处"><a href="#面向协议编程的好处" class="headerlink" title="面向协议编程的好处"></a>面向协议编程的好处</h3><p>面向协议编程的好处在于，通过协议+扩展实现一个功能，能够定义所需要的充分必要条件，不多也不少。这样就<strong>最大程度减少了耦合</strong>。使用者可以像搭积木一样随意组合这些协议，写一个<code>class</code>或<code>struct</code>来完成复杂的功能。实际上，Swift的标准库几乎是<code>everything is starting out as a protocol</code>。</p><ul><li>代码没有增多，却更复⽤用</li><li>⾯面向协议(接⼝口)，⽽而不是实现，充分解耦 </li><li>静态类型检查帮助在编译时发现问题</li><li>写代码像搭积⽊木，先设计接⼝口，再逐⼀一实现</li><li>依赖少，更容易调试</li></ul><h3 id="为什么说Swift是面向协议编程的语言？"><a href="#为什么说Swift是面向协议编程的语言？" class="headerlink" title="为什么说Swift是面向协议编程的语言？"></a>为什么说Swift是面向协议编程的语言？</h3><p>因为<code>Swift</code>里更推荐使用值类型变量（<code>struct</code>）而不是引用类型（<code>class</code>）的变量，<code>Swift</code>中许多常见的数据类型、字符串、集合类型，以及结构体和枚举都是值类型而非引用类型，值类型的变量在赋值时会自动进行一次低消耗的值拷贝，对比对象的<code>copy</code>要更加高效而且不存在线程安全问题。</p><h4 id="为什么需要struct"><a href="#为什么需要struct" class="headerlink" title="为什么需要struct"></a>为什么需要struct</h4><p><code>struct</code>和<code>class</code>的主要区别：</p><ul><li><code>struct</code>是值引用，而<code>class</code>是类型引用</li><li><code>struct</code>没有继承的功能，<code>class</code>有继承功能</li></ul><p>struct和class这两个基本层面的区别，体现了区别于Objective-C语言，swift语言带来了全新的天翻地覆的改变。</p><p>首先说第一点区别，从<code>swift</code>的更新和<code>struct</code>不断完善来看，苹果公司更加推荐使用<code>struct</code>来代替<code>class</code>，因为<code>struct</code>值引用和<code>class</code>类型引用这点区别，保证使用<code>struct</code>编码能写出更加安全可靠的代码。为什么这样说呢，<code>class</code>类型引用在赋值时是将变量指向了同一块内存地址，这在一个长时间的跨度上会带来一些意想不到的问题，试想一个简单的例子，<code>viewControllerA</code>持有一个<code>NSMutableArray</code>数组<code>mutalbeArray</code>，它包含100条<code>user</code>信息，此时将<code>mutableArray</code>赋值给<code>viewControllerB</code>，对于<code>viewControllerB</code>而言，它仅仅需要前10条<code>user</code>信息，所以它将<code>mutableArray</code>多余的信息删除了，这样一个脑残的操作导致了<code>viewControllerA</code>模块展示错误和潜在的逻辑错误。而使用<code>struct</code>值引用则不会出现这样的问题。</p><p>第二点区别，<code>struct</code>没有继承的功能，这是因为<code>swift</code>在本质上来说是面向协议(<code>Protocol Oriented</code>)的语言，<code>struct</code>没有也不需要继承的功能，为了实现某个功能，<code>struct</code>去服从并实现某个协议就即可，从一个较高的层次来看，<code>struct+protocol</code>是构成<code>swift</code>面向协议语言的两个基石。</p><h3 id="Swift标准库"><a href="#Swift标准库" class="headerlink" title="Swift标准库"></a>Swift标准库</h3><p>在 Swift 标准库里，包含55个 Protocol，102个 Struct，9个 Enums 和6个 Class，由此可见，苹果更推荐使用 Struct。</p><p>55个 Protocol 中大致可以分为三种类型：</p><ul><li>-Type：<ul><li>BooleanType</li><li>CollectionType</li><li>ErrorType</li></ul></li><li>-able:<ul><li>Comparable</li><li>Equatable</li><li>Hashable</li></ul></li><li>-Convertible<ul><li>ArrayLiteralConvertible</li><li>BooleanLiteralConvertible</li><li>CustomDebugStringConvertible</li></ul></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Swift是一门支持多编程范式的语言，既支持面向对象编程，也支持面向协议编程，同时还支持函数式编程。在项目开发过程中，控制器和视图部分由于使用系统框架，应更多采用面向对象编程的方式；而模型或业务逻辑等自定义类型部分，则应优先考虑面向协议编程。</p><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://blog.csdn.net/xuehongnizhao/article/details/55258066" target="_blank" rel="noopener">Swift面向协议编程（附代码）</a></p><p><a href="http://www.jianshu.com/p/4544b8837556" target="_blank" rel="noopener">谈谈Swift面向协议编程</a></p><p><a href="http://www.cocoachina.com/swift/20161121/18144.html" target="_blank" rel="noopener">从 Swift 的面向协议编程说开去</a></p><p><a href="http://www.cocoachina.com/swift/20150902/12824.html" target="_blank" rel="noopener">Swift面向协议编程初探</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="Swift面向协议编程"><a href="#Swift面向协议编程" class="headerlink" title="Swift面向协议编程"></a>Swift面向协议编程</h2><p>所谓面向协议编程，就是使用<code>protocol</code>声明方法，然后使用<code>extension</code>提供默认的实现，只要需要使用到该方法的类遵循该<code>protocol</code>，就可以直接使用该<code>extension</code>的实现。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">protocol animal &#123;</span><br><span class="line">    var food: String &#123;get&#125;</span><br><span class="line">    func eat()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extension animal &#123;</span><br><span class="line">    func eat() &#123;</span><br><span class="line">        print(&quot;food name is \(food)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Cat: animal &#123;</span><br><span class="line">    </span><br><span class="line">    var food: String = &quot;mouse&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Dog:animal &#123;</span><br><span class="line">    var food: String = &quot;cat&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let cat = Cat()</span><br><span class="line">let dog = Dog()</span><br><span class="line">cat.eat()</span><br><span class="line">dog.eat()</span><br><span class="line"></span><br><span class="line">log:</span><br><span class="line">food name is mouse</span><br><span class="line">food name is cat</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="代码复用"><a href="#代码复用" class="headerlink" title="代码复用"></a>代码复用</h3><ul><li><strong>继承</strong>：会带来耦合。<ul><li>继承的代价：这并不是一个新颖的话题，自面向对象编程诞生之日起就饱受争议，我们经常要忍受着愈加繁杂和庞大的继承体系来获得代码的可重用性，而且随着继承层次的增加，代码的复杂性会加速增长，随之而来的bug也会越来越难以发现。这时我们可能需要依靠设计模式来找回我们的思路，然而大多数设计模式只能帮助你理顺你的代码结构，却在同时更加加深了你的代码的复杂度。</li></ul></li><li><strong><code>category</code>/<code>extension</code></strong>：会污染所有的类</li><li><strong>面向协议编程</strong>：<code>protocol</code>+<code>extension</code> 最大程度地减少了耦合</li></ul><h3 id="面向协议编程的好处"><a href="#面向协议编程的好处" class="headerlink" title="面向协议编程的好处"></a>面向协议编程的好处</h3><p>面向协议编程的好处在于，通过协议+扩展实现一个功能，能够定义所需要的充分必要条件，不多也不少。这样就<strong>最大程度减少了耦合</strong>。使用者可以像搭积木一样随意组合这些协议，写一个<code>class</code>或<code>struct</code>来完成复杂的功能。实际上，Swift的标准库几乎是<code>everything is starting out as a protocol</code>。</p><ul><li>代码没有增多，却更复⽤</li><li>⾯向协议(接⼝)，⽽不是实现，充分解耦 </li><li>静态类型检查帮助在编译时发现问题</li><li>写代码像搭积木，先设计接⼝，再逐⼀实现</li><li>依赖少，更容易调试</li></ul><h3 id="为什么说Swift是面向协议编程的语言？"><a href="#为什么说Swift是面向协议编程的语言？" class="headerlink" title="为什么说Swift是面向协议编程的语言？"></a>为什么说Swift是面向协议编程的语言？</h3><p>因为<code>Swift</code>里更推荐使用值类型变量（<code>struct</code>）而不是引用类型（<code>class</code>）的变量，<code>Swift</code>中许多常见的数据类型、字符串、集合类型，以及结构体和枚举都是值类型而非引用类型，值类型的变量在赋值时会自动进行一次低消耗的值拷贝，对比对象的<code>copy</code>要更加高效而且不存在线程安全问题。</p><h4 id="为什么需要struct"><a href="#为什么需要struct" class="headerlink" title="为什么需要struct"></a>为什么需要struct</h4><p><code>struct</code>和<code>class</code>的主要区别：</p><ul><li><code>struct</code>是值类型，而<code>class</code>是引用类型</li><li><code>struct</code>没有继承的功能，<code>class</code>有继承功能</li></ul><p>struct和class这两个基本层面的区别，体现了区别于Objective-C语言，swift语言带来了全新的天翻地覆的改变。</p><p>首先说第一点区别，从<code>swift</code>的更新和<code>struct</code>不断完善来看，苹果公司更加推荐使用<code>struct</code>来代替<code>class</code>，因为<code>struct</code>值类型和<code>class</code>引用类型这点区别，保证使用<code>struct</code>编码能写出更加安全可靠的代码。为什么这样说呢，<code>class</code>引用类型在赋值时是将变量指向了同一块内存地址，这在一个长时间的跨度上会带来一些意想不到的问题，试想一个简单的例子，<code>viewControllerA</code>持有一个<code>NSMutableArray</code>数组<code>mutalbeArray</code>，它包含100条<code>user</code>信息，此时将<code>mutableArray</code>赋值给<code>viewControllerB</code>，对于<code>viewControllerB</code>而言，它仅仅需要前10条<code>user</code>信息，所以它将<code>mutableArray</code>多余的信息删除了，这样一个脑残的操作导致了<code>viewControllerA</code>模块展示错误和潜在的逻辑错误。而使用<code>struct</code>值引用则不会出现这样的问题。</p><p>第二点区别，<code>struct</code>没有继承的功能，这是因为<code>swift</code>在本质上来说是面向协议(<code>Protocol Oriented</code>)的语言，<code>struct</code>没有也不需要继承的功能，为了实现某个功能，<code>struct</code>去服从并实现某个协议就即可，从一个较高的层次来看，<code>struct+protocol</code>是构成<code>swift</code>面向协议语言的两个基石。</p><h3 id="Swift标准库"><a href="#Swift标准库" class="headerlink" title="Swift标准库"></a>Swift标准库</h3><p>在 Swift 标准库里，包含55个 Protocol，102个 Struct，9个 Enums 和6个 Class，由此可见，苹果更推荐使用 Struct。</p><p>55个 Protocol 中大致可以分为三种类型：</p><ul><li>-Type：<ul><li>BooleanType</li><li>CollectionType</li><li>ErrorType</li></ul></li><li>-able:<ul><li>Comparable</li><li>Equatable</li><li>Hashable</li></ul></li><li>-Convertible<ul><li>ArrayLiteralConvertible</li><li>BooleanLiteralConvertible</li><li>CustomDebugStringConvertible</li></ul></li></ul><h3 id="协议的两种类型"><a href="#协议的两种类型" class="headerlink" title="协议的两种类型"></a>协议的两种类型</h3><p>普通的协议可以被当作类型约束使用，也可以当作独立的类型使用。带有关联类型或者 Self 约束的协议特殊一些：我们不能将它当作独立的类型来使用，而只能将它们用作类型约束。</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Swift是一门支持多编程范式的语言，既支持面向对象编程，也支持面向协议编程，同时还支持函数式编程。在项目开发过程中，控制器和视图部分由于使用系统框架，应更多采用面向对象编程的方式；而模型或业务逻辑等自定义类型部分，则应优先考虑面向协议编程。</p><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://blog.csdn.net/xuehongnizhao/article/details/55258066" target="_blank" rel="noopener">Swift面向协议编程（附代码）</a></p><p><a href="http://www.jianshu.com/p/4544b8837556" target="_blank" rel="noopener">谈谈Swift面向协议编程</a></p><p><a href="http://www.cocoachina.com/swift/20161121/18144.html" target="_blank" rel="noopener">从 Swift 的面向协议编程说开去</a></p><p><a href="http://www.cocoachina.com/swift/20150902/12824.html" target="_blank" rel="noopener">Swift面向协议编程初探</a></p>]]></content>
     
     <summary type="html">
     
@@ -360,17 +381,17 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Swift" scheme="https://devqiaoyu.tech/tags/Swift/"/>
+      <category term="Swift" scheme="https://fightingjoey.github.io/tags/Swift/"/>
     
   </entry>
   
   <entry>
     <title>Swift错误处理</title>
-    <link href="https://devqiaoyu.tech/2017/11/11/%E5%BC%80%E5%8F%91/Swift%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/"/>
-    <id>https://devqiaoyu.tech/2017/11/11/开发/Swift错误处理/</id>
+    <link href="https://fightingjoey.github.io/2017/11/11/%E5%BC%80%E5%8F%91/Swift%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/"/>
+    <id>https://fightingjoey.github.io/2017/11/11/开发/Swift错误处理/</id>
     <published>2017-11-11T08:24:29.000Z</published>
     <updated>2018-09-27T02:10:15.432Z</updated>
     
@@ -388,17 +409,17 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Swift" scheme="https://devqiaoyu.tech/tags/Swift/"/>
+      <category term="Swift" scheme="https://fightingjoey.github.io/tags/Swift/"/>
     
   </entry>
   
   <entry>
     <title>iOS多线程 Swift4 GCD深入解析</title>
-    <link href="https://devqiaoyu.tech/2017/11/07/%E5%BC%80%E5%8F%91/iOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90/"/>
-    <id>https://devqiaoyu.tech/2017/11/07/开发/iOS多线程深入解析/</id>
+    <link href="https://fightingjoey.github.io/2017/11/07/%E5%BC%80%E5%8F%91/iOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90/"/>
+    <id>https://fightingjoey.github.io/2017/11/07/开发/iOS多线程深入解析/</id>
     <published>2017-11-07T08:07:17.000Z</published>
     <updated>2018-09-27T02:09:32.107Z</updated>
     
@@ -416,17 +437,17 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Swift" scheme="https://devqiaoyu.tech/tags/Swift/"/>
+      <category term="Swift" scheme="https://fightingjoey.github.io/tags/Swift/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu Anaconda安装TensorFlow-GPU</title>
-    <link href="https://devqiaoyu.tech/2017/10/22/%E6%95%99%E7%A8%8B/Ubuntu%20Anaconda%E5%AE%89%E8%A3%85TensorFlow-GPU/"/>
-    <id>https://devqiaoyu.tech/2017/10/22/教程/Ubuntu Anaconda安装TensorFlow-GPU/</id>
+    <link href="https://fightingjoey.github.io/2017/10/22/%E6%95%99%E7%A8%8B/Ubuntu%20Anaconda%E5%AE%89%E8%A3%85TensorFlow-GPU/"/>
+    <id>https://fightingjoey.github.io/2017/10/22/教程/Ubuntu Anaconda安装TensorFlow-GPU/</id>
     <published>2017-10-22T11:24:18.000Z</published>
     <updated>2018-09-27T02:08:22.219Z</updated>
     
@@ -443,19 +464,19 @@
     
     </summary>
     
-      <category term="教程" scheme="https://devqiaoyu.tech/categories/%E6%95%99%E7%A8%8B/"/>
+      <category term="教程" scheme="https://fightingjoey.github.io/categories/%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="深度学习" scheme="https://devqiaoyu.tech/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="Linux" scheme="https://fightingjoey.github.io/tags/Linux/"/>
     
-      <category term="Linux" scheme="https://devqiaoyu.tech/tags/Linux/"/>
+      <category term="深度学习" scheme="https://fightingjoey.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>制作Mac系统盘</title>
-    <link href="https://devqiaoyu.tech/2017/10/21/%E6%95%99%E7%A8%8B/%E5%88%B6%E4%BD%9CMac%E7%B3%BB%E7%BB%9F%E7%9B%98/"/>
-    <id>https://devqiaoyu.tech/2017/10/21/教程/制作Mac系统盘/</id>
+    <link href="https://fightingjoey.github.io/2017/10/21/%E6%95%99%E7%A8%8B/%E5%88%B6%E4%BD%9CMac%E7%B3%BB%E7%BB%9F%E7%9B%98/"/>
+    <id>https://fightingjoey.github.io/2017/10/21/教程/制作Mac系统盘/</id>
     <published>2017-10-21T10:35:00.000Z</published>
     <updated>2018-09-27T02:08:41.119Z</updated>
     
@@ -479,17 +500,17 @@
     
     </summary>
     
-      <category term="教程" scheme="https://devqiaoyu.tech/categories/%E6%95%99%E7%A8%8B/"/>
+      <category term="教程" scheme="https://fightingjoey.github.io/categories/%E6%95%99%E7%A8%8B/"/>
     
     
-      <category term="Mac" scheme="https://devqiaoyu.tech/tags/Mac/"/>
+      <category term="Mac" scheme="https://fightingjoey.github.io/tags/Mac/"/>
     
   </entry>
   
   <entry>
     <title>适配iOS11（常用）</title>
-    <link href="https://devqiaoyu.tech/2017/09/29/%E5%BC%80%E5%8F%91/%E9%80%82%E9%85%8DiOS11%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89/"/>
-    <id>https://devqiaoyu.tech/2017/09/29/开发/适配iOS11（常用）/</id>
+    <link href="https://fightingjoey.github.io/2017/09/29/%E5%BC%80%E5%8F%91/%E9%80%82%E9%85%8DiOS11%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89/"/>
+    <id>https://fightingjoey.github.io/2017/09/29/开发/适配iOS11（常用）/</id>
     <published>2017-09-29T09:24:28.000Z</published>
     <updated>2018-09-27T02:10:49.210Z</updated>
     
@@ -508,32 +529,10 @@
     
     </summary>
     
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://fightingjoey.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="iOS" scheme="https://devqiaoyu.tech/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Swift3 迁移至 Swift4遇到的问题</title>
-    <link href="https://devqiaoyu.tech/2017/09/29/%E5%BC%80%E5%8F%91/Swift3%20%E8%BF%81%E7%A7%BB%E8%87%B3%20Swift4%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://devqiaoyu.tech/2017/09/29/开发/Swift3 迁移至 Swift4遇到的问题/</id>
-    <published>2017-09-29T09:11:29.000Z</published>
-    <updated>2018-09-27T02:10:05.805Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-The-use-of-Swift-3-objc-inference-in-Swift-4-mode-is-deprecated-警告"><a href="#1-The-use-of-Swift-3-objc-inference-in-Swift-4-mode-is-deprecated-警告" class="headerlink" title="1.The use of Swift 3 @objc inference in Swift 4 mode is deprecated.警告"></a>1.<code>The use of Swift 3 @objc inference in Swift 4 mode is deprecated.</code>警告</h3><p>选择<code>Target</code>-&gt;<code>Build Settings</code>，搜索<code>Swift3</code>，在<code>Swift3 @objc Inference</code>中，把<code>On</code>改为<code>Off</code>或者<code>Defalut</code>。</p><a id="more"></a><h3 id="2-String的subString方法废弃"><a href="#2-String的subString方法废弃" class="headerlink" title="2.String的subString方法废弃"></a>2.<code>String</code>的<code>subString</code>方法废弃</h3><p>在<code>Swift3</code>中我们想要截取字符串的话，一般是用的是：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ctime = &quot;2017-09-28 12:11:32.43234&quot;</span><br><span class="line">ctime = ctime.substring(to: ctime.index(ctime.startIndex, offsetBy: 19))</span><br></pre></td></tr></table></figure><p>不得不说这段语句刚开始写的时候多么的蛋疼。。。不仅难以理解，而且在<code>Xcode8</code>里面敲的时候，莫名的就会全部代码高亮消失，然后提示<code>Report Bug</code>。</p><p>终于在<code>Swift4</code>中对其进行了修改，虽然个人感觉还是有点奇怪~，但是起码好用多了！！</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var ctime = &quot;2017-09-28 12:11:32.43234&quot;</span><br><span class="line">let endIndex = ctime.index(ctime.startIndex, offsetBy: 19)</span><br><span class="line">ctime = String(ctime[ctime.startIndex ..&lt; endIndex])</span><br></pre></td></tr></table></figure><blockquote><p>但是注意<code>SubString</code>使用的是原来<code>string</code>的内存。官方建议是短时间使用，如果想要长时间保持，需要转为<code>String</code>。</p></blockquote><p>为了使用起来更方便，我们可以写一个<code>Extension</code>来扩展<code>Sting</code>：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">extension String &#123;</span><br><span class="line">subscript (start: Int, end: Int) -&gt; String? &#123;</span><br><span class="line">        if start &gt; count || start &lt; 0 || start &gt; end &#123;</span><br><span class="line">            return nil</span><br><span class="line">        &#125;</span><br><span class="line">        let begin = self.index(self.startIndex, offsetBy: start)</span><br><span class="line">        var terminal: Index</span><br><span class="line">        if end &gt;= count &#123;</span><br><span class="line">            terminal = self.index(self.startIndex, offsetBy: count)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            terminal = self.index(self.startIndex, offsetBy: end)</span><br><span class="line">        &#125;</span><br><span class="line">        let str = self[begin ..&lt; terminal]</span><br><span class="line">        return String(str)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="3-某些第三方库未适配Swift4处理办法"><a href="#3-某些第三方库未适配Swift4处理办法" class="headerlink" title="3.某些第三方库未适配Swift4处理办法"></a>3.某些第三方库未适配Swift4处理办法</h3><ol><li>从<code>Profile</code>里移除该库</li><li><code>pod update</code> 或 <code>pod install</code></li><li>检查<code>Target</code>-&gt;<code>Build Settings</code>-&gt;<code>Linking</code>-&gt;<code>Other Linker Flags</code>中，是否移除了相应的<code>framework</code></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;1-The-use-of-Swift-3-objc-inference-in-Swift-4-mode-is-deprecated-警告&quot;&gt;&lt;a href=&quot;#1-The-use-of-Swift-3-objc-inference-in-Swift-4-mode-is-deprecated-警告&quot; class=&quot;headerlink&quot; title=&quot;1.The use of Swift 3 @objc inference in Swift 4 mode is deprecated.警告&quot;&gt;&lt;/a&gt;1.&lt;code&gt;The use of Swift 3 @objc inference in Swift 4 mode is deprecated.&lt;/code&gt;警告&lt;/h3&gt;&lt;p&gt;选择&lt;code&gt;Target&lt;/code&gt;-&amp;gt;&lt;code&gt;Build Settings&lt;/code&gt;，搜索&lt;code&gt;Swift3&lt;/code&gt;，在&lt;code&gt;Swift3 @objc Inference&lt;/code&gt;中，把&lt;code&gt;On&lt;/code&gt;改为&lt;code&gt;Off&lt;/code&gt;或者&lt;code&gt;Defalut&lt;/code&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="开发" scheme="https://devqiaoyu.tech/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="Swift" scheme="https://devqiaoyu.tech/tags/Swift/"/>
+      <category term="iOS" scheme="https://fightingjoey.github.io/tags/iOS/"/>
     
   </entry>
   
